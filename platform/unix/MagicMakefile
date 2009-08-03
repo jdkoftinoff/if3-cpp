@@ -1,0 +1,119 @@
+# The MagicMakefile by Jeff Koftinoff <jeffk@jdkoftinoff.com>
+#
+# this Makefile compiles everything (c++) in $(LIB_SRC_DIR) and puts it in the library in $(OUTPUT_LIB), using header dependancies
+#
+# test programs are everything in $(LIB_TESTS_DIR)/*.cpp and they are single file .cpp test programs that are compiled and linked
+# with the library into this build directory.
+#
+# the source files are  scanned dynamically with the magic of $(wildcard )
+#
+# You must set the following make vars:
+#   TOP
+#   PROJECT
+#   CXXFLAGS
+#   LDLIBS
+#   OUTPUT_LIB
+#   LIB_SRC_DIR
+#   LIB_TESTS_DIR
+#   LIB_TOOLS_DIR
+
+
+OUTPUT_LIB_DIR=.
+OUTPUT_LIB=$(OUTPUT_LIB_DIR)/lib$(PROJECT).a
+LIB_SRC_DIR=$(TOP)/src
+LIB_TESTS_DIR=$(TOP)/tests
+LIB_TOOLS_DIR=$(TOP)/tools
+
+LDFLAGS += -L$(OUTPUT_LIB_DIR)
+LDLIBS += -l$(PROJECT)
+
+ifeq ($(DEBUG),1)
+LDFLAGS += -g
+CXXFLAGS += -g
+else
+LDFLAGS += 
+CXXFLAGS +=-O2 
+endif
+
+# Some cygwin installations like using .exe explicitly
+#EXE=.exe 
+EXE=
+
+# some systems need ranlib
+RANLIB=ranlib
+
+# tell gnumake where to find out sources
+VPATH=$(TOP)/src:$(TOP)/tests:$(TOP)/tools
+
+# tell gnumake how to use g++ to output header dependency information
+
+CXXFLAGS += -MMD 
+
+# get the list of library source files from the src directory
+LIB_CPP_FILES=$(notdir $(wildcard $(LIB_SRC_DIR)/*.cpp))
+
+# get the list of test program source files from the tests directory
+LIB_TESTS_CPP_FILES=$(notdir $(wildcard $(LIB_TESTS_DIR)/*.cpp))
+
+# get the list of test program source files from the tools directory
+LIB_TOOLS_CPP_FILES=$(notdir $(wildcard $(LIB_TOOLS_DIR)/*.cpp))
+
+# manipulate these file lists to create our desired output files in the proper place
+LIB_O_FILES=$(LIB_CPP_FILES:.cpp=.o)
+
+LIB_TESTS_O_FILES=$(LIB_TEST_CPP_FILES:.cpp=.o)
+LIB_TESTS_EXE_FILES=$(LIB_TEST_CPP_FILES:.cpp=$(EXE))
+
+LIB_TOOLS_O_FILES=$(LIB_TOOLS_CPP_FILES:.cpp=.o)
+LIB_TOOLS_EXE_FILES=$(LIB_TOOLS_CPP_FILES:.cpp=$(EXE))
+
+% : %.cpp
+
+% : %.o 
+	$(CXX) $(LDFLAGS) $< -o $@ $(LDLIBS)
+
+.PHONY : all clean realclean distclean docs tests tools
+
+all : $(OUTPUT_LIB) tests tools
+
+
+clean :
+	-$(RM) *.o
+	-$(RM) $(LIB_TESTS_EXE_FILES)
+	-$(RM) $(LIB_TOOLS_EXE_FILES)
+	-$(RM) *.d
+
+realclean : clean
+	-$(RM) $(OUTPUT_LIB)
+	-$(RM) -r -f ../docs/html ../docs/rtf ../docs/latex
+
+
+distclean : realclean
+	-$(RM) $(OUTPUT_LIB)
+	find .. -name "*~" -print0 | xargs -0 rm
+
+.NOTPARALLEL : $(OUTPUT_LIB)
+
+$(OUTPUT_LIB) : $(OUTPUT_LIB)( $(LIB_O_FILES) )
+	$(RANLIB) $(OUTPUT_LIB)
+
+tests: $(LIB_TESTS_EXE_FILES)
+
+$(LIB_TESTS_EXE_FILES) : $(OUTPUT_LIB)
+
+tools: $(LIB_TOOLS_EXE_FILES)
+
+$(LIB_TOOLS_EXE_FILES) : $(OUTPUT_LIB)
+
+docs :
+	( cd $(TOP)/docs && doxygen $(PROJECT) )
+
+# include any dependencies created during the last make.
+-include *.d
+
+
+
+
+
+
+

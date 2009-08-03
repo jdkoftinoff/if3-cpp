@@ -1,0 +1,89 @@
+#! /bin/bash
+
+relative_dir="$(dirname "$0")"
+
+project_top_dir=$(cd "${relative_dir}" && pwd)
+
+MAKE="${MAKE:-make}"
+
+# load project specific bash definitions
+
+if [ -f "${project_top_dir}/project.sh" ]; then
+    . "${project_top_dir}/project.sh"
+fi
+
+usage() {
+    echo "Autobuild script for the J.D. Koftinoff Software Ltd.'s MagicMake system."
+    echo "See http://opensource.jdkoftinoff.com/jdks/trac/jdks/wiki/MagicMakefileV6 and"
+    echo "http://opensource.jdkoftinoff.com/project/wiki/magicmake for more information"
+    echo ""
+    echo "Usage:"
+    echo ""
+    echo "  mkdir work_dir"
+    echo "  cd work_dir"
+    echo "  project_dir/autobuild/autobuild.sh [target] [platform] [configure flags...]"
+    echo ""
+    echo "Where:"
+    echo ""
+    echo " [target] is one of: "
+    echo "  all clean configure docs docs-dev install install-dev install-docs-dev package package-dev package-docs-dev package-testresults packages ship ship-all ship-dev ship-docs-dev ship-raw-testresults ship-testresults testresults"
+    echo ""
+    echo " [platform] is one of: "
+    echo "  macosx"
+    echo "  macosx-universal"
+    echo "  linux"
+    echo "  linux-x86_64"
+    echo "  xenomai"
+    echo "  xenomai-x86_64"
+    echo "  posix"   
+    echo ""
+    echo ""
+    echo " useful configure flags: "
+    echo "    --target-install-dir=/opt  [defaults to /opt/local/$PROJECT-$PROJECT_VERSION]"
+    echo "    --target-bin-dir=bin"
+    echo "    --target-etc-dir=etc"
+    echo "    --target-share-dir=share/$PROJECT-$PROJECT_VERSION"
+    echo "    --target-docs-dir=share/doc/$PROJECT-$PROJECT_VERSION"
+    echo "    --target-lib-dir=lib"
+    echo "    --package-suffix=-abcd"
+    echo "    --ship-to=USERNAME@SERVER:PATH"
+    echo ""
+}
+
+error() {
+    echo "$@"
+    echo ""
+    echo "try:"
+    echo "   \"$0\" --help"
+    echo ""
+    echo "for information"
+    exit 1
+}
+
+if [ x"$1" = x"--help" -o x"$1" = x"" ]; then
+    usage
+    exit 1
+fi
+
+target="$1"
+shift
+platform="$1"
+shift
+
+"${project_top_dir}/configure" "--target-platform-$target=1" "$@"
+
+if [ "${target}" != "configure" -a "${target}" != "docs-dev" ]; then
+    "${MAKE}"
+fi
+
+if [ "${target}" != "configure" ]; then
+    "${MAKE}" "${target}"
+fi
+
+
+
+
+
+
+
+
