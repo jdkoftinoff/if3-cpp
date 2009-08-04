@@ -13,22 +13,20 @@ PROJECT_VERSION=3.0
 TOP_LIB_DIRS+=.
 SUBLIBS=
 INCLUDES+=
-DEFINES+=
-COMPILE_FLAGS+=-Wall
+DEFINES+=_REENTRANT JDKSBOOST_ENABLE_POSIX JDKSBOOST_ENABLE_PTHREADS
+COMPILE_FLAGS+=-Wall -pthread
 LINK_FLAGS+=
 PKGCONFIG_PACKAGES+=
 CONFIG_TOOLS+=
 
-LDLIBS_POSIX+=-lpthread -lssl -lcrypto
 
-#SWIG_PYTHON_OUTPUTS=if2k_py_swig_wrap.cpp if2kkernel.py
+BOOST_CONFIG?=$(PREFIX)/bin/jdksboost-config
+JDKS2K9_CONFIG?=$(PREFIX)/bin/jdks2k9-config
 
-#$(OUTPUT_SWIG_PYTHON_DIR)/if2k_py_swig_wrap.cpp : $(PROJECT_TOP_DIR)/swig/if2k_swig.i
-#	$(SWIG) $(addprefix -I,$(INCLUDES)) $(addprefix -D,$(DEFINES)) -DIF2K_CONFIG_POSIX -Wall -classic -python -c++ -module if2kkernel -o $(OUTPUT_SWIG_PYTHON_DIR)/if2k_swig_wrap.cpp -outdir $(OUTPUT_SWIG_PYTHON_DIR) $(PROJECT_TOP_DIR)/swig/if2k_swig.i
+LDLIBS_POSIX+=-pthread
+LDLIBS_POSIX+=-lssl -lcrypto
 
-
-#ALL+=$(OUTPUT_SWIG_PYTHON_DIR)/if2k_py_swig_wrap.cpp
-
+CONFIG_TOOLS+=$(BOOST_CONFIG) $(JDKS2K9_CONFIG)
 
 ifeq ($(PROJECT_VARIANT),debian)
 TARGET_DIR_STYLE=debian
