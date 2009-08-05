@@ -1,5 +1,5 @@
-PROJECT=if2kkernel
-PROJECT_NAME=if2kkernel
+PROJECT=ifcmgkernel
+PROJECT_NAME=ifcmgkernel
 PROJECT_MAINTAINER=jeffk
 PROJECT_COPYRIGHT=2008
 PROJECT_EMAIL=jeffk@internetfilter.com
@@ -8,8 +8,9 @@ PROJECT_LICENSE_FILE=$(PROJECT_TOP_DIR)/LICENSE.txt
 PROJECT_README_FILE=$(PROJECT_TOP_DIR)/README.txt
 PROJECT_COMPANY=Turner and Sons Productions, Inc.
 PROJECT_WEBSITE=www.internetfilter.com
-PROJECT_DESCRIPTION=if2kkernel
+PROJECT_DESCRIPTION=ifcmgkernel
 PROJECT_VERSION=3.0
+PROJECT_IDENTIFIER=com.contextualmediagroup.ifcmgkernel
 TOP_LIB_DIRS+=.
 SUBLIBS=
 INCLUDES+=
@@ -44,7 +45,6 @@ ifeq ($(PROJECT_VARIANT),macosx)
 TARGET_DIR_STYLE=macosx-library
 PACKAGE_CHOWN=
 PACKAGE_CHMOD=
-PROJECT_IDENTIFIER=com.internetfilter.if2kkernel
 PREFIX=/Library/internetfilter/$(PROJECT)-$(VERSION)
 endif
 
