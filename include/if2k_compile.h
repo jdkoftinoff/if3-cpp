@@ -80,10 +80,10 @@ namespace if2k
     for( int category=first_category; category<last_category; ++category )
     {
       filename_t input_filename;
-      form( input_filename, "%s%02d%s.txt", source_dir.c_str(), category+1, middle_part );
+      form( input_filename, "%s%d%s.txt", source_dir.c_str(), category+1, middle_part );
       
       filename_t output_filename;
-      form( output_filename, "%s%02d%s.pre", dest_dir.c_str(), category+1, middle_part );
+      form( output_filename, "%s%d%s.pre", dest_dir.c_str(), category+1, middle_part );
       
       if( tree_compile<TRAITS_T,PATTERN_EXPANDER_T>(
             input_filename,

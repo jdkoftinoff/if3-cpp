@@ -26,9 +26,10 @@ static void usage()
     stderr, 
     "usage:\nif2ktool_compile_all [source dir] [dest dir]\n" 
     "source dir should contain the files:\n"
-    "\t0#badurl.txt   (bad url lists)\n"
-    "\t0#goodurl.txt  (good url lists)\n"
-    "\t0#badphr.txt   (bad phrase lists)\n"
+    "\t#badurl.txt   (bad url lists)\n"
+    "\t#postbadurl.txt   (post bad url lists)\n"    
+    "\t#goodurl.txt  (good url lists)\n"
+    "\t#badphr.txt   (bad phrase lists)\n"
     "\n"
     "When # is 1,2,3,4,5,6,7,8\n"
     );
@@ -58,6 +59,12 @@ int main( int argc, char **argv )
       src_dir,
       dest_dir,
       "badurl"
+      );
+
+    count+=compile_files<tree_traits_url_t,pattern_expander_standard_t>(
+      src_dir,
+      dest_dir,
+      "postbadurl"
       );
     
     count+=compile_files<tree_traits_alphanumeric_t,pattern_expander_standard_t>(

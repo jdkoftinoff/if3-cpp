@@ -596,7 +596,7 @@ namespace if2k
       if( enable_bits && (1<<category) )
       {
         filename_t input_filename;      
-        form( input_filename, "%s%02d%s.pre", compiled_dir_name.c_str(), category+1, middle_part );
+        form( input_filename, "%s%d%s.pre", compiled_dir_name.c_str(), category+1, middle_part );
         
         if( util::file_exists( input_filename ) )
         {
@@ -622,7 +622,7 @@ namespace if2k
       if( enable_bits && (1<<category) )
       {
         filename_t input_filename;      
-        form( input_filename, "%s%02d%s.txt", non_compiled_dir_name.c_str(), category+1, middle_part );
+        form( input_filename, "%s%d%s.txt", non_compiled_dir_name.c_str(), category+1, middle_part );
         
         if( util::file_exists( input_filename ) )
         {
@@ -648,7 +648,7 @@ namespace if2k
       if( enable_bits && (1<<category) )
       {
         filename_t input_filename;      
-        form( input_filename, "%s%02d%s.pre", compiled_dir_name.c_str(), category+1, middle_part );
+        form( input_filename, "%s%d%s.pre", compiled_dir_name.c_str(), category+1, middle_part );
         
         if( util::file_exists( input_filename ) )
         {
@@ -674,7 +674,7 @@ namespace if2k
       if( enable_bits && (1<<category) )
       {
         filename_t input_filename;      
-        form( input_filename, "%s%02d%s.txt", non_compiled_dir_name.c_str(), category+1, middle_part );
+        form( input_filename, "%s%d%s.txt", non_compiled_dir_name.c_str(), category+1, middle_part );
         
         if( util::file_exists( input_filename ) )
         {
