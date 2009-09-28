@@ -11,9 +11,9 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world.h"
-#include "ifcmg_mmap_buf.h"
-#include "ifcmg_util.h"
+#include "ifcmg_world.hpp"
+#include "ifcmg_mmap_buf.hpp"
+#include "ifcmg_util.hpp"
 
 #if defined(IFCMG_CONFIG_WIN32)
 

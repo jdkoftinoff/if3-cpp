@@ -14,9 +14,9 @@ ALL RIGHTS RESERVED.
 #ifndef IFCMG_SCANNER_H
 #define IFCMG_SCANNER_H
 
-#include "ifcmg_pattern_expander.h"
-#include "ifcmg_tree.h"
-#include "ifcmg_dynbuf.h"
+#include "ifcmg_pattern_expander.hpp"
+#include "ifcmg_tree.hpp"
+#include "ifcmg_dynbuf.hpp"
 
 namespace ifcmg
 {

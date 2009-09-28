@@ -12,10 +12,10 @@ ALL RIGHTS RESERVED.
 
 */
 
-#include "ifcmg_world.h"
-#include "ifcmg_string.h"
-#include "ifcmg_util.h"
-#include "ifcmg_compile.h"
+#include "ifcmg_world.hpp"
+#include "ifcmg_string.hpp"
+#include "ifcmg_util.hpp"
+#include "ifcmg_compile.hpp"
 
 
 using namespace ifcmg;

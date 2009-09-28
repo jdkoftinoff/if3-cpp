@@ -14,10 +14,10 @@ ALL RIGHTS RESERVED.
 #ifndef IFCMG_MINI_COMPILE_H
 #define IFCMG_MINI_COMPILE_H
 
-#include "ifcmg_world.h"
-#include "ifcmg_string.h"
-#include "ifcmg_util.h"
-#include "ifcmg_tree.h"
+#include "ifcmg_world.hpp"
+#include "ifcmg_string.hpp"
+#include "ifcmg_util.hpp"
+#include "ifcmg_tree.hpp"
 
 namespace ifcmg
 {

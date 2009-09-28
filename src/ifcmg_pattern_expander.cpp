@@ -11,8 +11,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world.h"
-#include "ifcmg_pattern_expander.h"
+#include "ifcmg_world.hpp"
+#include "ifcmg_pattern_expander.hpp"
 
 namespace ifcmg
 {
@@ -98,6 +98,10 @@ namespace ifcmg
     string_t strings[16];
   };
   
+
+  pattern_expander_standard_t::~pattern_expander_standard_t()
+  {
+  }
   
   bool pattern_expander_standard_t::expand(
     const string_t &in_,

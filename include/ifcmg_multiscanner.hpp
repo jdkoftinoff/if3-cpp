@@ -14,11 +14,11 @@ ALL RIGHTS RESERVED.
 #ifndef IFCMG_MULTISCANNER_H
 #define IFCMG_MULTISCANNER_H
 
-#include "ifcmg_world.h"
-#include "ifcmg_string.h"
-#include "ifcmg_buf.h"
-#include "ifcmg_util.h"
-#include "ifcmg_scanner.h"
+#include "ifcmg_world.hpp"
+#include "ifcmg_string.hpp"
+#include "ifcmg_buf.hpp"
+#include "ifcmg_util.hpp"
+#include "ifcmg_scanner.hpp"
 
 namespace ifcmg
 {

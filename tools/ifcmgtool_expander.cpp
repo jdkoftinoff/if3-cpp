@@ -11,9 +11,9 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world.h"
-#include "ifcmg_pattern_expander.h"
-#include "ifcmg_util.h"
+#include "ifcmg_world.hpp"
+#include "ifcmg_pattern_expander.hpp"
+#include "ifcmg_util.hpp"
 
 class dumping_target : public ifcmg::pattern_target_t
 {

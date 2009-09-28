@@ -11,6 +11,6 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world.h"
-#include "ifcmg_tree.h"
+#include "ifcmg_world.hpp"
+#include "ifcmg_tree.hpp"
 

@@ -14,9 +14,9 @@ ALL RIGHTS RESERVED.
 #ifndef IFCMG_PATTERN_EXPANDER_H
 #define IFCMG_PATTERN_EXPANDER_H
 
-#include "ifcmg_buf.h"
-#include "ifcmg_string.h"
-#include "ifcmg_util.h"
+#include "ifcmg_buf.hpp"
+#include "ifcmg_string.hpp"
+#include "ifcmg_util.hpp"
 
 namespace ifcmg
 {
@@ -37,7 +37,7 @@ namespace ifcmg
     {
     }
     
-    virtual ~pattern_expander_t() 
+    virtual ~pattern_expander_t()
     {
     }
     
@@ -170,6 +170,8 @@ namespace ifcmg
     explicit pattern_expander_standard_t()
     {
     }
+
+    ~pattern_expander_standard_t();
     
     bool expand(
       const string_t &in, 

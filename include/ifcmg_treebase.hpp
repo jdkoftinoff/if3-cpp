@@ -14,8 +14,8 @@ ALL RIGHTS RESERVED.
 #ifndef IFCMG_TREEBASE_H
 #define IFCMG_TREEBASE_H
 
-#include "ifcmg_world.h"
-#include "ifcmg_util.h"
+#include "ifcmg_world.hpp"
+#include "ifcmg_util.hpp"
 
 namespace ifcmg
 {  

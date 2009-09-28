@@ -14,9 +14,9 @@ ALL RIGHTS RESERVED.
 #ifndef IFCMG_MMAP_BUF_H
 #define IFCMG_MMAP_BUF_H
 
-#include "ifcmg_world.h"
-#include "ifcmg_string.h"
-#include "ifcmg_buf.h"
+#include "ifcmg_world.hpp"
+#include "ifcmg_string.hpp"
+#include "ifcmg_buf.hpp"
 
 namespace ifcmg
 {

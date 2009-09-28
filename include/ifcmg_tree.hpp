@@ -14,11 +14,11 @@ ALL RIGHTS RESERVED.
 #ifndef IFCMG_TREE_H
 #define IFCMG_TREE_H
 
-#include "ifcmg_world.h"
-#include "ifcmg_dynbuf.h"
-#include "ifcmg_treebase.h"
-#include "ifcmg_mmap_buf.h"
-#include "ifcmg_pattern_expander.h"
+#include "ifcmg_world.hpp"
+#include "ifcmg_dynbuf.hpp"
+#include "ifcmg_treebase.hpp"
+#include "ifcmg_mmap_buf.hpp"
+#include "ifcmg_pattern_expander.hpp"
 
 namespace ifcmg
 {

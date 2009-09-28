@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -52,81 +52,68 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = ifcmgkernel;
 		};
 		BF3C0D501070EC18003A39A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BF3C0D2A1070EB55003A39A1 /* ifcmgtool_compile_all */;
+			remoteGlobalIDString = BF3C0D2A1070EB55003A39A1;
 			remoteInfo = ifcmgtool_compile_all;
 		};
 		BF3C0D521070EC18003A39A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BF3C0D311070EB6F003A39A1 /* ifcmgtool_compile */;
+			remoteGlobalIDString = BF3C0D311070EB6F003A39A1;
 			remoteInfo = ifcmgtool_compile;
 		};
 		BF3C0D541070EC18003A39A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BF3C0D381070EB88003A39A1 /* ifcmgtool_expander */;
+			remoteGlobalIDString = BF3C0D381070EB88003A39A1;
 			remoteInfo = ifcmgtool_expander;
 		};
 		BF3C0D561070EC18003A39A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BF3C0D421070EBAC003A39A1 /* ifcmgtool_findmatch */;
+			remoteGlobalIDString = BF3C0D421070EBAC003A39A1;
 			remoteInfo = ifcmgtool_findmatch;
 		};
 		BF3C0D581070EC28003A39A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = ifcmgkernel;
 		};
 		BF3C0D5B1070EC3D003A39A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = ifcmgkernel;
 		};
 		BF3C0D5E1070EC49003A39A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = ifcmgkernel;
 		};
 		BF3C0D611070EC54003A39A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = ifcmgkernel;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BF3C0CF41070E8E2003A39A1 /* ifcmg_buf_macosx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_buf_macosx.h; path = ../../../include/ifcmg_buf_macosx.h; sourceTree = SOURCE_ROOT; };
-		BF3C0CF51070E8E2003A39A1 /* ifcmg_buf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_buf.h; path = ../../../include/ifcmg_buf.h; sourceTree = SOURCE_ROOT; };
-		BF3C0CF61070E8E2003A39A1 /* ifcmg_compile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_compile.h; path = ../../../include/ifcmg_compile.h; sourceTree = SOURCE_ROOT; };
-		BF3C0CF71070E8E2003A39A1 /* ifcmg_dynbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_dynbuf.h; path = ../../../include/ifcmg_dynbuf.h; sourceTree = SOURCE_ROOT; };
-		BF3C0CF81070E8E2003A39A1 /* ifcmg_mmap_buf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_mmap_buf.h; path = ../../../include/ifcmg_mmap_buf.h; sourceTree = SOURCE_ROOT; };
-		BF3C0CF91070E8E2003A39A1 /* ifcmg_multiscanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_multiscanner.h; path = ../../../include/ifcmg_multiscanner.h; sourceTree = SOURCE_ROOT; };
-		BF3C0CFA1070E8E2003A39A1 /* ifcmg_pattern_expander.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_pattern_expander.h; path = ../../../include/ifcmg_pattern_expander.h; sourceTree = SOURCE_ROOT; };
-		BF3C0CFB1070E8E2003A39A1 /* ifcmg_scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_scanner.h; path = ../../../include/ifcmg_scanner.h; sourceTree = SOURCE_ROOT; };
-		BF3C0CFC1070E8E2003A39A1 /* ifcmg_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_string.h; path = ../../../include/ifcmg_string.h; sourceTree = SOURCE_ROOT; };
-		BF3C0CFD1070E8E2003A39A1 /* ifcmg_tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_tree.h; path = ../../../include/ifcmg_tree.h; sourceTree = SOURCE_ROOT; };
-		BF3C0CFE1070E8E2003A39A1 /* ifcmg_treebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_treebase.h; path = ../../../include/ifcmg_treebase.h; sourceTree = SOURCE_ROOT; };
-		BF3C0CFF1070E8E2003A39A1 /* ifcmg_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_util.h; path = ../../../include/ifcmg_util.h; sourceTree = SOURCE_ROOT; };
-		BF3C0D001070E8E2003A39A1 /* ifcmg_world.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_world.h; path = ../../../include/ifcmg_world.h; sourceTree = SOURCE_ROOT; };
 		BF3C0D011070E8F7003A39A1 /* ifcmg_buf_macosx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_buf_macosx.cpp; path = ../../../src/ifcmg_buf_macosx.cpp; sourceTree = SOURCE_ROOT; };
 		BF3C0D021070E8F7003A39A1 /* ifcmg_buf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_buf.cpp; path = ../../../src/ifcmg_buf.cpp; sourceTree = SOURCE_ROOT; };
 		BF3C0D031070E8F7003A39A1 /* ifcmg_compile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_compile.cpp; path = ../../../src/ifcmg_compile.cpp; sourceTree = SOURCE_ROOT; };
@@ -143,10 +130,23 @@
 		BF3C0D1B1070E93D003A39A1 /* ifcmgtool_compile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmgtool_compile.cpp; path = ../../../tools/ifcmgtool_compile.cpp; sourceTree = SOURCE_ROOT; };
 		BF3C0D1C1070E93D003A39A1 /* ifcmgtool_expander.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmgtool_expander.cpp; path = ../../../tools/ifcmgtool_expander.cpp; sourceTree = SOURCE_ROOT; };
 		BF3C0D1D1070E93D003A39A1 /* ifcmgtool_findmatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmgtool_findmatch.cpp; path = ../../../tools/ifcmgtool_findmatch.cpp; sourceTree = SOURCE_ROOT; };
-		BF3C0D2B1070EB55003A39A1 /* ifcmgtool_compile_all */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_compile_all; path = build/Debug/ifcmgtool_compile_all; sourceTree = "<group>"; };
-		BF3C0D321070EB6F003A39A1 /* ifcmgtool_compile */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_compile; path = build/Debug/ifcmgtool_compile; sourceTree = "<group>"; };
-		BF3C0D391070EB88003A39A1 /* ifcmgtool_expander */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_expander; path = build/Debug/ifcmgtool_expander; sourceTree = "<group>"; };
-		BF3C0D431070EBAC003A39A1 /* ifcmgtool_findmatch */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_findmatch; path = build/Debug/ifcmgtool_findmatch; sourceTree = "<group>"; };
+		BF3C0D2B1070EB55003A39A1 /* ifcmgtool_compile_all */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_compile_all; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF3C0D321070EB6F003A39A1 /* ifcmgtool_compile */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_compile; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF3C0D391070EB88003A39A1 /* ifcmgtool_expander */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_expander; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF3C0D431070EBAC003A39A1 /* ifcmgtool_findmatch */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_findmatch; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFF228F8107153FC00905E99 /* ifcmg_buf_macosx.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_buf_macosx.hpp; path = ../../../include/ifcmg_buf_macosx.hpp; sourceTree = SOURCE_ROOT; };
+		BFF228F9107153FC00905E99 /* ifcmg_buf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_buf.hpp; path = ../../../include/ifcmg_buf.hpp; sourceTree = SOURCE_ROOT; };
+		BFF228FA107153FC00905E99 /* ifcmg_compile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_compile.hpp; path = ../../../include/ifcmg_compile.hpp; sourceTree = SOURCE_ROOT; };
+		BFF228FB107153FC00905E99 /* ifcmg_dynbuf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_dynbuf.hpp; path = ../../../include/ifcmg_dynbuf.hpp; sourceTree = SOURCE_ROOT; };
+		BFF228FC107153FC00905E99 /* ifcmg_mmap_buf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_mmap_buf.hpp; path = ../../../include/ifcmg_mmap_buf.hpp; sourceTree = SOURCE_ROOT; };
+		BFF228FD107153FC00905E99 /* ifcmg_multiscanner.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_multiscanner.hpp; path = ../../../include/ifcmg_multiscanner.hpp; sourceTree = SOURCE_ROOT; };
+		BFF228FE107153FC00905E99 /* ifcmg_pattern_expander.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_pattern_expander.hpp; path = ../../../include/ifcmg_pattern_expander.hpp; sourceTree = SOURCE_ROOT; };
+		BFF228FF107153FC00905E99 /* ifcmg_scanner.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_scanner.hpp; path = ../../../include/ifcmg_scanner.hpp; sourceTree = SOURCE_ROOT; };
+		BFF22900107153FC00905E99 /* ifcmg_string.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_string.hpp; path = ../../../include/ifcmg_string.hpp; sourceTree = SOURCE_ROOT; };
+		BFF22901107153FC00905E99 /* ifcmg_tree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_tree.hpp; path = ../../../include/ifcmg_tree.hpp; sourceTree = SOURCE_ROOT; };
+		BFF22902107153FC00905E99 /* ifcmg_treebase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_treebase.hpp; path = ../../../include/ifcmg_treebase.hpp; sourceTree = SOURCE_ROOT; };
+		BFF22903107153FC00905E99 /* ifcmg_util.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_util.hpp; path = ../../../include/ifcmg_util.hpp; sourceTree = SOURCE_ROOT; };
+		BFF22904107153FC00905E99 /* ifcmg_world.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_world.hpp; path = ../../../include/ifcmg_world.hpp; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libifcmgkernel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libifcmgkernel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -239,19 +239,19 @@
 		BF3C0CF11070E8C9003A39A1 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				BF3C0CF41070E8E2003A39A1 /* ifcmg_buf_macosx.h */,
-				BF3C0CF51070E8E2003A39A1 /* ifcmg_buf.h */,
-				BF3C0CF61070E8E2003A39A1 /* ifcmg_compile.h */,
-				BF3C0CF71070E8E2003A39A1 /* ifcmg_dynbuf.h */,
-				BF3C0CF81070E8E2003A39A1 /* ifcmg_mmap_buf.h */,
-				BF3C0CF91070E8E2003A39A1 /* ifcmg_multiscanner.h */,
-				BF3C0CFA1070E8E2003A39A1 /* ifcmg_pattern_expander.h */,
-				BF3C0CFB1070E8E2003A39A1 /* ifcmg_scanner.h */,
-				BF3C0CFC1070E8E2003A39A1 /* ifcmg_string.h */,
-				BF3C0CFD1070E8E2003A39A1 /* ifcmg_tree.h */,
-				BF3C0CFE1070E8E2003A39A1 /* ifcmg_treebase.h */,
-				BF3C0CFF1070E8E2003A39A1 /* ifcmg_util.h */,
-				BF3C0D001070E8E2003A39A1 /* ifcmg_world.h */,
+				BFF228F8107153FC00905E99 /* ifcmg_buf_macosx.hpp */,
+				BFF228F9107153FC00905E99 /* ifcmg_buf.hpp */,
+				BFF228FA107153FC00905E99 /* ifcmg_compile.hpp */,
+				BFF228FB107153FC00905E99 /* ifcmg_dynbuf.hpp */,
+				BFF228FC107153FC00905E99 /* ifcmg_mmap_buf.hpp */,
+				BFF228FD107153FC00905E99 /* ifcmg_multiscanner.hpp */,
+				BFF228FE107153FC00905E99 /* ifcmg_pattern_expander.hpp */,
+				BFF228FF107153FC00905E99 /* ifcmg_scanner.hpp */,
+				BFF22900107153FC00905E99 /* ifcmg_string.hpp */,
+				BFF22901107153FC00905E99 /* ifcmg_tree.hpp */,
+				BFF22902107153FC00905E99 /* ifcmg_treebase.hpp */,
+				BFF22903107153FC00905E99 /* ifcmg_util.hpp */,
+				BFF22904107153FC00905E99 /* ifcmg_world.hpp */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -378,7 +378,7 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "ifcmgkernel" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* ifcmgkernel */;
 			projectDirPath = "";
@@ -555,8 +555,10 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INSTALL_PATH = /usr/local/bin;
 				PREBINDING = NO;
 				PRODUCT_NAME = ifcmgtool_compile_all;
@@ -585,8 +587,10 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INSTALL_PATH = /usr/local/bin;
 				PREBINDING = NO;
 				PRODUCT_NAME = ifcmgtool_compile;
@@ -615,8 +619,10 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INSTALL_PATH = /usr/local/bin;
 				PREBINDING = NO;
 				PRODUCT_NAME = ifcmgtool_expander;
@@ -645,8 +651,10 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INSTALL_PATH = /usr/local/bin;
 				PREBINDING = NO;
 				PRODUCT_NAME = ifcmgtool_findmatch;
