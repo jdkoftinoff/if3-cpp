@@ -1,0 +1,761 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		BF3C0D4B1070EC09003A39A1 /* all */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = BF3C0D6D1070EC9A003A39A1 /* Build configuration list for PBXAggregateTarget "all" */;
+			buildPhases = (
+			);
+			dependencies = (
+				BF3C0D4F1070EC18003A39A1 /* PBXTargetDependency */,
+				BF3C0D511070EC18003A39A1 /* PBXTargetDependency */,
+				BF3C0D531070EC18003A39A1 /* PBXTargetDependency */,
+				BF3C0D551070EC18003A39A1 /* PBXTargetDependency */,
+				BF3C0D571070EC18003A39A1 /* PBXTargetDependency */,
+			);
+			name = all;
+			productName = all;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		BF3C0D0D1070E8F7003A39A1 /* ifcmg_buf_macosx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D011070E8F7003A39A1 /* ifcmg_buf_macosx.cpp */; };
+		BF3C0D0E1070E8F7003A39A1 /* ifcmg_buf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D021070E8F7003A39A1 /* ifcmg_buf.cpp */; };
+		BF3C0D0F1070E8F7003A39A1 /* ifcmg_compile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D031070E8F7003A39A1 /* ifcmg_compile.cpp */; };
+		BF3C0D101070E8F7003A39A1 /* ifcmg_dynbuf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D041070E8F7003A39A1 /* ifcmg_dynbuf.cpp */; };
+		BF3C0D111070E8F7003A39A1 /* ifcmg_mmap_buf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D051070E8F7003A39A1 /* ifcmg_mmap_buf.cpp */; };
+		BF3C0D121070E8F7003A39A1 /* ifcmg_multiscanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D061070E8F7003A39A1 /* ifcmg_multiscanner.cpp */; };
+		BF3C0D131070E8F7003A39A1 /* ifcmg_pattern_expander.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D071070E8F7003A39A1 /* ifcmg_pattern_expander.cpp */; };
+		BF3C0D141070E8F7003A39A1 /* ifcmg_scanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D081070E8F7003A39A1 /* ifcmg_scanner.cpp */; };
+		BF3C0D151070E8F7003A39A1 /* ifcmg_tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D091070E8F7003A39A1 /* ifcmg_tree.cpp */; };
+		BF3C0D161070E8F7003A39A1 /* ifcmg_treebase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D0A1070E8F7003A39A1 /* ifcmg_treebase.cpp */; };
+		BF3C0D171070E8F7003A39A1 /* ifcmg_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D0B1070E8F7003A39A1 /* ifcmg_util.cpp */; };
+		BF3C0D181070E8F7003A39A1 /* ifcmg_world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D0C1070E8F7003A39A1 /* ifcmg_world.cpp */; };
+		BF3C0D471070EBB7003A39A1 /* ifcmgtool_compile_all.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D1A1070E93D003A39A1 /* ifcmgtool_compile_all.cpp */; };
+		BF3C0D481070EBC8003A39A1 /* ifcmgtool_compile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D1B1070E93D003A39A1 /* ifcmgtool_compile.cpp */; };
+		BF3C0D491070EBCE003A39A1 /* ifcmgtool_expander.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D1C1070E93D003A39A1 /* ifcmgtool_expander.cpp */; };
+		BF3C0D4A1070EBDE003A39A1 /* ifcmgtool_findmatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF3C0D1D1070E93D003A39A1 /* ifcmgtool_findmatch.cpp */; };
+		BF3C0D5A1070EC34003A39A1 /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
+		BF3C0D5D1070EC41003A39A1 /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
+		BF3C0D601070EC4D003A39A1 /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
+		BF3C0D631070EC58003A39A1 /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BF3C0D4E1070EC18003A39A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteInfo = ifcmgkernel;
+		};
+		BF3C0D501070EC18003A39A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF3C0D2A1070EB55003A39A1 /* ifcmgtool_compile_all */;
+			remoteInfo = ifcmgtool_compile_all;
+		};
+		BF3C0D521070EC18003A39A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF3C0D311070EB6F003A39A1 /* ifcmgtool_compile */;
+			remoteInfo = ifcmgtool_compile;
+		};
+		BF3C0D541070EC18003A39A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF3C0D381070EB88003A39A1 /* ifcmgtool_expander */;
+			remoteInfo = ifcmgtool_expander;
+		};
+		BF3C0D561070EC18003A39A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF3C0D421070EBAC003A39A1 /* ifcmgtool_findmatch */;
+			remoteInfo = ifcmgtool_findmatch;
+		};
+		BF3C0D581070EC28003A39A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteInfo = ifcmgkernel;
+		};
+		BF3C0D5B1070EC3D003A39A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteInfo = ifcmgkernel;
+		};
+		BF3C0D5E1070EC49003A39A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteInfo = ifcmgkernel;
+		};
+		BF3C0D611070EC54003A39A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteInfo = ifcmgkernel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BF3C0CF41070E8E2003A39A1 /* ifcmg_buf_macosx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_buf_macosx.h; path = ../../../include/ifcmg_buf_macosx.h; sourceTree = SOURCE_ROOT; };
+		BF3C0CF51070E8E2003A39A1 /* ifcmg_buf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_buf.h; path = ../../../include/ifcmg_buf.h; sourceTree = SOURCE_ROOT; };
+		BF3C0CF61070E8E2003A39A1 /* ifcmg_compile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_compile.h; path = ../../../include/ifcmg_compile.h; sourceTree = SOURCE_ROOT; };
+		BF3C0CF71070E8E2003A39A1 /* ifcmg_dynbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_dynbuf.h; path = ../../../include/ifcmg_dynbuf.h; sourceTree = SOURCE_ROOT; };
+		BF3C0CF81070E8E2003A39A1 /* ifcmg_mmap_buf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_mmap_buf.h; path = ../../../include/ifcmg_mmap_buf.h; sourceTree = SOURCE_ROOT; };
+		BF3C0CF91070E8E2003A39A1 /* ifcmg_multiscanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_multiscanner.h; path = ../../../include/ifcmg_multiscanner.h; sourceTree = SOURCE_ROOT; };
+		BF3C0CFA1070E8E2003A39A1 /* ifcmg_pattern_expander.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_pattern_expander.h; path = ../../../include/ifcmg_pattern_expander.h; sourceTree = SOURCE_ROOT; };
+		BF3C0CFB1070E8E2003A39A1 /* ifcmg_scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_scanner.h; path = ../../../include/ifcmg_scanner.h; sourceTree = SOURCE_ROOT; };
+		BF3C0CFC1070E8E2003A39A1 /* ifcmg_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_string.h; path = ../../../include/ifcmg_string.h; sourceTree = SOURCE_ROOT; };
+		BF3C0CFD1070E8E2003A39A1 /* ifcmg_tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_tree.h; path = ../../../include/ifcmg_tree.h; sourceTree = SOURCE_ROOT; };
+		BF3C0CFE1070E8E2003A39A1 /* ifcmg_treebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_treebase.h; path = ../../../include/ifcmg_treebase.h; sourceTree = SOURCE_ROOT; };
+		BF3C0CFF1070E8E2003A39A1 /* ifcmg_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_util.h; path = ../../../include/ifcmg_util.h; sourceTree = SOURCE_ROOT; };
+		BF3C0D001070E8E2003A39A1 /* ifcmg_world.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ifcmg_world.h; path = ../../../include/ifcmg_world.h; sourceTree = SOURCE_ROOT; };
+		BF3C0D011070E8F7003A39A1 /* ifcmg_buf_macosx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_buf_macosx.cpp; path = ../../../src/ifcmg_buf_macosx.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D021070E8F7003A39A1 /* ifcmg_buf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_buf.cpp; path = ../../../src/ifcmg_buf.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D031070E8F7003A39A1 /* ifcmg_compile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_compile.cpp; path = ../../../src/ifcmg_compile.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D041070E8F7003A39A1 /* ifcmg_dynbuf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_dynbuf.cpp; path = ../../../src/ifcmg_dynbuf.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D051070E8F7003A39A1 /* ifcmg_mmap_buf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_mmap_buf.cpp; path = ../../../src/ifcmg_mmap_buf.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D061070E8F7003A39A1 /* ifcmg_multiscanner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_multiscanner.cpp; path = ../../../src/ifcmg_multiscanner.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D071070E8F7003A39A1 /* ifcmg_pattern_expander.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_pattern_expander.cpp; path = ../../../src/ifcmg_pattern_expander.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D081070E8F7003A39A1 /* ifcmg_scanner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_scanner.cpp; path = ../../../src/ifcmg_scanner.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D091070E8F7003A39A1 /* ifcmg_tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_tree.cpp; path = ../../../src/ifcmg_tree.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D0A1070E8F7003A39A1 /* ifcmg_treebase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_treebase.cpp; path = ../../../src/ifcmg_treebase.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D0B1070E8F7003A39A1 /* ifcmg_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_util.cpp; path = ../../../src/ifcmg_util.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D0C1070E8F7003A39A1 /* ifcmg_world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_world.cpp; path = ../../../src/ifcmg_world.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D1A1070E93D003A39A1 /* ifcmgtool_compile_all.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmgtool_compile_all.cpp; path = ../../../tools/ifcmgtool_compile_all.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D1B1070E93D003A39A1 /* ifcmgtool_compile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmgtool_compile.cpp; path = ../../../tools/ifcmgtool_compile.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D1C1070E93D003A39A1 /* ifcmgtool_expander.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmgtool_expander.cpp; path = ../../../tools/ifcmgtool_expander.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D1D1070E93D003A39A1 /* ifcmgtool_findmatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmgtool_findmatch.cpp; path = ../../../tools/ifcmgtool_findmatch.cpp; sourceTree = SOURCE_ROOT; };
+		BF3C0D2B1070EB55003A39A1 /* ifcmgtool_compile_all */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_compile_all; path = build/Debug/ifcmgtool_compile_all; sourceTree = "<group>"; };
+		BF3C0D321070EB6F003A39A1 /* ifcmgtool_compile */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_compile; path = build/Debug/ifcmgtool_compile; sourceTree = "<group>"; };
+		BF3C0D391070EB88003A39A1 /* ifcmgtool_expander */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_expander; path = build/Debug/ifcmgtool_expander; sourceTree = "<group>"; };
+		BF3C0D431070EBAC003A39A1 /* ifcmgtool_findmatch */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_findmatch; path = build/Debug/ifcmgtool_findmatch; sourceTree = "<group>"; };
+		D2AAC046055464E500DB518D /* libifcmgkernel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libifcmgkernel.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF3C0D291070EB55003A39A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF3C0D5A1070EC34003A39A1 /* libifcmgkernel.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3C0D301070EB6F003A39A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF3C0D5D1070EC41003A39A1 /* libifcmgkernel.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3C0D371070EB88003A39A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF3C0D601070EC4D003A39A1 /* libifcmgkernel.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3C0D411070EBAC003A39A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF3C0D631070EC58003A39A1 /* libifcmgkernel.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D289987405E68DCB004EDB86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* ifcmgkernel */ = {
+			isa = PBXGroup;
+			children = (
+				BF3C0D191070E92A003A39A1 /* Tools */,
+				BF3C0CF11070E8C9003A39A1 /* Headers */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6A0FF2B0290797F04C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = ifcmgkernel;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				BF3C0D011070E8F7003A39A1 /* ifcmg_buf_macosx.cpp */,
+				BF3C0D021070E8F7003A39A1 /* ifcmg_buf.cpp */,
+				BF3C0D031070E8F7003A39A1 /* ifcmg_compile.cpp */,
+				BF3C0D041070E8F7003A39A1 /* ifcmg_dynbuf.cpp */,
+				BF3C0D051070E8F7003A39A1 /* ifcmg_mmap_buf.cpp */,
+				BF3C0D061070E8F7003A39A1 /* ifcmg_multiscanner.cpp */,
+				BF3C0D071070E8F7003A39A1 /* ifcmg_pattern_expander.cpp */,
+				BF3C0D081070E8F7003A39A1 /* ifcmg_scanner.cpp */,
+				BF3C0D091070E8F7003A39A1 /* ifcmg_tree.cpp */,
+				BF3C0D0A1070E8F7003A39A1 /* ifcmg_treebase.cpp */,
+				BF3C0D0B1070E8F7003A39A1 /* ifcmg_util.cpp */,
+				BF3C0D0C1070E8F7003A39A1 /* ifcmg_world.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libifcmgkernel.a */,
+				BF3C0D2B1070EB55003A39A1 /* ifcmgtool_compile_all */,
+				BF3C0D321070EB6F003A39A1 /* ifcmgtool_compile */,
+				BF3C0D391070EB88003A39A1 /* ifcmgtool_expander */,
+				BF3C0D431070EBAC003A39A1 /* ifcmgtool_findmatch */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF3C0CF11070E8C9003A39A1 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				BF3C0CF41070E8E2003A39A1 /* ifcmg_buf_macosx.h */,
+				BF3C0CF51070E8E2003A39A1 /* ifcmg_buf.h */,
+				BF3C0CF61070E8E2003A39A1 /* ifcmg_compile.h */,
+				BF3C0CF71070E8E2003A39A1 /* ifcmg_dynbuf.h */,
+				BF3C0CF81070E8E2003A39A1 /* ifcmg_mmap_buf.h */,
+				BF3C0CF91070E8E2003A39A1 /* ifcmg_multiscanner.h */,
+				BF3C0CFA1070E8E2003A39A1 /* ifcmg_pattern_expander.h */,
+				BF3C0CFB1070E8E2003A39A1 /* ifcmg_scanner.h */,
+				BF3C0CFC1070E8E2003A39A1 /* ifcmg_string.h */,
+				BF3C0CFD1070E8E2003A39A1 /* ifcmg_tree.h */,
+				BF3C0CFE1070E8E2003A39A1 /* ifcmg_treebase.h */,
+				BF3C0CFF1070E8E2003A39A1 /* ifcmg_util.h */,
+				BF3C0D001070E8E2003A39A1 /* ifcmg_world.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		BF3C0D191070E92A003A39A1 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				BF3C0D1A1070E93D003A39A1 /* ifcmgtool_compile_all.cpp */,
+				BF3C0D1B1070E93D003A39A1 /* ifcmgtool_compile.cpp */,
+				BF3C0D1C1070E93D003A39A1 /* ifcmgtool_expander.cpp */,
+				BF3C0D1D1070E93D003A39A1 /* ifcmgtool_findmatch.cpp */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
+		C6A0FF2B0290797F04C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC043055464E500DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		BF3C0D2A1070EB55003A39A1 /* ifcmgtool_compile_all */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF3C0D3D1070EBA6003A39A1 /* Build configuration list for PBXNativeTarget "ifcmgtool_compile_all" */;
+			buildPhases = (
+				BF3C0D281070EB55003A39A1 /* Sources */,
+				BF3C0D291070EB55003A39A1 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF3C0D591070EC28003A39A1 /* PBXTargetDependency */,
+			);
+			name = ifcmgtool_compile_all;
+			productName = ifcmgtool_compile_all;
+			productReference = BF3C0D2B1070EB55003A39A1 /* ifcmgtool_compile_all */;
+			productType = "com.apple.product-type.tool";
+		};
+		BF3C0D311070EB6F003A39A1 /* ifcmgtool_compile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF3C0D3E1070EBA6003A39A1 /* Build configuration list for PBXNativeTarget "ifcmgtool_compile" */;
+			buildPhases = (
+				BF3C0D2F1070EB6F003A39A1 /* Sources */,
+				BF3C0D301070EB6F003A39A1 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF3C0D5C1070EC3D003A39A1 /* PBXTargetDependency */,
+			);
+			name = ifcmgtool_compile;
+			productName = ifcmgtool_compile;
+			productReference = BF3C0D321070EB6F003A39A1 /* ifcmgtool_compile */;
+			productType = "com.apple.product-type.tool";
+		};
+		BF3C0D381070EB88003A39A1 /* ifcmgtool_expander */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF3C0D3F1070EBA6003A39A1 /* Build configuration list for PBXNativeTarget "ifcmgtool_expander" */;
+			buildPhases = (
+				BF3C0D361070EB88003A39A1 /* Sources */,
+				BF3C0D371070EB88003A39A1 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF3C0D5F1070EC49003A39A1 /* PBXTargetDependency */,
+			);
+			name = ifcmgtool_expander;
+			productName = ifcmgtool_expander;
+			productReference = BF3C0D391070EB88003A39A1 /* ifcmgtool_expander */;
+			productType = "com.apple.product-type.tool";
+		};
+		BF3C0D421070EBAC003A39A1 /* ifcmgtool_findmatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF3C0D6C1070EC9A003A39A1 /* Build configuration list for PBXNativeTarget "ifcmgtool_findmatch" */;
+			buildPhases = (
+				BF3C0D401070EBAC003A39A1 /* Sources */,
+				BF3C0D411070EBAC003A39A1 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF3C0D621070EC54003A39A1 /* PBXTargetDependency */,
+			);
+			name = ifcmgtool_findmatch;
+			productName = ifcmgtool_findmatch;
+			productReference = BF3C0D431070EBAC003A39A1 /* ifcmgtool_findmatch */;
+			productType = "com.apple.product-type.tool";
+		};
+		D2AAC045055464E500DB518D /* ifcmgkernel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "ifcmgkernel" */;
+			buildPhases = (
+				D2AAC043055464E500DB518D /* Headers */,
+				D2AAC044055464E500DB518D /* Sources */,
+				D289987405E68DCB004EDB86 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ifcmgkernel;
+			productName = ifcmgkernel;
+			productReference = D2AAC046055464E500DB518D /* libifcmgkernel.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "ifcmgkernel" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* ifcmgkernel */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF3C0D4B1070EC09003A39A1 /* all */,
+				D2AAC045055464E500DB518D /* ifcmgkernel */,
+				BF3C0D2A1070EB55003A39A1 /* ifcmgtool_compile_all */,
+				BF3C0D311070EB6F003A39A1 /* ifcmgtool_compile */,
+				BF3C0D381070EB88003A39A1 /* ifcmgtool_expander */,
+				BF3C0D421070EBAC003A39A1 /* ifcmgtool_findmatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF3C0D281070EB55003A39A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF3C0D471070EBB7003A39A1 /* ifcmgtool_compile_all.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3C0D2F1070EB6F003A39A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF3C0D481070EBC8003A39A1 /* ifcmgtool_compile.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3C0D361070EB88003A39A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF3C0D491070EBCE003A39A1 /* ifcmgtool_expander.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3C0D401070EBAC003A39A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF3C0D4A1070EBDE003A39A1 /* ifcmgtool_findmatch.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC044055464E500DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF3C0D0D1070E8F7003A39A1 /* ifcmg_buf_macosx.cpp in Sources */,
+				BF3C0D0E1070E8F7003A39A1 /* ifcmg_buf.cpp in Sources */,
+				BF3C0D0F1070E8F7003A39A1 /* ifcmg_compile.cpp in Sources */,
+				BF3C0D101070E8F7003A39A1 /* ifcmg_dynbuf.cpp in Sources */,
+				BF3C0D111070E8F7003A39A1 /* ifcmg_mmap_buf.cpp in Sources */,
+				BF3C0D121070E8F7003A39A1 /* ifcmg_multiscanner.cpp in Sources */,
+				BF3C0D131070E8F7003A39A1 /* ifcmg_pattern_expander.cpp in Sources */,
+				BF3C0D141070E8F7003A39A1 /* ifcmg_scanner.cpp in Sources */,
+				BF3C0D151070E8F7003A39A1 /* ifcmg_tree.cpp in Sources */,
+				BF3C0D161070E8F7003A39A1 /* ifcmg_treebase.cpp in Sources */,
+				BF3C0D171070E8F7003A39A1 /* ifcmg_util.cpp in Sources */,
+				BF3C0D181070E8F7003A39A1 /* ifcmg_world.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BF3C0D4F1070EC18003A39A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			targetProxy = BF3C0D4E1070EC18003A39A1 /* PBXContainerItemProxy */;
+		};
+		BF3C0D511070EC18003A39A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF3C0D2A1070EB55003A39A1 /* ifcmgtool_compile_all */;
+			targetProxy = BF3C0D501070EC18003A39A1 /* PBXContainerItemProxy */;
+		};
+		BF3C0D531070EC18003A39A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF3C0D311070EB6F003A39A1 /* ifcmgtool_compile */;
+			targetProxy = BF3C0D521070EC18003A39A1 /* PBXContainerItemProxy */;
+		};
+		BF3C0D551070EC18003A39A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF3C0D381070EB88003A39A1 /* ifcmgtool_expander */;
+			targetProxy = BF3C0D541070EC18003A39A1 /* PBXContainerItemProxy */;
+		};
+		BF3C0D571070EC18003A39A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF3C0D421070EBAC003A39A1 /* ifcmgtool_findmatch */;
+			targetProxy = BF3C0D561070EC18003A39A1 /* PBXContainerItemProxy */;
+		};
+		BF3C0D591070EC28003A39A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			targetProxy = BF3C0D581070EC28003A39A1 /* PBXContainerItemProxy */;
+		};
+		BF3C0D5C1070EC3D003A39A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			targetProxy = BF3C0D5B1070EC3D003A39A1 /* PBXContainerItemProxy */;
+		};
+		BF3C0D5F1070EC49003A39A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			targetProxy = BF3C0D5E1070EC49003A39A1 /* PBXContainerItemProxy */;
+		};
+		BF3C0D621070EC54003A39A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			targetProxy = BF3C0D611070EC54003A39A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91EC08733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = ifcmgkernel;
+			};
+			name = Debug;
+		};
+		1DEB91ED08733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = ifcmgkernel;
+			};
+			name = Release;
+		};
+		1DEB91F008733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		1DEB91F108733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		BF3C0D2D1070EB55003A39A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_compile_all;
+			};
+			name = Debug;
+		};
+		BF3C0D2E1070EB55003A39A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_compile_all;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		BF3C0D341070EB6F003A39A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_compile;
+			};
+			name = Debug;
+		};
+		BF3C0D351070EB6F003A39A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_compile;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		BF3C0D3B1070EB88003A39A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_expander;
+			};
+			name = Debug;
+		};
+		BF3C0D3C1070EB88003A39A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_expander;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		BF3C0D451070EBAC003A39A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_findmatch;
+			};
+			name = Debug;
+		};
+		BF3C0D461070EBAC003A39A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_findmatch;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		BF3C0D4C1070EC09003A39A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = all;
+			};
+			name = Debug;
+		};
+		BF3C0D4D1070EC09003A39A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = all;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "ifcmgkernel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91EC08733DB70010E9CD /* Debug */,
+				1DEB91ED08733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "ifcmgkernel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91F008733DB70010E9CD /* Debug */,
+				1DEB91F108733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF3C0D3D1070EBA6003A39A1 /* Build configuration list for PBXNativeTarget "ifcmgtool_compile_all" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF3C0D2D1070EB55003A39A1 /* Debug */,
+				BF3C0D2E1070EB55003A39A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF3C0D3E1070EBA6003A39A1 /* Build configuration list for PBXNativeTarget "ifcmgtool_compile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF3C0D341070EB6F003A39A1 /* Debug */,
+				BF3C0D351070EB6F003A39A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF3C0D3F1070EBA6003A39A1 /* Build configuration list for PBXNativeTarget "ifcmgtool_expander" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF3C0D3B1070EB88003A39A1 /* Debug */,
+				BF3C0D3C1070EB88003A39A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF3C0D6C1070EC9A003A39A1 /* Build configuration list for PBXNativeTarget "ifcmgtool_findmatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF3C0D451070EBAC003A39A1 /* Debug */,
+				BF3C0D461070EBAC003A39A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF3C0D6D1070EC9A003A39A1 /* Build configuration list for PBXAggregateTarget "all" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF3C0D4C1070EC09003A39A1 /* Debug */,
+				BF3C0D4D1070EC09003A39A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
