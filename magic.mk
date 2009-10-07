@@ -2147,7 +2147,7 @@ else
 ifeq ($(CROSS_COMPILING)$(BUILD_NATIVE),11)
 ALL_TARGETS += native-dirs dirs native-lib native-tools native-tools-dev native-examples native-tests dirs lib tools tools-dev tests examples local-config-tool 
 else
-ALL_TARGETS += dirs lib tools tools-dev tests examples local-config-tool 
+ALL_TARGETS += dirs $(PRECOMPILED_HEADER_GCH) lib tools tools-dev tests examples local-config-tool 
 endif
 
 all : dirs $(ALL_TARGETS)
