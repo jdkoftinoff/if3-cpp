@@ -38,7 +38,8 @@ POSTGRESQL_INCLUDES:=$(shell $(POSTGRESQL_CONFIG) --includedir)
 POSTGRESQL_LDFLAGS:=-L$(shell $(POSTGRESQL_CONFIG) --libdir)
 INCLUDES+=$(POSTGRESQL_INCLUDES)
 LDFLAGS+=$(POSTGRESQL_LDFLAGS)
-LDLIBS+=-lpgport -lpgtypes -lpq -lpam -lz
+#LDLIBS+=-lpgport -lpgtypes -lpq -lpam -lz
+LDLIBS+=-lpgport -lpq -lpam -lz
 endif
 
 ifeq ($(PROJECT_VARIANT),debian)
