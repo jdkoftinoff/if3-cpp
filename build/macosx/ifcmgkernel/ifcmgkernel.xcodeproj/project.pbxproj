@@ -18,6 +18,7 @@
 				BF3C0D531070EC18003A39A1 /* PBXTargetDependency */,
 				BF3C0D551070EC18003A39A1 /* PBXTargetDependency */,
 				BF3C0D571070EC18003A39A1 /* PBXTargetDependency */,
+				BFFEED70108CEA7B00EF75AF /* PBXTargetDependency */,
 			);
 			name = all;
 			productName = all;
@@ -55,6 +56,17 @@
 		BFFEECF6108CD19700EF75AF /* ifcmg_db_filters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFFEECF1108CD19700EF75AF /* ifcmg_db_filters.cpp */; };
 		BFFEECF7108CD19700EF75AF /* ifcmg_db_needles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFFEECF2108CD19700EF75AF /* ifcmg_db_needles.cpp */; };
 		BFFEECF8108CD19700EF75AF /* ifcmg_db_sections.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFFEECF3108CD19700EF75AF /* ifcmg_db_sections.cpp */; };
+		BFFEED09108CD63500EF75AF /* ifcmg_db_util.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFFEED08108CD63500EF75AF /* ifcmg_db_util.hpp */; };
+		BFFEED0B108CD64500EF75AF /* ifcmg_db_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFFEED0A108CD64500EF75AF /* ifcmg_db_util.cpp */; };
+		BFFEED31108CE6A300EF75AF /* ifcmg_html_parse.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFFEED30108CE6A300EF75AF /* ifcmg_html_parse.hpp */; };
+		BFFEED33108CE6AF00EF75AF /* ifcmg_html_parse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFFEED32108CE6AF00EF75AF /* ifcmg_html_parse.cpp */; };
+		BFFEED5E108CE8F800EF75AF /* ifcmg_cgi.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFFEED5D108CE8F800EF75AF /* ifcmg_cgi.hpp */; };
+		BFFEED60108CE90600EF75AF /* ifcmg_cgi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFFEED5F108CE90600EF75AF /* ifcmg_cgi.cpp */; };
+		BFFEED62108CE9B200EF75AF /* ifcmg_httpd.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFFEED61108CE9B200EF75AF /* ifcmg_httpd.hpp */; };
+		BFFEED64108CE9C200EF75AF /* ifcmg_httpd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFFEED63108CE9C200EF75AF /* ifcmg_httpd.cpp */; };
+		BFFEED66108CEA1D00EF75AF /* ifcmgtool_test_httpd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFFEED65108CEA1D00EF75AF /* ifcmgtool_test_httpd.cpp */; };
+		BFFEED6E108CEA7300EF75AF /* ifcmgtool_test_httpd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFFEED65108CEA1D00EF75AF /* ifcmgtool_test_httpd.cpp */; };
+		BFFEED73108CEA8700EF75AF /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +133,20 @@
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = ifcmgkernel;
 		};
+		BFFEED6F108CEA7B00EF75AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFFEED69108CEA6200EF75AF /* ifcmgtool_test_httpd */;
+			remoteInfo = ifcmgtool_test_httpd;
+		};
+		BFFEED71108CEA8400EF75AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteInfo = ifcmgkernel;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -167,6 +193,16 @@
 		BFFEECF1108CD19700EF75AF /* ifcmg_db_filters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_db_filters.cpp; path = ../../../src/ifcmg_db_filters.cpp; sourceTree = SOURCE_ROOT; };
 		BFFEECF2108CD19700EF75AF /* ifcmg_db_needles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_db_needles.cpp; path = ../../../src/ifcmg_db_needles.cpp; sourceTree = SOURCE_ROOT; };
 		BFFEECF3108CD19700EF75AF /* ifcmg_db_sections.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_db_sections.cpp; path = ../../../src/ifcmg_db_sections.cpp; sourceTree = SOURCE_ROOT; };
+		BFFEED08108CD63500EF75AF /* ifcmg_db_util.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_db_util.hpp; path = ../../../include/ifcmg_db_util.hpp; sourceTree = SOURCE_ROOT; };
+		BFFEED0A108CD64500EF75AF /* ifcmg_db_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_db_util.cpp; path = ../../../src/ifcmg_db_util.cpp; sourceTree = SOURCE_ROOT; };
+		BFFEED30108CE6A300EF75AF /* ifcmg_html_parse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_html_parse.hpp; path = ../../../include/ifcmg_html_parse.hpp; sourceTree = SOURCE_ROOT; };
+		BFFEED32108CE6AF00EF75AF /* ifcmg_html_parse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_html_parse.cpp; path = ../../../src/ifcmg_html_parse.cpp; sourceTree = SOURCE_ROOT; };
+		BFFEED5D108CE8F800EF75AF /* ifcmg_cgi.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_cgi.hpp; path = ../../../include/ifcmg_cgi.hpp; sourceTree = SOURCE_ROOT; };
+		BFFEED5F108CE90600EF75AF /* ifcmg_cgi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_cgi.cpp; path = ../../../src/ifcmg_cgi.cpp; sourceTree = SOURCE_ROOT; };
+		BFFEED61108CE9B200EF75AF /* ifcmg_httpd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_httpd.hpp; path = ../../../include/ifcmg_httpd.hpp; sourceTree = SOURCE_ROOT; };
+		BFFEED63108CE9C200EF75AF /* ifcmg_httpd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_httpd.cpp; path = ../../../src/ifcmg_httpd.cpp; sourceTree = SOURCE_ROOT; };
+		BFFEED65108CEA1D00EF75AF /* ifcmgtool_test_httpd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmgtool_test_httpd.cpp; path = ../../../tools/ifcmgtool_test_httpd.cpp; sourceTree = SOURCE_ROOT; };
+		BFFEED6A108CEA6200EF75AF /* ifcmgtool_test_httpd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_test_httpd; path = build/Debug/ifcmgtool_test_httpd; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libifcmgkernel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libifcmgkernel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -203,6 +239,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFFEED68108CEA6200EF75AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFFEED73108CEA8700EF75AF /* libifcmgkernel.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D289987405E68DCB004EDB86 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,6 +272,9 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BFFEED63108CE9C200EF75AF /* ifcmg_httpd.cpp */,
+				BFFEED5F108CE90600EF75AF /* ifcmg_cgi.cpp */,
+				BFFEED0A108CD64500EF75AF /* ifcmg_db_util.cpp */,
 				BFFEECEF108CD19700EF75AF /* ifcmg_db_categories.cpp */,
 				BFFEECF0108CD19700EF75AF /* ifcmg_db_filtermap.cpp */,
 				BFFEECF1108CD19700EF75AF /* ifcmg_db_filters.cpp */,
@@ -237,6 +284,7 @@
 				BF3C0D021070E8F7003A39A1 /* ifcmg_buf.cpp */,
 				BF3C0D031070E8F7003A39A1 /* ifcmg_compile.cpp */,
 				BF3C0D041070E8F7003A39A1 /* ifcmg_dynbuf.cpp */,
+				BFFEED32108CE6AF00EF75AF /* ifcmg_html_parse.cpp */,
 				BF3C0D051070E8F7003A39A1 /* ifcmg_mmap_buf.cpp */,
 				BF3C0D061070E8F7003A39A1 /* ifcmg_multiscanner.cpp */,
 				BF3C0D071070E8F7003A39A1 /* ifcmg_pattern_expander.cpp */,
@@ -257,6 +305,7 @@
 				BF3C0D321070EB6F003A39A1 /* ifcmgtool_compile */,
 				BF3C0D391070EB88003A39A1 /* ifcmgtool_expander */,
 				BF3C0D431070EBAC003A39A1 /* ifcmgtool_findmatch */,
+				BFFEED6A108CEA6200EF75AF /* ifcmgtool_test_httpd */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -264,6 +313,9 @@
 		BF3C0CF11070E8C9003A39A1 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				BFFEED61108CE9B200EF75AF /* ifcmg_httpd.hpp */,
+				BFFEED5D108CE8F800EF75AF /* ifcmg_cgi.hpp */,
+				BFFEED08108CD63500EF75AF /* ifcmg_db_util.hpp */,
 				BFFEECE5108CD18500EF75AF /* ifcmg_db_categories.hpp */,
 				BFFEECE6108CD18500EF75AF /* ifcmg_db_filtermap.hpp */,
 				BFFEECE7108CD18500EF75AF /* ifcmg_db_filters.hpp */,
@@ -273,6 +325,7 @@
 				BFF228F9107153FC00905E99 /* ifcmg_buf.hpp */,
 				BFF228FA107153FC00905E99 /* ifcmg_compile.hpp */,
 				BFF228FB107153FC00905E99 /* ifcmg_dynbuf.hpp */,
+				BFFEED30108CE6A300EF75AF /* ifcmg_html_parse.hpp */,
 				BFF228FC107153FC00905E99 /* ifcmg_mmap_buf.hpp */,
 				BFF228FD107153FC00905E99 /* ifcmg_multiscanner.hpp */,
 				BFF228FE107153FC00905E99 /* ifcmg_pattern_expander.hpp */,
@@ -289,6 +342,7 @@
 		BF3C0D191070E92A003A39A1 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				BFFEED65108CEA1D00EF75AF /* ifcmgtool_test_httpd.cpp */,
 				BF3C0D1A1070E93D003A39A1 /* ifcmgtool_compile_all.cpp */,
 				BF3C0D1B1070E93D003A39A1 /* ifcmgtool_compile.cpp */,
 				BF3C0D1C1070E93D003A39A1 /* ifcmgtool_expander.cpp */,
@@ -316,6 +370,10 @@
 				BFFEECEC108CD18500EF75AF /* ifcmg_db_filters.hpp in Headers */,
 				BFFEECED108CD18500EF75AF /* ifcmg_db_needles.hpp in Headers */,
 				BFFEECEE108CD18500EF75AF /* ifcmg_db_sections.hpp in Headers */,
+				BFFEED09108CD63500EF75AF /* ifcmg_db_util.hpp in Headers */,
+				BFFEED31108CE6A300EF75AF /* ifcmg_html_parse.hpp in Headers */,
+				BFFEED5E108CE8F800EF75AF /* ifcmg_cgi.hpp in Headers */,
+				BFFEED62108CE9B200EF75AF /* ifcmg_httpd.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +448,23 @@
 			productReference = BF3C0D431070EBAC003A39A1 /* ifcmgtool_findmatch */;
 			productType = "com.apple.product-type.tool";
 		};
+		BFFEED69108CEA6200EF75AF /* ifcmgtool_test_httpd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFFEED76108CEAA600EF75AF /* Build configuration list for PBXNativeTarget "ifcmgtool_test_httpd" */;
+			buildPhases = (
+				BFFEED67108CEA6200EF75AF /* Sources */,
+				BFFEED68108CEA6200EF75AF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFFEED72108CEA8400EF75AF /* PBXTargetDependency */,
+			);
+			name = ifcmgtool_test_httpd;
+			productName = ifcmgtool_test_httpd;
+			productReference = BFFEED6A108CEA6200EF75AF /* ifcmgtool_test_httpd */;
+			productType = "com.apple.product-type.tool";
+		};
 		D2AAC045055464E500DB518D /* ifcmgkernel */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "ifcmgkernel" */;
@@ -425,6 +500,7 @@
 				BF3C0D311070EB6F003A39A1 /* ifcmgtool_compile */,
 				BF3C0D381070EB88003A39A1 /* ifcmgtool_expander */,
 				BF3C0D421070EBAC003A39A1 /* ifcmgtool_findmatch */,
+				BFFEED69108CEA6200EF75AF /* ifcmgtool_test_httpd */,
 			);
 		};
 /* End PBXProject section */
@@ -462,6 +538,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFFEED67108CEA6200EF75AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFFEED6E108CEA7300EF75AF /* ifcmgtool_test_httpd.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2AAC044055464E500DB518D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -483,6 +567,11 @@
 				BFFEECF6108CD19700EF75AF /* ifcmg_db_filters.cpp in Sources */,
 				BFFEECF7108CD19700EF75AF /* ifcmg_db_needles.cpp in Sources */,
 				BFFEECF8108CD19700EF75AF /* ifcmg_db_sections.cpp in Sources */,
+				BFFEED0B108CD64500EF75AF /* ifcmg_db_util.cpp in Sources */,
+				BFFEED33108CE6AF00EF75AF /* ifcmg_html_parse.cpp in Sources */,
+				BFFEED60108CE90600EF75AF /* ifcmg_cgi.cpp in Sources */,
+				BFFEED64108CE9C200EF75AF /* ifcmg_httpd.cpp in Sources */,
+				BFFEED66108CEA1D00EF75AF /* ifcmgtool_test_httpd.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +622,16 @@
 			isa = PBXTargetDependency;
 			target = D2AAC045055464E500DB518D /* ifcmgkernel */;
 			targetProxy = BF3C0D611070EC54003A39A1 /* PBXContainerItemProxy */;
+		};
+		BFFEED70108CEA7B00EF75AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFFEED69108CEA6200EF75AF /* ifcmgtool_test_httpd */;
+			targetProxy = BFFEED6F108CEA7B00EF75AF /* PBXContainerItemProxy */;
+		};
+		BFFEED72108CEA8400EF75AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			targetProxy = BFFEED71108CEA8400EF75AF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -737,6 +836,36 @@
 			};
 			name = Release;
 		};
+		BFFEED6C108CEA6300EF75AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_test_httpd;
+			};
+			name = Debug;
+		};
+		BFFEED6D108CEA6300EF75AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_test_httpd;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -799,6 +928,15 @@
 			buildConfigurations = (
 				BF3C0D4C1070EC09003A39A1 /* Debug */,
 				BF3C0D4D1070EC09003A39A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFFEED76108CEAA600EF75AF /* Build configuration list for PBXNativeTarget "ifcmgtool_test_httpd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFFEED6C108CEA6300EF75AF /* Debug */,
+				BFFEED6D108CEA6300EF75AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -92,6 +92,12 @@ ALL RIGHTS RESERVED.
 # include <string>
 # include <iostream>
 # include <sstream>
+# include <list>
+# include <vector>
+# include <algorithm>
+# include <exception>
+# include <stdexcept>
+
 # if defined(IFCMG_CONFIG_NEWNOTHROW)
 #  define newnothrow new (std::nothrow)
 # else
@@ -106,6 +112,22 @@ ALL RIGHTS RESERVED.
 #  define ifcmg_throw( a ) do { fprintf(stderr,"%s",a); abort(); } while(0)
 # endif
 #endif
+
+namespace ifcmg 
+{
+  template< typename T1, typename T2 > inline T1 lexical_cast ( const T2 &v )
+  {
+    T1 newval;
+    std::stringstream os;
+    
+    if ( ! ( os << v ) || ! ( os >> newval ) )
+      throw std::invalid_argument ( "lexical_cast failure" );
+    
+    return newval;
+  }
+  
+  
+}
 
 #endif
 
