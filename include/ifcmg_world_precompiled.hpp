@@ -97,6 +97,7 @@
 # include <algorithm>
 # include <exception>
 # include <stdexcept>
+# include <cstring>
 
 # if defined(IFCMG_CONFIG_NEWNOTHROW)
 #  define newnothrow new (std::nothrow)

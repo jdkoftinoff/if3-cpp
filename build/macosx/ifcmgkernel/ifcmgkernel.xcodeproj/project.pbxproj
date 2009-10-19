@@ -145,14 +145,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = ifcmgkernel;
 		};
 		BFCD5D58108D1ED400FDA674 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BFCD5D4F108D1EB600FDA674 /* ifcmgtool_test_categorizer */;
+			remoteGlobalIDString = BFCD5D4F108D1EB600FDA674;
 			remoteInfo = ifcmgtool_test_categorizer;
 		};
 		BFFEED6F108CEA7B00EF75AF /* PBXContainerItemProxy */ = {
@@ -198,7 +198,7 @@
 		BFCD5D48108D1E8200FDA674 /* ifcmg_categorizer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_categorizer.hpp; path = ../../../include/ifcmg_categorizer.hpp; sourceTree = SOURCE_ROOT; };
 		BFCD5D4A108D1E9100FDA674 /* ifcmg_categorizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_categorizer.cpp; path = ../../../src/ifcmg_categorizer.cpp; sourceTree = SOURCE_ROOT; };
 		BFCD5D4C108D1EA300FDA674 /* ifcmgtool_test_categorizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmgtool_test_categorizer.cpp; path = ../../../tools/ifcmgtool_test_categorizer.cpp; sourceTree = SOURCE_ROOT; };
-		BFCD5D50108D1EB600FDA674 /* ifcmgtool_test_categorizer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_test_categorizer; path = build/Debug/ifcmgtool_test_categorizer; sourceTree = "<group>"; };
+		BFCD5D50108D1EB600FDA674 /* ifcmgtool_test_categorizer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_test_categorizer; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF228F8107153FC00905E99 /* ifcmg_buf_macosx.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_buf_macosx.hpp; path = ../../../include/ifcmg_buf_macosx.hpp; sourceTree = SOURCE_ROOT; };
 		BFF228F9107153FC00905E99 /* ifcmg_buf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_buf.hpp; path = ../../../include/ifcmg_buf.hpp; sourceTree = SOURCE_ROOT; };
 		BFF228FA107153FC00905E99 /* ifcmg_compile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_compile.hpp; path = ../../../include/ifcmg_compile.hpp; sourceTree = SOURCE_ROOT; };
