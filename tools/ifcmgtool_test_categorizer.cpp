@@ -11,6 +11,16 @@
  ALL RIGHTS RESERVED.
  
  */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_cgi.hpp"
 
+#include "ifcmg_world_precompiled.hpp"
+#include "ifcmg_string.hpp"
+#include "ifcmg_util.hpp"
+#include "ifcmg_compile.hpp"
+#include "ifcmg_categorizer.hpp"
+
+using namespace ifcmg;
+
+int main( int argc, char **argv )
+{
+  
+}

@@ -11,8 +11,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_MINI_COMPILE_H
-#define IFCMG_MINI_COMPILE_H
+#ifndef IFCMG_MINI_COMPILE_HPP
+#define IFCMG_MINI_COMPILE_HPP
 
 #include "ifcmg_world.hpp"
 #include "ifcmg_string.hpp"

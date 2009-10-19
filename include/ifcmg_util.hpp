@@ -12,8 +12,8 @@ ALL RIGHTS RESERVED.
 
 */
 
-#ifndef IFCMG_UTIL_H
-#define IFCMG_UTIL_H
+#ifndef IFCMG_UTIL_HPP
+#define IFCMG_UTIL_HPP
 
 #include "ifcmg_world.hpp"
 #include "ifcmg_string.hpp"

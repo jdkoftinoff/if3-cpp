@@ -11,8 +11,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_MULTISCANNER_H
-#define IFCMG_MULTISCANNER_H
+#ifndef IFCMG_MULTISCANNER_HPP
+#define IFCMG_MULTISCANNER_HPP
 
 #include "ifcmg_world.hpp"
 #include "ifcmg_string.hpp"

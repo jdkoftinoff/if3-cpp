@@ -19,6 +19,7 @@
 				BF3C0D551070EC18003A39A1 /* PBXTargetDependency */,
 				BF3C0D571070EC18003A39A1 /* PBXTargetDependency */,
 				BFFEED70108CEA7B00EF75AF /* PBXTargetDependency */,
+				BFCD5D59108D1ED400FDA674 /* PBXTargetDependency */,
 			);
 			name = all;
 			productName = all;
@@ -46,6 +47,13 @@
 		BF3C0D5D1070EC41003A39A1 /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
 		BF3C0D601070EC4D003A39A1 /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
 		BF3C0D631070EC58003A39A1 /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
+		BFCD5CCE108D054100FDA674 /* ifcmg_db.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFCD5CCD108D054100FDA674 /* ifcmg_db.hpp */; };
+		BFCD5CD0108D055000FDA674 /* ifcmg_db.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCD5CCF108D055000FDA674 /* ifcmg_db.cpp */; };
+		BFCD5CD2108D064C00FDA674 /* ifcmg_world_precompiled.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFCD5CD1108D064C00FDA674 /* ifcmg_world_precompiled.hpp */; };
+		BFCD5D49108D1E8200FDA674 /* ifcmg_categorizer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFCD5D48108D1E8200FDA674 /* ifcmg_categorizer.hpp */; };
+		BFCD5D4B108D1E9100FDA674 /* ifcmg_categorizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCD5D4A108D1E9100FDA674 /* ifcmg_categorizer.cpp */; };
+		BFCD5D54108D1EC100FDA674 /* ifcmgtool_test_categorizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCD5D4C108D1EA300FDA674 /* ifcmgtool_test_categorizer.cpp */; };
+		BFCD5D55108D1ECA00FDA674 /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
 		BFFEECEA108CD18500EF75AF /* ifcmg_db_categories.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFFEECE5108CD18500EF75AF /* ifcmg_db_categories.hpp */; };
 		BFFEECEB108CD18500EF75AF /* ifcmg_db_filtermap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFFEECE6108CD18500EF75AF /* ifcmg_db_filtermap.hpp */; };
 		BFFEECEC108CD18500EF75AF /* ifcmg_db_filters.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFFEECE7108CD18500EF75AF /* ifcmg_db_filters.hpp */; };
@@ -133,18 +141,32 @@
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = ifcmgkernel;
 		};
+		BFCD5D56108D1ECD00FDA674 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteInfo = ifcmgkernel;
+		};
+		BFCD5D58108D1ED400FDA674 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFCD5D4F108D1EB600FDA674 /* ifcmgtool_test_categorizer */;
+			remoteInfo = ifcmgtool_test_categorizer;
+		};
 		BFFEED6F108CEA7B00EF75AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BFFEED69108CEA6200EF75AF /* ifcmgtool_test_httpd */;
+			remoteGlobalIDString = BFFEED69108CEA6200EF75AF;
 			remoteInfo = ifcmgtool_test_httpd;
 		};
 		BFFEED71108CEA8400EF75AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = ifcmgkernel;
 		};
 /* End PBXContainerItemProxy section */
@@ -170,6 +192,13 @@
 		BF3C0D321070EB6F003A39A1 /* ifcmgtool_compile */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_compile; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3C0D391070EB88003A39A1 /* ifcmgtool_expander */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_expander; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3C0D431070EBAC003A39A1 /* ifcmgtool_findmatch */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_findmatch; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFCD5CCD108D054100FDA674 /* ifcmg_db.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_db.hpp; path = ../../../include/ifcmg_db.hpp; sourceTree = SOURCE_ROOT; };
+		BFCD5CCF108D055000FDA674 /* ifcmg_db.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_db.cpp; path = ../../../src/ifcmg_db.cpp; sourceTree = SOURCE_ROOT; };
+		BFCD5CD1108D064C00FDA674 /* ifcmg_world_precompiled.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_world_precompiled.hpp; path = ../../../include/ifcmg_world_precompiled.hpp; sourceTree = SOURCE_ROOT; };
+		BFCD5D48108D1E8200FDA674 /* ifcmg_categorizer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_categorizer.hpp; path = ../../../include/ifcmg_categorizer.hpp; sourceTree = SOURCE_ROOT; };
+		BFCD5D4A108D1E9100FDA674 /* ifcmg_categorizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_categorizer.cpp; path = ../../../src/ifcmg_categorizer.cpp; sourceTree = SOURCE_ROOT; };
+		BFCD5D4C108D1EA300FDA674 /* ifcmgtool_test_categorizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmgtool_test_categorizer.cpp; path = ../../../tools/ifcmgtool_test_categorizer.cpp; sourceTree = SOURCE_ROOT; };
+		BFCD5D50108D1EB600FDA674 /* ifcmgtool_test_categorizer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_test_categorizer; path = build/Debug/ifcmgtool_test_categorizer; sourceTree = "<group>"; };
 		BFF228F8107153FC00905E99 /* ifcmg_buf_macosx.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_buf_macosx.hpp; path = ../../../include/ifcmg_buf_macosx.hpp; sourceTree = SOURCE_ROOT; };
 		BFF228F9107153FC00905E99 /* ifcmg_buf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_buf.hpp; path = ../../../include/ifcmg_buf.hpp; sourceTree = SOURCE_ROOT; };
 		BFF228FA107153FC00905E99 /* ifcmg_compile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_compile.hpp; path = ../../../include/ifcmg_compile.hpp; sourceTree = SOURCE_ROOT; };
@@ -202,7 +231,7 @@
 		BFFEED61108CE9B200EF75AF /* ifcmg_httpd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_httpd.hpp; path = ../../../include/ifcmg_httpd.hpp; sourceTree = SOURCE_ROOT; };
 		BFFEED63108CE9C200EF75AF /* ifcmg_httpd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_httpd.cpp; path = ../../../src/ifcmg_httpd.cpp; sourceTree = SOURCE_ROOT; };
 		BFFEED65108CEA1D00EF75AF /* ifcmgtool_test_httpd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmgtool_test_httpd.cpp; path = ../../../tools/ifcmgtool_test_httpd.cpp; sourceTree = SOURCE_ROOT; };
-		BFFEED6A108CEA6200EF75AF /* ifcmgtool_test_httpd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = ifcmgtool_test_httpd; path = build/Debug/ifcmgtool_test_httpd; sourceTree = "<group>"; };
+		BFFEED6A108CEA6200EF75AF /* ifcmgtool_test_httpd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_test_httpd; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AAC046055464E500DB518D /* libifcmgkernel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libifcmgkernel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -239,6 +268,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFCD5D4E108D1EB600FDA674 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFCD5D55108D1ECA00FDA674 /* libifcmgkernel.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFFEED68108CEA6200EF75AF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -272,8 +309,10 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BFCD5D4A108D1E9100FDA674 /* ifcmg_categorizer.cpp */,
 				BFFEED63108CE9C200EF75AF /* ifcmg_httpd.cpp */,
 				BFFEED5F108CE90600EF75AF /* ifcmg_cgi.cpp */,
+				BFCD5CCF108D055000FDA674 /* ifcmg_db.cpp */,
 				BFFEED0A108CD64500EF75AF /* ifcmg_db_util.cpp */,
 				BFFEECEF108CD19700EF75AF /* ifcmg_db_categories.cpp */,
 				BFFEECF0108CD19700EF75AF /* ifcmg_db_filtermap.cpp */,
@@ -306,6 +345,7 @@
 				BF3C0D391070EB88003A39A1 /* ifcmgtool_expander */,
 				BF3C0D431070EBAC003A39A1 /* ifcmgtool_findmatch */,
 				BFFEED6A108CEA6200EF75AF /* ifcmgtool_test_httpd */,
+				BFCD5D50108D1EB600FDA674 /* ifcmgtool_test_categorizer */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -313,8 +353,10 @@
 		BF3C0CF11070E8C9003A39A1 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				BFCD5D48108D1E8200FDA674 /* ifcmg_categorizer.hpp */,
 				BFFEED61108CE9B200EF75AF /* ifcmg_httpd.hpp */,
 				BFFEED5D108CE8F800EF75AF /* ifcmg_cgi.hpp */,
+				BFCD5CCD108D054100FDA674 /* ifcmg_db.hpp */,
 				BFFEED08108CD63500EF75AF /* ifcmg_db_util.hpp */,
 				BFFEECE5108CD18500EF75AF /* ifcmg_db_categories.hpp */,
 				BFFEECE6108CD18500EF75AF /* ifcmg_db_filtermap.hpp */,
@@ -335,6 +377,7 @@
 				BFF22902107153FC00905E99 /* ifcmg_treebase.hpp */,
 				BFF22903107153FC00905E99 /* ifcmg_util.hpp */,
 				BFF22904107153FC00905E99 /* ifcmg_world.hpp */,
+				BFCD5CD1108D064C00FDA674 /* ifcmg_world_precompiled.hpp */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -342,6 +385,7 @@
 		BF3C0D191070E92A003A39A1 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				BFCD5D4C108D1EA300FDA674 /* ifcmgtool_test_categorizer.cpp */,
 				BFFEED65108CEA1D00EF75AF /* ifcmgtool_test_httpd.cpp */,
 				BF3C0D1A1070E93D003A39A1 /* ifcmgtool_compile_all.cpp */,
 				BF3C0D1B1070E93D003A39A1 /* ifcmgtool_compile.cpp */,
@@ -374,6 +418,9 @@
 				BFFEED31108CE6A300EF75AF /* ifcmg_html_parse.hpp in Headers */,
 				BFFEED5E108CE8F800EF75AF /* ifcmg_cgi.hpp in Headers */,
 				BFFEED62108CE9B200EF75AF /* ifcmg_httpd.hpp in Headers */,
+				BFCD5CCE108D054100FDA674 /* ifcmg_db.hpp in Headers */,
+				BFCD5CD2108D064C00FDA674 /* ifcmg_world_precompiled.hpp in Headers */,
+				BFCD5D49108D1E8200FDA674 /* ifcmg_categorizer.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +495,23 @@
 			productReference = BF3C0D431070EBAC003A39A1 /* ifcmgtool_findmatch */;
 			productType = "com.apple.product-type.tool";
 		};
+		BFCD5D4F108D1EB600FDA674 /* ifcmgtool_test_categorizer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFCD5D5A108D1EF300FDA674 /* Build configuration list for PBXNativeTarget "ifcmgtool_test_categorizer" */;
+			buildPhases = (
+				BFCD5D4D108D1EB600FDA674 /* Sources */,
+				BFCD5D4E108D1EB600FDA674 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFCD5D57108D1ECD00FDA674 /* PBXTargetDependency */,
+			);
+			name = ifcmgtool_test_categorizer;
+			productName = ifcmgtool_test_categorizer;
+			productReference = BFCD5D50108D1EB600FDA674 /* ifcmgtool_test_categorizer */;
+			productType = "com.apple.product-type.tool";
+		};
 		BFFEED69108CEA6200EF75AF /* ifcmgtool_test_httpd */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFFEED76108CEAA600EF75AF /* Build configuration list for PBXNativeTarget "ifcmgtool_test_httpd" */;
@@ -501,6 +565,7 @@
 				BF3C0D381070EB88003A39A1 /* ifcmgtool_expander */,
 				BF3C0D421070EBAC003A39A1 /* ifcmgtool_findmatch */,
 				BFFEED69108CEA6200EF75AF /* ifcmgtool_test_httpd */,
+				BFCD5D4F108D1EB600FDA674 /* ifcmgtool_test_categorizer */,
 			);
 		};
 /* End PBXProject section */
@@ -538,6 +603,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFCD5D4D108D1EB600FDA674 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFCD5D54108D1EC100FDA674 /* ifcmgtool_test_categorizer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFFEED67108CEA6200EF75AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -572,6 +645,8 @@
 				BFFEED60108CE90600EF75AF /* ifcmg_cgi.cpp in Sources */,
 				BFFEED64108CE9C200EF75AF /* ifcmg_httpd.cpp in Sources */,
 				BFFEED66108CEA1D00EF75AF /* ifcmgtool_test_httpd.cpp in Sources */,
+				BFCD5CD0108D055000FDA674 /* ifcmg_db.cpp in Sources */,
+				BFCD5D4B108D1E9100FDA674 /* ifcmg_categorizer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +698,16 @@
 			target = D2AAC045055464E500DB518D /* ifcmgkernel */;
 			targetProxy = BF3C0D611070EC54003A39A1 /* PBXContainerItemProxy */;
 		};
+		BFCD5D57108D1ECD00FDA674 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC045055464E500DB518D /* ifcmgkernel */;
+			targetProxy = BFCD5D56108D1ECD00FDA674 /* PBXContainerItemProxy */;
+		};
+		BFCD5D59108D1ED400FDA674 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFCD5D4F108D1EB600FDA674 /* ifcmgtool_test_categorizer */;
+			targetProxy = BFCD5D58108D1ED400FDA674 /* PBXContainerItemProxy */;
+		};
 		BFFEED70108CEA7B00EF75AF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BFFEED69108CEA6200EF75AF /* ifcmgtool_test_httpd */;
@@ -645,6 +730,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = ifcmgkernel;
 			};
@@ -665,12 +751,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_AUTO_VECTORIZATION = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = include/ifcmg_world_precompiled.hpp;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				SDKROOT = macosx10.6;
 			};
 			name = Debug;
@@ -679,10 +770,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_AUTO_VECTORIZATION = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = include/ifcmg_world_precompiled.hpp;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				SDKROOT = macosx10.6;
 			};
 			name = Release;
@@ -836,6 +932,36 @@
 			};
 			name = Release;
 		};
+		BFCD5D52108D1EB600FDA674 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_test_categorizer;
+			};
+			name = Debug;
+		};
+		BFCD5D53108D1EB600FDA674 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = ifcmgtool_test_categorizer;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		BFFEED6C108CEA6300EF75AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -928,6 +1054,15 @@
 			buildConfigurations = (
 				BF3C0D4C1070EC09003A39A1 /* Debug */,
 				BF3C0D4D1070EC09003A39A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFCD5D5A108D1EF300FDA674 /* Build configuration list for PBXNativeTarget "ifcmgtool_test_categorizer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFCD5D52108D1EB600FDA674 /* Debug */,
+				BFCD5D53108D1EB600FDA674 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

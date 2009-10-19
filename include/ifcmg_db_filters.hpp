@@ -10,8 +10,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_DB_FILTERS_H
-#define IFCMG_DB_FILTERS_H
+#ifndef IFCMG_DB_FILTERS_HPP
+#define IFCMG_DB_FILTERS_HPP
 
 
 #endif

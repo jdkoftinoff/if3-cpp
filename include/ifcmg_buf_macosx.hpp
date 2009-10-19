@@ -11,8 +11,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_BUF_MACOSX_H
-#define IFCMG_BUF_MACOSX_H
+#ifndef IFCMG_BUF_MACOSX_HPP
+#define IFCMG_BUF_MACOSX_HPP
 
 #ifdef __OBJC__
 

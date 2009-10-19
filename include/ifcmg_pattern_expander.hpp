@@ -11,8 +11,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_PATTERN_EXPANDER_H
-#define IFCMG_PATTERN_EXPANDER_H
+#ifndef IFCMG_PATTERN_EXPANDER_HPP
+#define IFCMG_PATTERN_EXPANDER_HPP
 
 #include "ifcmg_buf.hpp"
 #include "ifcmg_string.hpp"

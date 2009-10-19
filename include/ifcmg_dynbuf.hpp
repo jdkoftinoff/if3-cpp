@@ -11,8 +11,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_DYNBUF_H
-#define IFCMG_DYNBUF_H
+#ifndef IFCMG_DYNBUF_HPP
+#define IFCMG_DYNBUF_HPP
 
 #include "ifcmg_world.hpp"
 #include "ifcmg_string.hpp"

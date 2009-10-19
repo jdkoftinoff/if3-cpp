@@ -10,12 +10,14 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_HTML_PARSE_H
-#define IFCMG_HTML_PARSE_H
+#ifndef IFCMG_HTML_PARSE_HPP
+#define IFCMG_HTML_PARSE_HPP
 
 #include "ifcmg_world.hpp"
 #include "ifcmg_string.hpp"
 #include "ifcmg_buf.hpp"
+#include "ifcmg_dynbuf.hpp"
+#include "ifcmg_cgi.hpp"
 
 namespace ifcmg 
 {
@@ -55,18 +57,18 @@ namespace ifcmg
       IN_COMMENT_END_SECOND,
       IN_COMMENT_QUOTE,
       IN_TAG_QUOTE
-    } state;
-    jdk_str<256> tagname;
-    bool in_script;
-    bool in_style;
+    } m_state;
+    string_t m_tagname;
+    bool m_in_script;
+    bool m_in_style;
   };
   
   
-  class html_decode_t_to_links : public html_decode_base_t
+  class html_decode_to_links_t : public html_decode_base_t
   {
   public:
-    explicit html_decode_t_to_links();
-    virtual ~html_decode_t_to_links();
+    explicit html_decode_to_links_t();
+    virtual ~html_decode_to_links_t();
     
     void clear();
     
@@ -74,8 +76,8 @@ namespace ifcmg
     
   protected:
     
-    virtual void tagfound( const buf_t &in, size_t start_point, size_t len, dynbuf_t &out );
-    virtual void contentfound( const buf_t &in, size_t start_point, size_t len, dynbuf_t &out );
+    virtual void tag_found( const buf_t &in, size_t start_point, size_t len, dynbuf_t &out );
+    virtual void content_found( const buf_t &in, size_t start_point, size_t len, dynbuf_t &out );
     
     enum
     {

@@ -10,8 +10,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_DB_FILTERMAP_H
-#define IFCMG_DB_FILTERMAP_H
+#ifndef IFCMG_DB_FILTERMAP_HPP
+#define IFCMG_DB_FILTERMAP_HPP
 
 
 #endif

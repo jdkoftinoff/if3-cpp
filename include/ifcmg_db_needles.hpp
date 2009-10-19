@@ -10,8 +10,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_DB_NEEDLES_H
-#define IFCMG_DB_NEEDLES_H
+#ifndef IFCMG_DB_NEEDLES_HPP
+#define IFCMG_DB_NEEDLES_HPP
 
 
 #endif

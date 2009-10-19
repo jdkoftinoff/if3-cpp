@@ -11,7 +11,7 @@
  ALL RIGHTS RESERVED.
  
  */
-#include "ifcmg_world.hpp"
+#include "ifcmg_world_precompiled.hpp"
 #include "ifcmg_db_util.hpp"
 
 namespace ifcmg 

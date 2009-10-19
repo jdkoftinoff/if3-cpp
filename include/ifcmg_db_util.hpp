@@ -10,8 +10,8 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_DB_UTIL_H
-#define IFCMG_DB_UTIL_H
+#ifndef IFCMG_DB_UTIL_HPP
+#define IFCMG_DB_UTIL_HPP
 
 #include "ifcmg_world.hpp"
 #include "ifcmg_string.hpp"

@@ -1,5 +1,4 @@
-/*
- 
+/*  
  The IF Contextual Media Group Kernel Version 3
  Source Code
  
@@ -11,6 +10,13 @@
  ALL RIGHTS RESERVED.
  
  */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_cgi.hpp"
+#ifndef IFCMG_CATEGORIZER_HPP
+#define IFCMG_CATEGORIZER_HPP
 
+#include "ifcmg_world.hpp"
+
+namespace ifcmg 
+{
+}
+
+#endif

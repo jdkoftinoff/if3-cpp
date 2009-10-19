@@ -10,8 +10,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_DB_CATEGORIES_H
-#define IFCMG_DB_CATEGORIES_H
+#ifndef IFCMG_DB_CATEGORIES_HPP
+#define IFCMG_DB_CATEGORIES_HPP
 
 #include "ifcmg_world.hpp"
 #include "ifcmg_db_util.hpp"

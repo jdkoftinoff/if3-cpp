@@ -11,8 +11,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_MMAP_BUF_H
-#define IFCMG_MMAP_BUF_H
+#ifndef IFCMG_MMAP_BUF_HPP
+#define IFCMG_MMAP_BUF_HPP
 
 #include "ifcmg_world.hpp"
 #include "ifcmg_string.hpp"

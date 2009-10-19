@@ -12,5 +12,8 @@
  
  */
 #include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_cgi.hpp"
+#include "ifcmg_db.hpp"
 
+namespace ifcmg
+{
+}

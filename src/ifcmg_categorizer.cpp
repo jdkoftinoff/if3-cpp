@@ -12,5 +12,8 @@
  
  */
 #include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_cgi.hpp"
+#include "ifcmg_categorizer.hpp"
 
+namespace ifcmg
+{
+}

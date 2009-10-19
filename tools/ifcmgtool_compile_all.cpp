@@ -12,7 +12,7 @@ ALL RIGHTS RESERVED.
 
 */
 
-#include "ifcmg_world.hpp"
+#include "ifcmg_world_precompiled.hpp"
 #include "ifcmg_string.hpp"
 #include "ifcmg_util.hpp"
 #include "ifcmg_compile.hpp"

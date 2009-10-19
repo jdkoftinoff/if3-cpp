@@ -11,8 +11,8 @@
  ALL RIGHTS RESERVED.
  
  */
-#include "ifcmg_world.hpp"
-  //#include "ifcmg_html_parse.hpp"
+#include "ifcmg_world_precompiled.hpp"
+#include "ifcmg_html_parse.hpp"
 
 namespace ifcmg
 {

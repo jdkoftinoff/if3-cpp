@@ -11,8 +11,8 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_TREEBASE_H
-#define IFCMG_TREEBASE_H
+#ifndef IFCMG_TREEBASE_HPP
+#define IFCMG_TREEBASE_HPP
 
 #include "ifcmg_world.hpp"
 #include "ifcmg_util.hpp"
