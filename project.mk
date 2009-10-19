@@ -20,19 +20,11 @@ LINK_FLAGS+=
 PKGCONFIG_PACKAGES+=
 CONFIG_TOOLS+=
 
+ENABLE_SOCI=0
 ENABLE_SOCI_POSTGRESQL=1
 
-
-BOOST_CONFIG?=$(PREFIX)/bin/jdksboost-config
-JDKS2K9_CONFIG?=$(PREFIX)/bin/jdks2k9-config
+ifeq ($(ENABLE_SOCI)$(ENABLE_SOCI_POSTGRESQL),11)
 SOCI_CONFIG?=$(PREFIX)/bin/soci-config
-
-LDLIBS_POSIX+=-pthread
-LDLIBS_POSIX+=-lssl -lcrypto
-
-CONFIG_TOOLS+=$(BOOST_CONFIG) $(JDKS2K9_CONFIG) $(SOCI_CONFIG)
-
-ifeq ($(ENABLE_SOCI_POSTGRESQL),1)
 POSTGRESQL_CONFIG?=pg_config
 POSTGRESQL_INCLUDES:=$(shell $(POSTGRESQL_CONFIG) --includedir)
 POSTGRESQL_LDFLAGS:=-L$(shell $(POSTGRESQL_CONFIG) --libdir)
@@ -41,6 +33,14 @@ LDFLAGS+=$(POSTGRESQL_LDFLAGS)
 #LDLIBS+=-lpgport -lpgtypes -lpq -lpam -lz
 LDLIBS+=-lpgport -lpq -lpam -lz
 endif
+
+#BOOST_CONFIG?=$(PREFIX)/bin/jdksboost-config
+#JDKS2K9_CONFIG?=$(PREFIX)/bin/jdks2k9-config
+
+LDLIBS_POSIX+=-pthread
+LDLIBS_POSIX+=-lssl -lcrypto
+
+CONFIG_TOOLS+=$(BOOST_CONFIG) $(JDKS2K9_CONFIG) $(SOCI_CONFIG)
 
 ifeq ($(PROJECT_VARIANT),debian)
 TARGET_DIR_STYLE=debian
