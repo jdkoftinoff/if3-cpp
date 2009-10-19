@@ -603,7 +603,7 @@ namespace ifcmg
           scanner = newnothrow url_scanner_precompiled_t( input_filename );
           if( !scanner )
           {
-            ifcmg_throw( "new url_scanner_precompiled_t" );
+            ifcmg_throw( std::runtime_exception, "new url_scanner_precompiled_t" );
           }
         }
       }
@@ -629,7 +629,7 @@ namespace ifcmg
           scanner = newnothrow url_scanner_t( input_filename );
           if( !scanner )
           {
-            ifcmg_throw( "new url_scanner_t" );
+            ifcmg_throw( std::runtime_exception, "new url_scanner_t" );
           }
         }
       }
@@ -655,7 +655,7 @@ namespace ifcmg
           scanner = newnothrow alphanumeric_scanner_precompiled_t( input_filename );
           if( !scanner )
           {
-            ifcmg_throw( "new alphanumeric_scanner_precompiled_t" );
+            ifcmg_throw( std::runtime_exception, "new alphanumeric_scanner_precompiled_t" );
           }
         }
       }
@@ -681,7 +681,7 @@ namespace ifcmg
           scanner = newnothrow alphanumeric_scanner_t( input_filename );
           if( !scanner )
           {
-            ifcmg_throw( "alphanumeric_scanner_t" );
+            ifcmg_throw( std::runtime_exception, "alphanumeric_scanner_t" );
           }
         }
       }

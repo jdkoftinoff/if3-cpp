@@ -106,11 +106,11 @@
 # endif
 
 # if defined(IFCMG_CONFIG_THROW)
-#  define ifcmg_throw( a ) throw( a )
+#  define ifcmg_throw( a, b ) throw( a(b) )
 # elif defined(IFCMG_CONFIG_POSIX)
-#  define ifcmg_throw( a ) do { fprintf(stderr,"%s",a); abort(); } while(0)
+#  define ifcmg_throw( a, b ) do { fprintf(stderr,"%s(\"%s\")",#a,b); abort(); } while(0)
 # elif defined(IFCMG_CONFIG_WIN32)
-#  define ifcmg_throw( a ) do { fprintf(stderr,"%s",a); abort(); } while(0)
+#  define ifcmg_throw( a, b ) do { fprintf(stderr,"%s(\"%s\")",#a,b); abort(); } while(0)
 # endif
 #endif
 
@@ -122,7 +122,9 @@ namespace ifcmg
     std::stringstream os;
     
     if ( ! ( os << v ) || ! ( os >> newval ) )
-      throw std::invalid_argument ( "lexical_cast failure" );
+    {
+      ifcmg_throw( std::invalid_argument, "lexical_cast" );
+    }
     
     return newval;
   }

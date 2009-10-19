@@ -27,7 +27,7 @@ namespace ifcmg
   {
     inline bool operator() ( const VALUE_T &a ) const
     {
-      return !util::isalnum(a) && !util::ispunct(a);
+      return !std::isalnum(a) && !std::ispunct(a);
     }
   };
   
@@ -325,10 +325,10 @@ namespace ifcmg
         const typename tree_traits_t::leaf_t &leaf = tree.get( item );
         if( leaf.is_free() || leaf.is_end() )
           break;
-        if( util::isalpha( leaf.value ) )
+        if( std::isalpha( leaf.value ) )
         {
-          initial_shortcuts[ (int)util::toupper(leaf.value) ] = item;			
-          initial_shortcuts[ (int)util::tolower(leaf.value) ] = item;						
+          initial_shortcuts[ (int)std::toupper(leaf.value) ] = item;			
+          initial_shortcuts[ (int)std::tolower(leaf.value) ] = item;						
         }
         else
         {

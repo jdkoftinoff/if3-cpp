@@ -33,7 +33,7 @@ namespace ifcmg
   {
     bool operator() ( const VALUE_T &a ) const
     {
-      return util::isspace(a);
+      return std::isspace(a);
     }
   };
   
@@ -42,7 +42,7 @@ namespace ifcmg
   {
     bool operator() ( const VALUE_T &a ) const
     {
-      return !util::isalnum(a);
+      return !std::isalnum(a);
     }
   };
   
@@ -70,8 +70,8 @@ namespace ifcmg
     int operator() ( const VALUE_T &a_, const VALUE_T &b_ ) const
     {
       int result;
-      VALUE_T a( util::toupper(a_) );
-      VALUE_T b( util::toupper(b_) );
+      VALUE_T a( std::toupper(a_) );
+      VALUE_T b( std::toupper(b_) );
       
       if( a==b )
         result=0;
@@ -321,7 +321,7 @@ namespace ifcmg
 	    {
         if( !buf.expand( buf.get_data_length()*3/2 ) )
         {
-          ifcmg_throw("Unable to expand tree buffer");		
+          ifcmg_throw(std::runtime_error, "Unable to expand tree buffer");		
 		    }
         buf.fill();
         clear( first_free, (buf.get_data_length() / sizeof(typename tree_traits_t::leaf_t)) );

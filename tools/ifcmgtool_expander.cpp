@@ -49,7 +49,7 @@ int main( int argc, char **argv )
   ifcmg::pattern_expander_standard_t expander;
   
   ifcmg::string_t line;
-  while( ifcmg::util::read_line<4096>( line, stdin ) )
+  while( ifcmg::util::read_line( line, stdin ) )
   {
     expander.expand( line, target, 0, false, prefix );
   }

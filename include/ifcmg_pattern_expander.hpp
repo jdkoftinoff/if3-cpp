@@ -110,7 +110,7 @@ namespace ifcmg
       FILE *f=fopen(fname.c_str(),"rt");
       if( f )		
       {
-        while( util::read_line<4096>( str, f ) )
+        while( util::read_line( str, f ) )
         {
           progress++;
           if( str.length()>4 )
@@ -142,7 +142,7 @@ namespace ifcmg
       FILE *f=fopen(fname.c_str(),"rt");
       if( f )		
       {
-        while( util::read_line<4096>( str, f ) )
+        while( util::read_line( str, f ) )
         {
           if( !expand( str, target, 0, true, prefix ) )
           {
