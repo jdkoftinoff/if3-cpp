@@ -30,7 +30,6 @@ namespace ifcmg
   public:
     db_t();
     ~db_t();    
-    
   };
 }
 

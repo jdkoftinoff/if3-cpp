@@ -47,6 +47,12 @@
 		BF3C0D5D1070EC41003A39A1 /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
 		BF3C0D601070EC4D003A39A1 /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
 		BF3C0D631070EC58003A39A1 /* libifcmgkernel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libifcmgkernel.a */; };
+		BF9D19DF108D3E1700EB9C85 /* ifcmg_net.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BF9D19DE108D3E1700EB9C85 /* ifcmg_net.hpp */; };
+		BF9D19E1108D3E2D00EB9C85 /* ifcmg_net.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9D19E0108D3E2D00EB9C85 /* ifcmg_net.cpp */; };
+		BF9D1A15108E2DFA00EB9C85 /* ifcmg_daemon.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BF9D1A14108E2DFA00EB9C85 /* ifcmg_daemon.hpp */; };
+		BF9D1A17108E2E0600EB9C85 /* ifcmg_daemon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9D1A16108E2E0600EB9C85 /* ifcmg_daemon.cpp */; };
+		BF9D1A40108E64A900EB9C85 /* ifcmg_syslog.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BF9D1A3F108E64A900EB9C85 /* ifcmg_syslog.hpp */; };
+		BF9D1A42108E64B900EB9C85 /* ifcmg_syslog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF9D1A41108E64B900EB9C85 /* ifcmg_syslog.cpp */; };
 		BFCD5CCE108D054100FDA674 /* ifcmg_db.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFCD5CCD108D054100FDA674 /* ifcmg_db.hpp */; };
 		BFCD5CD0108D055000FDA674 /* ifcmg_db.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFCD5CCF108D055000FDA674 /* ifcmg_db.cpp */; };
 		BFCD5CD2108D064C00FDA674 /* ifcmg_world_precompiled.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFCD5CD1108D064C00FDA674 /* ifcmg_world_precompiled.hpp */; };
@@ -192,6 +198,12 @@
 		BF3C0D321070EB6F003A39A1 /* ifcmgtool_compile */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_compile; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3C0D391070EB88003A39A1 /* ifcmgtool_expander */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_expander; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3C0D431070EBAC003A39A1 /* ifcmgtool_findmatch */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ifcmgtool_findmatch; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF9D19DE108D3E1700EB9C85 /* ifcmg_net.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_net.hpp; path = ../../../include/ifcmg_net.hpp; sourceTree = SOURCE_ROOT; };
+		BF9D19E0108D3E2D00EB9C85 /* ifcmg_net.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_net.cpp; path = ../../../src/ifcmg_net.cpp; sourceTree = SOURCE_ROOT; };
+		BF9D1A14108E2DFA00EB9C85 /* ifcmg_daemon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_daemon.hpp; path = ../../../include/ifcmg_daemon.hpp; sourceTree = SOURCE_ROOT; };
+		BF9D1A16108E2E0600EB9C85 /* ifcmg_daemon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_daemon.cpp; path = ../../../src/ifcmg_daemon.cpp; sourceTree = SOURCE_ROOT; };
+		BF9D1A3F108E64A900EB9C85 /* ifcmg_syslog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_syslog.hpp; path = ../../../include/ifcmg_syslog.hpp; sourceTree = SOURCE_ROOT; };
+		BF9D1A41108E64B900EB9C85 /* ifcmg_syslog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_syslog.cpp; path = ../../../src/ifcmg_syslog.cpp; sourceTree = SOURCE_ROOT; };
 		BFCD5CCD108D054100FDA674 /* ifcmg_db.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_db.hpp; path = ../../../include/ifcmg_db.hpp; sourceTree = SOURCE_ROOT; };
 		BFCD5CCF108D055000FDA674 /* ifcmg_db.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ifcmg_db.cpp; path = ../../../src/ifcmg_db.cpp; sourceTree = SOURCE_ROOT; };
 		BFCD5CD1108D064C00FDA674 /* ifcmg_world_precompiled.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ifcmg_world_precompiled.hpp; path = ../../../include/ifcmg_world_precompiled.hpp; sourceTree = SOURCE_ROOT; };
@@ -309,6 +321,9 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BF9D1A41108E64B900EB9C85 /* ifcmg_syslog.cpp */,
+				BF9D1A16108E2E0600EB9C85 /* ifcmg_daemon.cpp */,
+				BF9D19E0108D3E2D00EB9C85 /* ifcmg_net.cpp */,
 				BFCD5D4A108D1E9100FDA674 /* ifcmg_categorizer.cpp */,
 				BFFEED63108CE9C200EF75AF /* ifcmg_httpd.cpp */,
 				BFFEED5F108CE90600EF75AF /* ifcmg_cgi.cpp */,
@@ -353,6 +368,9 @@
 		BF3C0CF11070E8C9003A39A1 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				BF9D1A3F108E64A900EB9C85 /* ifcmg_syslog.hpp */,
+				BF9D1A14108E2DFA00EB9C85 /* ifcmg_daemon.hpp */,
+				BF9D19DE108D3E1700EB9C85 /* ifcmg_net.hpp */,
 				BFCD5D48108D1E8200FDA674 /* ifcmg_categorizer.hpp */,
 				BFFEED61108CE9B200EF75AF /* ifcmg_httpd.hpp */,
 				BFFEED5D108CE8F800EF75AF /* ifcmg_cgi.hpp */,
@@ -421,6 +439,9 @@
 				BFCD5CCE108D054100FDA674 /* ifcmg_db.hpp in Headers */,
 				BFCD5CD2108D064C00FDA674 /* ifcmg_world_precompiled.hpp in Headers */,
 				BFCD5D49108D1E8200FDA674 /* ifcmg_categorizer.hpp in Headers */,
+				BF9D19DF108D3E1700EB9C85 /* ifcmg_net.hpp in Headers */,
+				BF9D1A15108E2DFA00EB9C85 /* ifcmg_daemon.hpp in Headers */,
+				BF9D1A40108E64A900EB9C85 /* ifcmg_syslog.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,6 +668,9 @@
 				BFFEED66108CEA1D00EF75AF /* ifcmgtool_test_httpd.cpp in Sources */,
 				BFCD5CD0108D055000FDA674 /* ifcmg_db.cpp in Sources */,
 				BFCD5D4B108D1E9100FDA674 /* ifcmg_categorizer.cpp in Sources */,
+				BF9D19E1108D3E2D00EB9C85 /* ifcmg_net.cpp in Sources */,
+				BF9D1A17108E2E0600EB9C85 /* ifcmg_daemon.cpp in Sources */,
+				BF9D1A42108E64B900EB9C85 /* ifcmg_syslog.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

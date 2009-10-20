@@ -50,7 +50,8 @@
   // for win32 we need windows.h and friends
 #if defined(IFCMG_CONFIG_WIN32)
 # include <windows.h>
-# include <winsock.h>
+# include <winsock2.h>
+# include <ws2tcpip.h>
 # include <io.h>
 # include <process.h>
 #endif
@@ -71,7 +72,20 @@
 # include <sys/wait.h>
 # include <sys/mman.h>
 # include <sys/stat.h>
+# include <netdb.h>
 # include <unistd.h>
+# include <netinet/in.h>
+# include <sys/poll.h>
+# include <unistd.h>
+# include <sys/socket.h>
+# include <arpa/inet.h>
+# include <net/if.h>
+# include <sys/resource.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <syslog.h>
+# include <pwd.h>
 #endif
 
   // include the normal standard c library stuff

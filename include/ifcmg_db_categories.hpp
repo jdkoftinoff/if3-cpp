@@ -51,7 +51,7 @@ namespace ifcmg
     string_t m_name;  
   };
   
-  typedef std::list< db_categories_row_t > db_categories_table_t;
+  typedef std::vector< db_categories_row_t > db_categories_table_t;
   
 }
 
