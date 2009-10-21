@@ -15,10 +15,16 @@ ALL RIGHTS RESERVED.
 
 #include "ifcmg_world.hpp"
 #include "ifcmg_db_util.hpp"
-
+#include "ifcmg_tree.hpp"
 
 namespace ifcmg 
 {
+  class db_needles_attribute_t
+  {
+  public:
+  };
+  
+
   class db_needles_row_t 
   {
   public:
@@ -51,6 +57,7 @@ namespace ifcmg
     int64_t m_id;
     string_t m_name;  
   };
+  
 }
 
 

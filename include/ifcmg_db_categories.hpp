@@ -52,7 +52,9 @@ namespace ifcmg
   };
   
   typedef std::vector< db_categories_row_t > db_categories_table_t;
-  
+ 
+  void load( db_categories_table_t &t, filename_t file );  
+
 }
 
 

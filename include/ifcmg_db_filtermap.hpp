@@ -56,6 +56,7 @@ namespace ifcmg
   
   typedef std::vector< db_filtermap_row_t > db_filtermap_table_t;
   
+  void load( db_filtermap_table_t &t, filename_t file );  
 }
 
 

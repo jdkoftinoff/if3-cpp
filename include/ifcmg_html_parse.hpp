@@ -21,14 +21,62 @@
 
 namespace ifcmg 
 {
+  class html_decode_target_t
+  {
+  public:
+    html_decode_target_t() {}
+    virtual ~html_decode_target_t() {}
+    
+    virtual void content_link( string_t const &url ) = 0;
+    virtual void link( string_t const &url ) = 0;
+    virtual void img( string_t const &url ) = 0;
+    virtual void script( string_t const &data ) = 0;
+    virtual void text( string_t const &text ) = 0;
+  };
+
+  class html_decode_target_dumper_t
+  {
+  public:
+    html_decode_target_dumper_t( std::ostream &o ) : m_o(o)
+    {
+    }
+
+    void content_link( string_t const &url )
+    {
+      m_o << "content link: " << url << "\n";
+    }
+    
+    void link( string_t const &url )
+    {
+      m_o << "link: " << url << "\n";
+    }
+    
+    void img( string_t const &url )
+    {
+      m_o << "img: " << url << "\n";
+    }
+    
+    void script( string_t const &data )
+    {
+      m_o << "script: " << data << "\n";
+    }
+    
+    void text( string_t const &text )
+    {
+      m_o << "text: " << text << "\n";
+    }
+    
+  private:
+    std::ostream &m_o;
+  };
   
   class html_decode_base_t
   {
   public:
     virtual ~html_decode_base_t() {}
-    
-    virtual void clear() = 0;
-    virtual void process( const buf_t &in, dynbuf_t &out ) =0;  
+
+    virtual void reset() = 0;
+    virtual void process( const buf_t &data_in, html_decode_target_t &target ) =0;  
   };
   
   
@@ -37,9 +85,9 @@ namespace ifcmg
   public:
     explicit html_decode_t();
     virtual ~html_decode_t();
-    
-    void clear();
-    virtual void process( const buf_t &in, dynbuf_t &out );
+
+    virtual void reset() = 0;
+    virtual void process( const buf_t &data_in, html_decode_target_t &target );
     
   protected:
     enum
@@ -58,53 +106,15 @@ namespace ifcmg
       IN_COMMENT_QUOTE,
       IN_TAG_QUOTE
     } m_state;
+    
     string_t m_tagname;
+    string_t m_script;
+    string_t m_href;
+    
     bool m_in_script;
     bool m_in_style;
   };
   
-  
-  class html_decode_to_links_t : public html_decode_base_t
-  {
-  public:
-    explicit html_decode_to_links_t();
-    virtual ~html_decode_to_links_t();
-    
-    void clear();
-    
-    virtual void process( const buf_t &in, dynbuf_t &out );
-    
-  protected:
-    
-    virtual void tag_found( const buf_t &in, size_t start_point, size_t len, dynbuf_t &out );
-    virtual void content_found( const buf_t &in, size_t start_point, size_t len, dynbuf_t &out );
-    
-    enum
-    {
-      IN_CONTENT,
-      IN_CONTENT_AMP,
-      IN_WHITESPACE,
-      IN_LESS_THAN_FIRST,
-      IN_LESS_THAN_SECOND,
-      IN_LESS_THAN_THIRD,
-      IN_TAG,	
-      IN_TAGNAME,
-      IN_COMMENT,
-      IN_COMMENT_END_FIRST,
-      IN_COMMENT_END_SECOND,
-      IN_COMMENT_QUOTE,
-      IN_TAG_QUOTE,
-      IN_TAG_SPACE,
-      IN_TAG_PROPERTY
-    } m_state;
-    
-    string_t m_tag_name;
-    string_t m_tag_property;
-    string_t m_tag_property_value;
-    bool m_in_script;
-    bool m_in_style;
-    size_t m_tag_start_point;
-  };  
 }
 
 #endif

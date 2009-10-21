@@ -54,6 +54,8 @@ namespace ifcmg
   
   typedef std::vector< db_sections_row_t > db_sections_table_t;
   
+  
+  void load( db_sections_table_t &t, filename_t file );  
 }
 
 

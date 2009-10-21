@@ -30,6 +30,10 @@ namespace ifcmg
   public:
     db_t() {}
     virtual ~db_t() {}   
+    
+  private:
+    db_categories_table_t m_categories;
+    db_filters_table_t m_filters;
   };
 }
 
