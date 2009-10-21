@@ -28,8 +28,8 @@ namespace ifcmg
   class db_t
   {
   public:
-    db_t();
-    ~db_t();    
+    db_t() {}
+    virtual ~db_t() {}   
   };
 }
 

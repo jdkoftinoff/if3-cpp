@@ -20,64 +20,134 @@
 
 namespace ifcmg 
 {
-  typedef int socklen_t;
   
 #ifdef _WIN32
   typedef SOCKET_HANDLE socket_handle_t;
 #else
   typedef int socket_handle_t;
 #endif
-
   
   void net_init();
   
-  class net_addr_t 
+  inline string_t to_string( const ::sockaddr *a, size_t a_len )
+  {
+    char buf1[1024] = "";
+    char buf1_serv[128] = "";
+    ::getnameinfo ( a, a_len, buf1, sizeof(buf1)-1, buf1_serv, sizeof(buf1_serv)-1, 0 );
+
+    buf1[1023] = '\0';
+    buf1_serv[127] = '\0';
+
+    char buf2[128] = "";
+    char buf2_serv[128] = "";
+    ::getnameinfo( a, a_len, buf2, sizeof(buf2)-1, buf2_serv, sizeof(buf2_serv)-1, NI_NUMERICHOST|NI_NUMERICSERV);
+    
+    buf2[127] = '\0';
+    buf2_serv[127] = '\0';
+    
+    string_t result = 
+      string_t("[") + string_t(buf1) + "]:" + buf1_serv 
+      + " ( [" + string_t(buf2) + "]:" + buf2_serv + " )";
+    return result;
+  }
+
+  inline string_t to_string( const ::sockaddr_storage *a, size_t a_len )
+  {
+    return to_string( (const ::sockaddr *)a, a_len );
+  }
+    
+  inline string_t to_string( const ::addrinfo &a )
+  {
+    return to_string( a.ai_addr, a.ai_addrlen );
+  }
+  
+  inline
+  std::ostream & operator << ( std::ostream& o, const ::addrinfo &v )
+  {
+    o << to_string(v);
+    return o;
+  }
+  
+  
+  class net_address_t
   {
   public:
-    
-    friend
-    std::ostream & operator << ( std::ostream &s, net_addr_t const &v )
+    net_address_t( const char *hostname, const char *port )
     {
-      char buf[256];
-      getnameinfo( 
-                  (sockaddr *)&v.m_addr, 
-                  v.m_len, 
-                  buf, 
-                  sizeof(buf), 
-                  NULL, 
-                  0, 
-                  NI_NUMERICHOST
-                  );
-      s << buf;
-      return s;
+      ::addrinfo hints;
+      ::memset(&hints,'\0',sizeof(hints) );
+      hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG | AI_NUMERICSERV;
+      hints.ai_socktype = SOCK_STREAM;
+      int e = ::getaddrinfo( hostname, port, &hints,&m_ai );
+      if( e!=0 )
+      {
+        throw std::runtime_error( "getaddrinfo: " + string_t( strerror(e) ) );
+      }    
     }
     
-    struct sockaddr_storage m_addr;
-    socklen_t m_len;    
+    class const_iterator
+    {
+    public:
+      const_iterator( const const_iterator &o ) : m_v( o.m_v ) {}
+      
+      const_iterator( ::addrinfo *v ) : m_v(v) {}
+      
+      const ::addrinfo & operator * () const { return *m_v; }
+      
+      const ::addrinfo * operator -> () const { return m_v; }
+      
+      const_iterator & operator ++ ()
+      {
+        if( m_v != 0 )
+          m_v = m_v->ai_next;
+        return *this;
+      }
+      
+      const_iterator operator ++ (int)
+      {
+        const_iterator prev( *this );
+        if( m_v !=0 )
+          m_v = m_v->ai_next;
+        return prev;
+      }
+      
+      bool operator == ( const const_iterator &o ) const
+      {
+        return m_v != o.m_v;
+      }
+      
+      bool operator != ( const const_iterator &o ) const
+      {
+        return m_v != o.m_v;
+      }
+      
+    private:
+      ::addrinfo *m_v;
+    };
+    
+    const_iterator begin() const { return const_iterator( m_ai ); }
+    const_iterator end() const { return const_iterator(0); }
+    
+    ~net_address_t()
+    {
+      ::freeaddrinfo( m_ai );
+    }
+    
+    inline friend std::ostream & operator << ( std::ostream& o, const net_address_t &v )
+    {
+      o << "{\n";
+      for( net_address_t::const_iterator i= v.begin(); i!= v.end(); ++i )      
+      {
+        o << *i << "\n";
+      }
+      o << "}\n";
+      return o;
+    }
+    
+  private:
+    ::addrinfo *m_ai;
   };
   
-  class net_addr_list_t 
-  {
-  public:
-    net_addr_list_t( 
-                    const char *host, 
-                    const char *port
-                    )
-    {
-      m_addr = 0;
-      struct addrinfo hints;
-      memset(&hints,'\0',sizeof(hints) );
-      hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG;
-      hints.ai_socktype = SOCK_STREAM;
-      int e = getaddrinfo( host,port,&hints,&m_addr );
-      if(e<0)
-      {
-        m_addr=0;
-      }
-    }
-    
-    struct addrinfo *m_addr;
-  }; 
 }
 
 #endif

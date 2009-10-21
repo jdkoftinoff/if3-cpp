@@ -18,8 +18,6 @@
 namespace ifcmg
 {
 #ifdef _WIN32
-  typedef SOCKET_HANDLE socket_handle_t;
-  
   void net_init()
   {
     WSADATA wsaData;
@@ -42,10 +40,9 @@ namespace ifcmg
     /* WinSock has been initialized */    
   }
 #else
-  typedef int socket_handle_t;
-  
   void net_init()
   {
+    signal( SIGPIPE, SIG_IGN );    
   }
 #endif
   

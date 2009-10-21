@@ -85,7 +85,6 @@ namespace ifcmg
           break;
       };      
     }
-    signal( SIGPIPE, SIG_IGN );
     logger = new system_logger_t( identity, !real_daemon );
     
     if( new_uid.length()>0 )
@@ -135,7 +134,10 @@ namespace ifcmg
     pid_t i = fork();
     if( i == 0 )
     {
-signal( SIGPIPE, SIG_IGN );
+    }
+    if( i<0 )
+    {
+      throw std::runtime_error("fork failed");
     }
     return i;
   }
