@@ -29,6 +29,7 @@ namespace ifcmg
     virtual ~httpd_session_base_t() {}
     
     virtual void run( socket_handle_t s ) = 0;
+
   };
   
   class httpd_session_redirector_t : public httpd_session_base_t
@@ -37,12 +38,10 @@ namespace ifcmg
     httpd_session_redirector_t( db_t &db ) : m_db( db ) {}
     virtual ~httpd_session_redirector_t() {}
     
-    void run( socket_handle_t s ) 
-    {
-      write(s, "HELLO THERE\r\n", 13);
-    }
-    
+    void run( socket_handle_t s );
+ 
   private:
+    
     db_t &m_db;
   };
   

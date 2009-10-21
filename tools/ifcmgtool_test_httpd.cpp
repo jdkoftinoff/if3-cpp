@@ -28,7 +28,7 @@ int main( int argc, char **argv )
   net_init();
   
   daemonize(
-            true, 
+            false, 
             string_t(argv[0]), 
             string_t(""), 
             string_t(argv[0])+".pid", 
@@ -40,10 +40,8 @@ int main( int argc, char **argv )
   try 
   {
     db_t db;
-    httpd_fork_server_t server(0,"9999", new httpd_session_redirector_t(db) );
-    server.run();
-    // todo: wait for all subprocesses to exit
-    
+    httpd_session_base_t *session =  new httpd_session_redirector_t(db);
+    session->run( STDIN_FILENO );      
   }
   catch (std::exception &e) 
   {

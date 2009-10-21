@@ -147,6 +147,7 @@ namespace ifcmg
   private:
     ::addrinfo *m_ai;
   };
+
   
 }
 
