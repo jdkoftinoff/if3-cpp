@@ -76,7 +76,7 @@ namespace ifcmg
     {
       ::addrinfo hints;
       ::memset(&hints,'\0',sizeof(hints) );
-      hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG | AI_NUMERICSERV;
+      hints.ai_flags = AI_PASSIVE | AI_ADDRCONFIG; // | AI_NUMERICSERV;
       hints.ai_socktype = SOCK_STREAM;
       int e = ::getaddrinfo( hostname, port, &hints,&m_ai );
       if( e!=0 )
