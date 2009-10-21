@@ -11,12 +11,15 @@
  ALL RIGHTS RESERVED.
  
  */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_html_parse.hpp"
+
+#ifndef IFCMG_CRAWLER_HPP
+#define IFCMG_CRAWLER_HPP
+
+#include "ifcmg_world.hpp"
 
 namespace ifcmg
 {
-
-  
   
 }
+
+#endif

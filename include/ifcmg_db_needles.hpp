@@ -14,31 +14,25 @@ ALL RIGHTS RESERVED.
 #define IFCMG_DB_NEEDLES_HPP
 
 #include "ifcmg_world.hpp"
+
+#include "ifcmg_string.hpp"
 #include "ifcmg_db_util.hpp"
-#include "ifcmg_tree.hpp"
 
 namespace ifcmg 
 {
-  class db_needles_attribute_t
-  {
-  public:
-  };
-  
-
+ 
   class db_needles_row_t 
   {
   public:
     db_needles_row_t() 
     :
-    m_id(-1),
-    m_name("")
+    m_id(-1)
     {
     }
     
     db_needles_row_t( db_needles_row_t const &o )
     :
-    m_id( o.m_id ),
-    m_name( o.m_name )
+    m_id( o.m_id )
     {
     }
     
@@ -46,18 +40,30 @@ namespace ifcmg
     {      
     }
     
-    ~db_needles_row_t();
+    ~db_needles_row_t() 
+    {
+    }
     
-    db_needles_row_t & operator = ( db_needles_row_t const &o );
+    db_needles_row_t & operator = ( db_needles_row_t const &o )
+    {
+      return *this;
+    }
     
-    int64_t get_id() const { return m_id; }
-    string_t const & get_name() const { return m_name; }
-    
-  private:
     int64_t m_id;
-    string_t m_name;  
+    char m_needle[128];
+    int64_t m_section;
+    int64_t m_category1;
+    int64_t m_category2;
+    int64_t m_category3;
+    int64_t m_category4;
+    int32_t m_score;
+    int32_t m_autogen;   
   };
+    
+  typedef std::vector< db_needles_row_t > db_needles_table_t;
   
+  void load( db_needles_table_t &t, filename_t file );  
+
 }
 
 

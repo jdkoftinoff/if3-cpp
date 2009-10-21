@@ -39,7 +39,9 @@ namespace ifcmg
     {      
     }
     
-    ~db_categories_row_t();
+    ~db_categories_row_t()
+    {
+    }
     
     db_categories_row_t & operator = ( db_categories_row_t const &o );
     

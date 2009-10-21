@@ -40,7 +40,9 @@ namespace ifcmg
     {      
     }
     
-    ~db_sections_row_t();
+    ~db_sections_row_t()
+    {
+    }
     
     db_sections_row_t & operator = ( db_sections_row_t const &o );
     
