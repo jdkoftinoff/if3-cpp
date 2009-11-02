@@ -25,7 +25,7 @@ PRECOMPILED_HEADER=$(PROJECT_TOP_DIR)/include/ifcmg_world_precompiled.hpp
 
 
 ENABLE_SOCI=0
-ENABLE_SOCI_POSTGRESQL=1
+ENABLE_SOCI_POSTGRESQL=0
 
 ifeq ($(ENABLE_SOCI)$(ENABLE_SOCI_POSTGRESQL),11)
 SOCI_CONFIG?=$(PREFIX)/bin/soci-config
@@ -64,7 +64,6 @@ PACKAGE_CHOWN=
 PACKAGE_CHMOD=
 PREFIX=/Library/contextualmediagroup/$(PROJECT)-$(VERSION)
 endif
-
 
 
 
