@@ -147,23 +147,27 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
 
     for (int i = 0; i < 64; ++i)
     {
-      if (category_sums[i] > largest_category_value)
+      if (category_sums[i] >= largest_category_value && category_sums[i]>0)
       {
         largest_category = i;
         largest_category_value = category_sums[i];
       }
     }
 
-
-    if (total_bad > 0)
+    if (largest_category != -1)
     {
       category = largest_category;
-      accessed = 2;
+
+      if (total_bad > 0)
+      {
+        accessed = 2;
+      }
+
     }
 
   }
 
-  return Py_BuildValue("iii", accessed, category, ad_tags_found);
+  return Py_BuildValue("iii", accessed, category+1, ad_tags_found);
 }
 
 static PyObject *

@@ -4,7 +4,7 @@
 all : clean
 	python setup.py build
 
-install :
+install : clean
 	python setup.py install
 
 clean :
