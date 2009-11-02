@@ -66,7 +66,7 @@ namespace ifcmg
     const filename_t &dest_dir_,
     const char *middle_part,
     int first_category=0,
-    int last_category=7
+    int last_category=64
     )
   {
     int success_count=0;
@@ -75,15 +75,15 @@ namespace ifcmg
     
     util::fix_directory_name( source_dir );
     util::fix_directory_name( dest_dir );
-    
+    mkdir( dest_dir.c_str(), 0777 );
     // compile good urls
     for( int category=first_category; category<last_category; ++category )
     {
       filename_t input_filename;
-      form( input_filename, "%s%d%s.txt", source_dir.c_str(), category+1, middle_part );
+      form( input_filename, "%s%03d-%s.txt", source_dir.c_str(), category+1, middle_part );
       
       filename_t output_filename;
-      form( output_filename, "%s%d%s.pre", dest_dir.c_str(), category+1, middle_part );
+      form( output_filename, "%s%03d-%s.pre", dest_dir.c_str(), category+1, middle_part );
       
       if( tree_compile<TRAITS_T,PATTERN_EXPANDER_T>(
             input_filename,

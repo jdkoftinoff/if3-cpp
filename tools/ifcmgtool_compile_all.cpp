@@ -26,12 +26,12 @@ static void usage()
     stderr, 
     "usage:\nifcmgtool_compile_all [source dir] [dest dir]\n" 
     "source dir should contain the files:\n"
-    "\t#badurl.txt   (bad url lists)\n"
-    "\t#postbadurl.txt   (post bad url lists)\n"    
-    "\t#goodurl.txt  (good url lists)\n"
-    "\t#badphr.txt   (bad phrase lists)\n"
+    "\t#-badurl.txt   (bad url lists)\n"
+    "\t#-postbadurl.txt   (post bad url lists)\n"
+    "\t#-goodurl.txt  (good url lists)\n"
+    "\t#-badphr.txt   (bad phrase lists)\n"
     "\n"
-    "When # is 1,2,3,4,5,6,7,8\n"
+    "When # is 001-064\n"
     );
 }
 

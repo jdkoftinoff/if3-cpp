@@ -6,3 +6,7 @@ all : clean
 
 install :
 	python setup.py install
+
+clean :
+	rm -r -f build
+

@@ -22,7 +22,7 @@ ALL RIGHTS RESERVED.
 
 namespace ifcmg
 {
-  enum { MULTISCANNER_MAX_CATEGORIES=32 };
+  enum { MULTISCANNER_MAX_CATEGORIES=64 };
 
   inline
   std::vector<std::string> &split(
@@ -618,7 +618,6 @@ namespace ifcmg
 
       filename_t input_filename;
       form(input_filename, "%s%03d-%s.pre", compiled_dir_name.c_str(), category + 1, middle_part);
-
       if (util::file_exists(input_filename)) {
         scanner = newnothrow url_scanner_precompiled_t(input_filename);
         if (!scanner) {
