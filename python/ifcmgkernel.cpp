@@ -28,23 +28,31 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
   using namespace ifcmg;
 
   const char *link;
+  size_t link_length;
+
   const char *text;
+  size_t text_length;
+
   const char *links;
+  size_t links_length;
+
   const char *content_links;
+  size_t content_links_length;
 
   int accessed = 0;
   int category = 0;
   int ad_tags_found = 0;
 
-  if (!PyArg_ParseTuple(args, "ssss", &link, &text, &links, &content_links))
+  if (!PyArg_ParseTuple(args, "s#s#s#s#", 
+			&link, &link_length, &text, &text_length, 
+			&links, &links_length, 
+			&content_links, &content_links_length ))
     return NULL;
-
-  size_t text_len = strlen(text);
-
+  
   multiscanner_result_t link_find_result = 
     multiscanner->find_in_data(
-		     text,
-		     text_len,
+		     link,
+		     link_length,
 		     0xff, 
 		     0xff, 
 		     0xff,
@@ -54,7 +62,7 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
   multiscanner_result_t text_find_result = 
     multiscanner->find_in_data(
 		     text,
-		     text_len,
+		     text_length,
 		     0xff, 
 		     0xff, 
 		     0xff,
@@ -64,7 +72,7 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
   multiscanner_result_t links_find_result = 
     multiscanner->find_in_data(
 		     links,
-		     strlen(links),
+		     links_length,
 		     0xff, 
 		     0xff, 
 		     0xff,
@@ -74,14 +82,14 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
   multiscanner_result_t content_links_find_result = 
     multiscanner->find_in_data(
 		     content_links,
-		     strlen(content_links),
+		     content_links_length,
 		     0xff, 
 		     0xff, 
 		     0xff,
 		     0xff
 		     );  
 
-  if( text_len<100 )
+  if( text_length<100 )
     {
       accessed=0;
     }
