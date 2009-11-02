@@ -112,6 +112,7 @@
 # include <exception>
 # include <stdexcept>
 # include <cstring>
+# include <cstdlib>
 
 # if defined(IFCMG_CONFIG_NEWNOTHROW)
 #  define newnothrow new (std::nothrow)

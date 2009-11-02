@@ -36,7 +36,7 @@ void dump( multiscanner_result_t &find_result, const string_t &title )
            find_result.get_total_good_url_match_count()
     );
   
-  for( i=0; i<multiscanner_result_t::MAX_CATEGORIES; ++i )
+  for( i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
   {
     unsigned int count=find_result.get_good_url_match_count( i );
     if( count )
@@ -49,7 +49,7 @@ void dump( multiscanner_result_t &find_result, const string_t &title )
            find_result.get_total_bad_url_match_count()
     );
   
-  for( i=0; i<multiscanner_result_t::MAX_CATEGORIES; ++i )
+  for( i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
   {
     unsigned int count=find_result.get_bad_url_match_count( i );
     if( count )
@@ -62,7 +62,7 @@ void dump( multiscanner_result_t &find_result, const string_t &title )
            find_result.get_total_bad_phrase_match_count()
     );
   
-  for( i=0; i<multiscanner_result_t::MAX_CATEGORIES; ++i )
+  for( i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
   {
     unsigned int count=find_result.get_bad_phrase_match_count( i );
     if( count )
@@ -91,17 +91,22 @@ int main( int argc, char **argv )
   
   dynbuf_t input_test_data( input_test_data_filename );
   
-  multiscanner_t ms( compiled_db_dir, non_compiled_db_dir, 0xff, 0xff, 0xff, 0xff );
+  multiscanner_t ms( compiled_db_dir, non_compiled_db_dir);
   
   multiscanner_result_t find_result;
-  
+
+  multiscanner_categories_enable_t good_url_enable_bits;
+  multiscanner_categories_enable_t bad_url_enable_bits;
+  multiscanner_categories_enable_t postbad_url_enable_bits;
+  multiscanner_categories_enable_t bad_phrase_enable_bits;
+
   find_result = ms.find_in_data(
     input_test_data.get_data(),
     input_test_data.get_data_length(),
-    0xff, 
-    0xff, 
-    0xff,
-    0xff
+    good_url_enable_bits,
+    bad_url_enable_bits, 
+    postbad_url_enable_bits,
+    bad_phrase_enable_bits
     );  
   
   dump( find_result, string_t("find results") );
@@ -110,10 +115,10 @@ int main( int argc, char **argv )
     input_test_data.get_data(),
     input_test_data.get_data_length(),
     '*',
-    0xff, 
-    0xff,
-    0xff
-    );
+    bad_url_enable_bits,
+    postbad_url_enable_bits,
+    bad_phrase_enable_bits
+   );
   
   dump( find_result, string_t("censor results") );
   

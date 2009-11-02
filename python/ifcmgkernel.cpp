@@ -39,54 +39,70 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
   const char *content_links;
   size_t content_links_length;
 
+  const char *bad_categories_enable=0;
+
   int accessed = 0;
   int category = 0;
   int ad_tags_found = 0;
 
-  if (!PyArg_ParseTuple(args, "s#s#s#s#", 
+  if (!PyArg_ParseTuple(args, "s#s#s#s#|s", 
 			&link, &link_length, &text, &text_length, 
 			&links, &links_length, 
-			&content_links, &content_links_length ))
+			&content_links, &content_links_length,
+			bad_categories_enable
+			))
     return NULL;
+
+  multiscanner_categories_enable_t good_url_enable_bits;
+  multiscanner_categories_enable_t bad_url_enable_bits;
+  multiscanner_categories_enable_t postbad_url_enable_bits;
+  multiscanner_categories_enable_t bad_phrase_enable_bits;
   
+  if( bad_categories_enable )
+  {
+    bad_url_enable_bits.set_from_string( std::string(bad_categories_enable) );
+    postbad_url_enable_bits.set_from_string( std::string(bad_categories_enable) );
+    bad_phrase_enable_bits.set_from_string( std::string(bad_categories_enable) );
+  }
+
   multiscanner_result_t link_find_result = 
     multiscanner->find_in_data(
-		     link,
-		     link_length,
-		     0xff, 
-		     0xff, 
-		     0xff,
-		     0xff
-		     );  
+			       link,
+			       link_length,
+			       good_url_enable_bits,
+			       bad_url_enable_bits, 
+			       postbad_url_enable_bits,
+			       bad_phrase_enable_bits
+			       );  
   
   multiscanner_result_t text_find_result = 
     multiscanner->find_in_data(
 		     text,
 		     text_length,
-		     0xff, 
-		     0xff, 
-		     0xff,
-		     0xff
+		     good_url_enable_bits,
+		     bad_url_enable_bits, 
+		     postbad_url_enable_bits,
+		     bad_phrase_enable_bits
 		     );  
   
   multiscanner_result_t links_find_result = 
     multiscanner->find_in_data(
 		     links,
 		     links_length,
-		     0xff, 
-		     0xff, 
-		     0xff,
-		     0xff
+		     good_url_enable_bits,
+		     bad_url_enable_bits, 
+		     postbad_url_enable_bits,
+		     bad_phrase_enable_bits
 		     );  
   
   multiscanner_result_t content_links_find_result = 
     multiscanner->find_in_data(
 		     content_links,
 		     content_links_length,
-		     0xff, 
-		     0xff, 
-		     0xff,
-		     0xff
+		     good_url_enable_bits,
+		     bad_url_enable_bits, 
+		     postbad_url_enable_bits,
+		     bad_phrase_enable_bits
 		     );  
 
   if( text_length<100 )
@@ -136,8 +152,7 @@ ifcmgkernel_startup(PyObject *self, PyObject *args)
   
   multiscanner = new multiscanner_t( 
 				    filename_t(compiled_db_path), 
-				    filename_t(uncompiled_db_path),
-				    0xff, 0xff, 0xff, 0xff 
+				    filename_t(uncompiled_db_path)
 				     );
     
   return Py_BuildValue("");

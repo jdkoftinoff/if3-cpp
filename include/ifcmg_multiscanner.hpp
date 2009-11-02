@@ -22,11 +22,72 @@ ALL RIGHTS RESERVED.
 
 namespace ifcmg
 {
-  
+  enum { MULTISCANNER_MAX_CATEGORIES=32 };
+
+  inline
+  std::vector<std::string> &split(
+      const std::string &s,
+          char delim,
+          std::vector<std::string> &elems)
+  {
+    std::stringstream ss(s);
+    std::string item;
+    while(std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+  }
+
+
+  inline
+  std::vector<std::string> split(const std::string &s, char delim) {
+      std::vector<std::string> elems;
+      return split(s, delim, elems);
+  }
+
+
+
+  class multiscanner_categories_enable_t
+  {
+  public:
+    multiscanner_categories_enable_t()
+    {
+      for( int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      {
+        enabled[i]=true;
+      }
+    }
+
+    void clear()
+    {
+      for( int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      {
+        enabled[i]=false;
+      }
+    }
+
+    void set_from_string( std::string cats )
+    {
+      std::vector<std::string> items = split( cats, ',' );
+      for( std::vector<std::string>::iterator i=items.begin(); i!=items.end(); i++ )
+      {
+        int value = strtol( i->c_str(), 0, 10 );
+        if( value>0 && value<=MULTISCANNER_MAX_CATEGORIES )
+        {
+          enabled[value-1] = true;
+        }
+      }
+    }
+
+    bool is_enabled( int c ) const { return enabled[c]; }
+
+  private:
+    bool enabled[MULTISCANNER_MAX_CATEGORIES];
+  };
+    
   class multiscanner_result_t
   {
   public:
-    enum { MAX_CATEGORIES = 32 };
     
     multiscanner_result_t()
       :
@@ -35,7 +96,7 @@ namespace ifcmg
       total_postbad_url_match_count(0),
       total_bad_phrase_match_count(0)
     {
-      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
       {
         good_url_match_count[i] = 0;
         bad_url_match_count[i] = 0;
@@ -51,7 +112,7 @@ namespace ifcmg
       total_postbad_url_match_count( other.total_postbad_url_match_count ),
       total_bad_phrase_match_count( other.total_bad_phrase_match_count )
     {
-      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
       {
         good_url_match_count[i] = other.good_url_match_count[i];
         bad_url_match_count[i] = other.bad_url_match_count[i];
@@ -60,27 +121,6 @@ namespace ifcmg
       }
     }
 
-#ifndef SWIG    
-    const multiscanner_result_t & operator = ( const multiscanner_result_t &other )
-    {
-      if( &other != this )
-      {
-        total_good_url_match_count = other.total_good_url_match_count;
-        total_bad_url_match_count = other.total_bad_url_match_count;
-        total_postbad_url_match_count = other.total_postbad_url_match_count;
-        total_bad_phrase_match_count = other.total_bad_phrase_match_count;
-        
-        for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
-        {
-          good_url_match_count[i] = other.good_url_match_count[i];
-          bad_url_match_count[i] = other.bad_url_match_count[i];
-          postbad_url_match_count[i] = other.postbad_url_match_count[i];
-          bad_phrase_match_count[i] = other.bad_phrase_match_count[i];
-        }        
-      }
-      return *this;
-    }
-#endif
     
     ~multiscanner_result_t()
     {
@@ -92,7 +132,7 @@ namespace ifcmg
       total_bad_url_match_count =0;
       total_postbad_url_match_count =0;
       total_bad_phrase_match_count =0;
-      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
       {
         good_url_match_count[i] = 0;
         bad_url_match_count[i] = 0;
@@ -173,7 +213,7 @@ namespace ifcmg
       os << "total_bad_url_match_count = " << total_bad_url_match_count << "\n";
       os << "total_postbad_url_match_count = " << total_postbad_url_match_count << "\n";
       os << "total_bad_phrase_match_count = " << total_bad_phrase_match_count << "\n";
-      for( size_t i=0; i<MAX_CATEGORIES; ++i )
+      for( size_t i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
       {
         if( good_url_match_count[i] !=0 )
         {
@@ -202,10 +242,10 @@ namespace ifcmg
     unsigned int total_bad_url_match_count;
     unsigned int total_postbad_url_match_count;
     unsigned int total_bad_phrase_match_count;
-    unsigned int good_url_match_count[MAX_CATEGORIES];
-    unsigned int bad_url_match_count[MAX_CATEGORIES];
-    unsigned int postbad_url_match_count[MAX_CATEGORIES];
-    unsigned int bad_phrase_match_count[MAX_CATEGORIES];
+    unsigned int good_url_match_count[MULTISCANNER_MAX_CATEGORIES];
+    unsigned int bad_url_match_count[MULTISCANNER_MAX_CATEGORIES];
+    unsigned int postbad_url_match_count[MULTISCANNER_MAX_CATEGORIES];
+    unsigned int bad_phrase_match_count[MULTISCANNER_MAX_CATEGORIES];
   };
   
   template <class T>
@@ -303,15 +343,10 @@ namespace ifcmg
   class multiscanner_t
   {
   public:
-    enum { MAX_CATEGORIES = 32 };
     
     multiscanner_t( 
       const filename_t compiled_dir_name_,
-      const filename_t non_compiled_dir_name_,
-      unsigned int good_url_enable_bits,
-      unsigned int bad_url_enable_bits,
-      unsigned int postbad_url_enable_bits,
-      unsigned int bad_phrase_enable_bits
+      const filename_t non_compiled_dir_name_
       )
     {
       filename_t compiled_dir_name( compiled_dir_name_ );
@@ -320,12 +355,11 @@ namespace ifcmg
       util::fix_directory_name( compiled_dir_name );
       util::fix_directory_name( non_compiled_dir_name );
       
-      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
       {
         good_urls_precompiled[i] = 
           load_url_scanner_precompiled(
             compiled_dir_name,
-            good_url_enable_bits,
             i,
             "goodurl"
             );
@@ -333,7 +367,6 @@ namespace ifcmg
         good_urls[i] = 
           load_url_scanner(
             non_compiled_dir_name,
-            good_url_enable_bits,
             i,
             "goodurl"
             );
@@ -341,7 +374,6 @@ namespace ifcmg
         bad_urls_precompiled[i] = 
           load_url_scanner_precompiled(
             compiled_dir_name,
-            bad_url_enable_bits,
             i,
             "badurl"
             );
@@ -349,7 +381,6 @@ namespace ifcmg
         postbad_urls_precompiled[i] = 
           load_url_scanner_precompiled(
             compiled_dir_name,
-            postbad_url_enable_bits,
             i,
             "postbadurl"
             );
@@ -357,7 +388,6 @@ namespace ifcmg
         bad_urls[i] = 
           load_url_scanner(
             non_compiled_dir_name,
-            bad_url_enable_bits,
             i,
             "badurl"
             );
@@ -365,7 +395,6 @@ namespace ifcmg
         postbad_urls[i] = 
           load_url_scanner(
             non_compiled_dir_name,
-            postbad_url_enable_bits,
             i,
             "postbadurl"
             );
@@ -373,7 +402,6 @@ namespace ifcmg
         bad_phrases_precompiled[i] = 
           load_alphanumeric_scanner_precompiled(
             compiled_dir_name,
-            bad_phrase_enable_bits,
             i,
             "badphr"
             );
@@ -381,7 +409,6 @@ namespace ifcmg
         bad_phrases[i] = 
           load_alphanumeric_scanner(
             non_compiled_dir_name,
-            bad_phrase_enable_bits,
             i,
             "badphr"
             );
@@ -390,7 +417,7 @@ namespace ifcmg
     
     virtual ~multiscanner_t()
     {
-      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
       {
         delete good_urls_precompiled[i];
         delete good_urls[i];
@@ -405,10 +432,10 @@ namespace ifcmg
 
     multiscanner_result_t find_in_string(
       std::string str,
-      unsigned int good_url_enable_bits,
-      unsigned int bad_url_enable_bits,
-      unsigned int postbad_url_enable_bits,
-      unsigned int bad_phrase_enable_bits
+      multiscanner_categories_enable_t const &good_url_enable_bits,
+      multiscanner_categories_enable_t const &bad_url_enable_bits,
+      multiscanner_categories_enable_t const &postbad_url_enable_bits,
+      multiscanner_categories_enable_t const &bad_phrase_enable_bits
       )
     {
       return find_in_data( 
@@ -424,19 +451,17 @@ namespace ifcmg
     multiscanner_result_t find_in_data(
       const void *buf,
       int buf_len,
-      unsigned int good_url_enable_bits,
-      unsigned int bad_url_enable_bits,
-      unsigned int postbad_url_enable_bits,
-      unsigned int bad_phrase_enable_bits
+      multiscanner_categories_enable_t const &good_url_enable_bits,
+      multiscanner_categories_enable_t const &bad_url_enable_bits,
+      multiscanner_categories_enable_t const &postbad_url_enable_bits,
+      multiscanner_categories_enable_t const &bad_phrase_enable_bits
       )
     {
       multiscanner_result_t result;
       
-      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
       {
-        int bit = 1<<i;
-
-        if( bad_url_enable_bits & bit )
+        if( bad_url_enable_bits.is_enabled(i))
         {
           if( bad_urls_precompiled[i] )
           {
@@ -451,7 +476,7 @@ namespace ifcmg
           }
         }
 
-        if( good_url_enable_bits & bit )
+        if( good_url_enable_bits.is_enabled(i) )
         {
           if( good_urls_precompiled[i] )
           {
@@ -466,7 +491,7 @@ namespace ifcmg
           }
         }
         
-        if( postbad_url_enable_bits & bit )
+        if( postbad_url_enable_bits.is_enabled(i) )
         {
           if( postbad_urls_precompiled[i] )
           {
@@ -481,7 +506,7 @@ namespace ifcmg
           }
         }
         
-        if( bad_phrase_enable_bits & bit )
+        if( bad_phrase_enable_bits.is_enabled(i) )
         {
           if( bad_phrases_precompiled[i] )
           {
@@ -503,9 +528,9 @@ namespace ifcmg
     std::string censor_in_string(
       std::string str,
       char censor_char,
-      unsigned int bad_url_enable_bits,
-      unsigned int postbad_url_enable_bits,
-      unsigned int bad_phrase_enable_bits
+      multiscanner_categories_enable_t const &bad_url_enable_bits,
+      multiscanner_categories_enable_t const &postbad_url_enable_bits,
+      multiscanner_categories_enable_t const &bad_phrase_enable_bits
       )
     {      
       censor_in_data( 
@@ -523,18 +548,17 @@ namespace ifcmg
       void *buf,
       int buf_len,
       char censor_char,
-      unsigned int bad_url_enable_bits,
-      unsigned int postbad_url_enable_bits,
-      unsigned int bad_phrase_enable_bits
+      multiscanner_categories_enable_t const &bad_url_enable_bits,
+      multiscanner_categories_enable_t const &postbad_url_enable_bits,
+      multiscanner_categories_enable_t const &bad_phrase_enable_bits
       )
     {
       multiscanner_result_t result;
       
-      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
       {
-        int bit = 1<<i;
-        
-        if( bad_url_enable_bits & bit )
+       
+        if( bad_url_enable_bits.is_enabled(i))
         {
           if( bad_urls_precompiled[i] )
           {
@@ -549,7 +573,7 @@ namespace ifcmg
           }
         }
 
-        if( postbad_url_enable_bits & bit )
+        if( postbad_url_enable_bits.is_enabled(i))
         {
           if( postbad_urls_precompiled[i] )
           {
@@ -564,7 +588,7 @@ namespace ifcmg
           }
         }
         
-        if( bad_phrase_enable_bits & bit )
+        if( bad_phrase_enable_bits.is_enabled(i) )
         {
           if( bad_phrases_precompiled[i] )
           {
@@ -586,25 +610,19 @@ namespace ifcmg
     
     url_scanner_precompiled_t *load_url_scanner_precompiled(
       filename_t compiled_dir_name,
-      unsigned int enable_bits,
       int category,
       const char *middle_part
       )
     {
       url_scanner_precompiled_t *scanner = 0;
-      
-      if( enable_bits && (1<<category) )
-      {
-        filename_t input_filename;      
-        form( input_filename, "%s%d%s.pre", compiled_dir_name.c_str(), category+1, middle_part );
-        
-        if( util::file_exists( input_filename ) )
-        {
-          scanner = newnothrow url_scanner_precompiled_t( input_filename );
-          if( !scanner )
-          {
-            ifcmg_throw( std::runtime_exception, "new url_scanner_precompiled_t" );
-          }
+
+      filename_t input_filename;
+      form(input_filename, "%s%03d-%s.pre", compiled_dir_name.c_str(), category + 1, middle_part);
+
+      if (util::file_exists(input_filename)) {
+        scanner = newnothrow url_scanner_precompiled_t(input_filename);
+        if (!scanner) {
+          ifcmg_throw(std::runtime_exception, "new url_scanner_precompiled_t");
         }
       }
       return scanner;
@@ -612,25 +630,19 @@ namespace ifcmg
     
     url_scanner_t *load_url_scanner(
       filename_t non_compiled_dir_name,
-      unsigned int enable_bits,
       int category,
       const char *middle_part
       )
     {
       url_scanner_t *scanner = 0;
-      
-      if( enable_bits && (1<<category) )
-      {
-        filename_t input_filename;      
-        form( input_filename, "%s%d%s.txt", non_compiled_dir_name.c_str(), category+1, middle_part );
-        
-        if( util::file_exists( input_filename ) )
-        {
-          scanner = newnothrow url_scanner_t( input_filename );
-          if( !scanner )
-          {
-            ifcmg_throw( std::runtime_exception, "new url_scanner_t" );
-          }
+
+      filename_t input_filename;
+      form(input_filename, "%s%03d-%s.txt", non_compiled_dir_name.c_str(), category + 1, middle_part);
+
+      if (util::file_exists(input_filename)) {
+        scanner = newnothrow url_scanner_t(input_filename);
+        if (!scanner) {
+          ifcmg_throw(std::runtime_exception, "new url_scanner_t");
         }
       }
       return scanner;
@@ -638,25 +650,19 @@ namespace ifcmg
     
     alphanumeric_scanner_precompiled_t *load_alphanumeric_scanner_precompiled(
       filename_t compiled_dir_name,
-      unsigned int enable_bits,
       int category,
       const char *middle_part
       )
     {
       alphanumeric_scanner_precompiled_t *scanner = 0;
-      
-      if( enable_bits && (1<<category) )
-      {
-        filename_t input_filename;      
-        form( input_filename, "%s%d%s.pre", compiled_dir_name.c_str(), category+1, middle_part );
-        
-        if( util::file_exists( input_filename ) )
-        {
-          scanner = newnothrow alphanumeric_scanner_precompiled_t( input_filename );
-          if( !scanner )
-          {
-            ifcmg_throw( std::runtime_exception, "new alphanumeric_scanner_precompiled_t" );
-          }
+
+      filename_t input_filename;
+      form(input_filename, "%s%03d-%s.pre", compiled_dir_name.c_str(), category + 1, middle_part);
+
+      if (util::file_exists(input_filename)) {
+        scanner = newnothrow alphanumeric_scanner_precompiled_t(input_filename);
+        if (!scanner) {
+          ifcmg_throw(std::runtime_exception, "new alphanumeric_scanner_precompiled_t");
         }
       }
       return scanner;
@@ -664,43 +670,36 @@ namespace ifcmg
     
     alphanumeric_scanner_t *load_alphanumeric_scanner(
       filename_t non_compiled_dir_name,
-      unsigned int enable_bits,
       int category,
       const char *middle_part
       )
     {
       alphanumeric_scanner_t *scanner = 0;
-      
-      if( enable_bits && (1<<category) )
-      {
-        filename_t input_filename;      
-        form( input_filename, "%s%d%s.txt", non_compiled_dir_name.c_str(), category+1, middle_part );
-        
-        if( util::file_exists( input_filename ) )
-        {
-          scanner = newnothrow alphanumeric_scanner_t( input_filename );
-          if( !scanner )
-          {
-            ifcmg_throw( std::runtime_exception, "alphanumeric_scanner_t" );
-          }
+
+      filename_t input_filename;
+      form(input_filename, "%s%03d-%s.txt", non_compiled_dir_name.c_str(), category + 1, middle_part);
+
+      if (util::file_exists(input_filename)) {
+        scanner = newnothrow alphanumeric_scanner_t(input_filename);
+        if (!scanner) {
+          ifcmg_throw(std::runtime_exception, "alphanumeric_scanner_t");
         }
       }
       return scanner;
     }
     
-    url_scanner_precompiled_t *good_urls_precompiled[MAX_CATEGORIES];
-    url_scanner_t *good_urls[MAX_CATEGORIES];
+    url_scanner_precompiled_t *good_urls_precompiled[MULTISCANNER_MAX_CATEGORIES];
+    url_scanner_t *good_urls[MULTISCANNER_MAX_CATEGORIES];
     
-    url_scanner_precompiled_t *bad_urls_precompiled[MAX_CATEGORIES];
-    url_scanner_t *bad_urls[MAX_CATEGORIES];
+    url_scanner_precompiled_t *bad_urls_precompiled[MULTISCANNER_MAX_CATEGORIES];
+    url_scanner_t *bad_urls[MULTISCANNER_MAX_CATEGORIES];
 
-    url_scanner_precompiled_t *postbad_urls_precompiled[MAX_CATEGORIES];
-    url_scanner_t *postbad_urls[MAX_CATEGORIES];
+    url_scanner_precompiled_t *postbad_urls_precompiled[MULTISCANNER_MAX_CATEGORIES];
+    url_scanner_t *postbad_urls[MULTISCANNER_MAX_CATEGORIES];
     
-    alphanumeric_scanner_precompiled_t *bad_phrases_precompiled[MAX_CATEGORIES];
-    alphanumeric_scanner_t *bad_phrases[MAX_CATEGORIES];
+    alphanumeric_scanner_precompiled_t *bad_phrases_precompiled[MULTISCANNER_MAX_CATEGORIES];
+    alphanumeric_scanner_t *bad_phrases[MULTISCANNER_MAX_CATEGORIES];
     
-    unsigned int enable_bits;
   };
 }
 
