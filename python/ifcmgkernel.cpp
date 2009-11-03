@@ -113,7 +113,7 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
   else
   {
     accessed = 1;
-    category = 0;
+    category = -1;
     ad_tags_found = 0;
 
     int total_bad = 0;
