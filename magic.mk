@@ -130,6 +130,7 @@ TAR_EXCLUDE_LIST=--exclude '.svn' --exclude '*~' --exclude '.hg' --exclude 'CVS'
 # When we build a config tool script, this is the file name we use. 
 PROJECT_CONFIG_TOOL?=$(PROJECT)-config
 
+PYTHON?=python
 CHMOD?=chmod
 CHOWN?=chown
 SWIG:=$(shell which swig)
@@ -413,6 +414,7 @@ LIB_$(1)_M_FILES=$$(call get_file_list,$$(LIB_$(1)_DIR),m)
 LIB_$(1)_MM_FILES=$$(call get_file_list,$$(LIB_$(1)_DIR),mm)
 LIB_$(1)_RC_FILES=$$(call get_file_list,$$(LIB_$(1)_DIR),rc)
 LIB_$(1)_SH_FILES=$$(call get_file_list_full,$$(LIB_$(1)_DIR),sh)
+LIB_$(1)_PY_FILES=$$(call get_file_list_full,$$(LIB_$(1)_DIR),py)
 
 LIB_$(1)_O_FILES=$$(call get_cpp_o_files,$$(LIB_$(1)_CPP_FILES)) \
 	$$(call get_cc_o_files,$$(LIB_$(1)_CC_FILES)) \
@@ -433,6 +435,8 @@ LIB_$(1)_DISASM_FILES=$$(LIB_$(1)_O_FILES:.o=.disasm)
 LIB_$(1)_ASM_FILES=$$(LIB_$(1)_O_FILES:.o=.asm)
 
 LIB_$(1)_EXE_FILES=$$(addprefix $$(OUTPUT_$(1)_DIR)/,$$(notdir $$(LIB_$(1)_O_FILES:.o=$$(EXE))))
+LIB_$(1)_EXE_FILES+=$$(addprefix $$(OUTPUT_$(1)_DIR)/,$$(notdir $$(LIB_$(1)_PY_FILES)))
+LIB_$(1)_EXE_FILES+=$$(addprefix $$(OUTPUT_$(1)_DIR)/,$$(notdir $$(LIB_$(1)_SH_FILES)))
 
 ifeq ($(CROSS_COMPILING),1)
 NATIVE_LIB_$(1)_CPP_FILES=$$(call get_file_list,$$(NATIVE_LIB_$(1)_DIR),cpp)
@@ -2401,11 +2405,11 @@ install-all : $(ALL_INSTALLS)
 
 install : $(INSTALL_MODE)
 
-.PHONY : preinstall-main
+.PHONY : preinstall-main preinstall-main-setup
 
 CLEAN_DIRS += $(LOCAL_INSTALL_DIR) $(LOCAL_INSTALL_DEV_DIR) $(LOCAL_INSTALL_DOCS_DEV_DIR)
 
-preinstall-main : all lib tools tests examples docs internal-magic-util-scripts
+preinstall-main-setup : all lib tools tests examples docs internal-magic-util-scripts
 	@echo preinstall-main:
 	@$(RMDIRS) $(LOCAL_INSTALL_DIR)
 	@$(MKDIRS) $(LOCAL_INSTALL_BIN_DIR)	
@@ -2414,13 +2418,17 @@ preinstall-main : all lib tools tests examples docs internal-magic-util-scripts
 	@$(call copy_dirs,$(LIB_ETC_DIR),$(LOCAL_INSTALL_ETC_DIR))
 	@$(call copy_dirs,$(LIB_MAN_DIR),$(LOCAL_INSTALL_MAN_DIR))
 	@$(call copy_files,$(LIB_TOOLS_SH_FILES),$(LOCAL_INSTALL_BIN_DIR))
+	@$(call copy_files,$(LIB_TOOLS_PY_FILES),$(LOCAL_INSTALL_BIN_DIR))
 	@$(call chown_dirs,$(LOCAL_INSTALL_DIR))
 	@$(call chmod_dirs,$(LOCAL_INSTALL_DIR))
 	@$(call project-preinstall-main-hook,$(LOCAL_INSTALL_DIR))
 
+preinstall-main : preinstall-main-setup $(PREINSTALL_MAIN_DEPS)
+
+
 .PHONY : install-main
 
-install-main : preinstall-main install-main-dirs
+install-main : preinstall-main install-main-dirs 
 	@echo install-main:
 	@$(call copy_dirs,$(LOCAL_INSTALL_BIN_DIR),$(INSTALL_BIN_DIR))
 	@$(call copy_dirs,$(LOCAL_INSTALL_SHARE_DIR),$(INSTALL_SHARE_DIR))
@@ -2733,7 +2741,7 @@ PACKAGE_DEPENDS+=$(PACKAGE_GLIBC_DEPENDS)
 
 PACKAGE_COPYRIGHT_FILE?=$()
 
-PACKAGE_DOCS_DIR=$(LOCAL_INSTALL_DIR)/usr/share/doc/$(PACKAGE_BASENAME)
+PACKAGE_DOCS_DIR?=$(LOCAL_INSTALL_DIR)/usr/share/doc/$(PACKAGE_BASENAME)
 
 define create_copyright_file
 	echo create_copyright_file $(1) $(2)

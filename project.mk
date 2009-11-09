@@ -67,4 +67,41 @@ PREFIX=/Library/contextualmediagroup/$(PROJECT)-$(VERSION)
 endif
 
 
+PYTHON_MODULES_DIR ?= $(PROJECT_TOP_DIR)/python
+
+TARGET_PYTHON_DIR ?= $(TARGET_BIN_DIR)/
+OUTPUT_PYTHON_DIR ?= $(OUTPUT_DIR)/python
+OUTPUT_PYTHON_BUILD_DIR ?= $(OUTPUT_PYTHON_DIR)/build
+OUTPUT_PYTHON_BDIST_DIR ?= $(OUTPUT_PYTHON_DIR)/bdist
+
+ALL_OUTPUT_DIRS += $(OUTPUT_PYTHON_BUILD_DIR) $(OUTPUT_PYTHON_BDIST_DIR) $(OUTPUT_PYTHON_DIST_DIR)
+
+ALL_TARGETS += python-build
+
+.PHONY : python-build python-bdist python-install
+
+python-build : lib
+	@( echo Python Modules: && \
+	cd $(PYTHON_MODULES_DIR) && \
+	LIB_DIR=$(OUTPUT_LIB_DIR) $(PYTHON) setup.py build -f -b $(OUTPUT_PYTHON_BUILD_DIR) $(PYTHON_MODULES_BUILD_OPTIONS) )
+
+PREINSTALL_MAIN_DEPS += python-preinstall
+
+.PHONY : python-preinstall
+
+python-preinstall : python-build
+	$(CP) -rp $(OUTPUT_PYTHON_BUILD_DIR)/lib.*/* $(LOCAL_INSTALL_BIN_DIR)/
+	
+
+python-bdist : lib
+	@(cd $(PYTHON_MODULES_DIR) && \
+	LIB_DIR=$(OUTPUT_LIB_DIR) $(PYTHON) setup.py bdist -b $(OUTPUT_PYTHON_BDIST_DIR) $(PYTHON_MODULES_BDIST_OPTIONS) )
+
+python-install : lib
+	@(cd $(PYTHON_MODULES_DIR) && \
+	LIB_DIR=$(OUTPUT_LIB_DIR) $(PYTHON) setup.py install $(PYTHON_MODULES_INSTALL_OPTIONS) )
+
+
+
+
 
