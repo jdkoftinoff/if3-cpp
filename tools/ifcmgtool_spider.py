@@ -259,7 +259,7 @@ def main():
   if len(sys.argv) > 1:
     domain_to_scan = sys.argv[1]
   if len(sys.argv) > 2:
-    pages_to_scan = sys.argv[2]
+    pages_to_scan = int(sys.argv[2])
   if len(sys.argv) > 3:
     precompiled_path = sys.argv[3]
   if len(sys.argv) > 4:
