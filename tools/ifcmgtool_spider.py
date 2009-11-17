@@ -242,8 +242,11 @@ class Spider:
 
 
 def main():
-  precompiled_path = '/opt/cmg/ifcmgdb/share/ifcmgdb-pre'
-  noncompiled_path = '/opt/cmg/ifcmgdb/share/ifcmgdb-non'
+  CMG_PREFIX = '/usr'
+  if os.environ.has_key('CMG_PREFIX'):
+    CMG_PREFIX = os.environ['CMG_PREFIX']
+  precompiled_path = CMG_PREFIX + '/share/ifcmgdb-pre'
+  noncompiled_path = CMG_PREFIX + '/share/ifcmgdb-non'
   domain_to_scan = None
   pages_to_scan = 10
 
