@@ -202,8 +202,6 @@ ifcmgkernel_scan_url(PyObject *self, PyObject *args)
     bad_phrase_enable_bits.set_from_string(std::string(bad_categories_enable));
   }
 
-  std::cerr << "link to scan: " << link << "\n";
-
   multiscanner_result_t link_find_result =
           multiscanner->find_in_data(
                                      link,
@@ -213,8 +211,6 @@ ifcmgkernel_scan_url(PyObject *self, PyObject *args)
                                      postbad_url_enable_bits,
                                      bad_phrase_enable_bits
                                      );
-
-  std::cerr << "link_find_result: " << link_find_result << "\n";
 
   category = -1;
 

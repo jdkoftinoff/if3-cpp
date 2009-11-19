@@ -269,7 +269,7 @@ class Spider:
 
 def spider_on_url( domain_to_scan, pages_to_scan ):
   if pages_to_scan == 0:
-    print domain_to_scan, ifcmgkernel_scan_url( domain_to_scan )
+    print( '%s\t%s' % (domain_to_scan, ifcmgkernel_scan_url( domain_to_scan ) ) )
   else:
     s = Spider(domain_to_scan, pages_to_scan)  
     while s.done == False:
@@ -290,7 +290,12 @@ def main():
     
   if len(sys.argv) == 1:
     print "ifcmgtool_spider usage:"
-    print "  ifcmgtool_spider.py domain pagecount precompiled_path noncompiled_path"
+    print "  ifcmgtool_spider.py domain_or_url pagecount precompiled_path noncompiled_path"
+    print "to crawl pages."
+    print "or:"
+    print "  ifcmgtool_spider.py url 0"
+    print "to verify url without downloading content."
+    print "in either case a url/domain of '-' means to read from stdin"
     sys.exit(1)
       
   if len(sys.argv) > 1:
