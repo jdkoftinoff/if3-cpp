@@ -4,7 +4,7 @@ import sys
 import time
 import os
 
-from HTMLParser import HTMLParser
+from HTMLParser import HTMLParser, HTMLParseError
 import datetime
 import httplib
 import ifcmgkernel
@@ -15,10 +15,7 @@ import urllib2
 import urlparse
 
 def ifcmgkernel_run_scan(link, text, links, content_links):
-  try:
-    return ifcmgkernel.run_scan(link, text, links, content_links)
-  except:
-    return [0, 0, 0]
+  return ifcmgkernel.run_scan(link, text, links, content_links)
 
 class MyParser(HTMLParser):
   def __init__(self, spider):
@@ -92,7 +89,7 @@ class MyParser(HTMLParser):
     pass
 
 class ScanResults:
-  def __init__(self, link, tts, bytes, category, ad_tags_found, accessed, date):
+  def __init__(self, link, tts, bytes, category, ad_tags_found, accessed, date, urlcategory ):
     self.link = link
     self.tts = tts
     self.bytes = bytes
@@ -100,10 +97,11 @@ class ScanResults:
     self.ad_tags_found = ad_tags_found
     self.accessed = accessed
     self.date = date
+    self.urlcategory = urlcategory
         
   def __str__(self):
-    r = '%s\t%d\t%d\t%d\t%d\t%d\t%s' \
-      % (self.link, self.accessed, self.category, self.ad_tags_found, self.bytes, self.tts, self.date)
+    r = '%s\t%d\t%d\t%d\t%d\t%d\t%s\t%s' \
+      % (self.link, self.accessed, self.category, self.ad_tags_found, self.bytes, self.tts, self.date, self.urlcategory)
     return r
         
 class Spider:
@@ -122,7 +120,6 @@ class Spider:
     self.done = False
     self.bytes = 0
     self.current_link = start_url
-    print start, start_url
 
   def close(self):
     self.parser.reset()
@@ -147,7 +144,8 @@ class Spider:
                            0,
                            0,
                            0,
-                           datetime.datetime.now()
+                           datetime.datetime.now(),
+                           0
                            )
       else:
         if self.parse(link, html):
@@ -165,6 +163,8 @@ class Spider:
                              html
                              )
 
+    urlcategory = ifcmgkernel_run_scan( link, link, '', '' )
+    
     accessed = r[0]
     category = r[1]
     ad_tags_found = r[2]
@@ -176,7 +176,8 @@ class Spider:
                        category,
                        ad_tags_found,
                        accessed,
-                       datetime.datetime.now()
+                       datetime.datetime.now(),
+                       urlcategory[1]
                        )
 
   def scan(self, link, starttime):
@@ -187,6 +188,7 @@ class Spider:
                              self.parser.content_links
                              )
 
+    urlcategory = ifcmgkernel_run_scan( link, link, '', '' )
     accessed = r[0]
     category = r[1]
     ad_tags_found = r[2]
@@ -198,7 +200,8 @@ class Spider:
                        category,
                        ad_tags_found,
                        accessed,
-                       datetime.datetime.now()
+                       datetime.datetime.now(),
+                       urlcategory[1]
                        )
 
   def parse(self, link, html):
@@ -208,8 +211,10 @@ class Spider:
       self.bytes = len(html)
       self.parser.feed(html)
       return True
-    except:
-      raise
+    except HTMLParseError:
+      return False
+    except UnicodeDecodeError:
+      return False
     return False
 
   def fixup(self, link):
@@ -244,11 +249,22 @@ class Spider:
       content_type = response.info()['Content-Type']
       if content_type[:4] == 'text':
         the_page = response.read()
-        #print the_page
         return the_page
-    except:
+    except urllib2.URLError:
+      pass
+    except urllib2.HTTPError:
       pass
     return None
+
+def spider_on_url( domain_to_scan, pages_to_scan ):
+  s = Spider(domain_to_scan, pages_to_scan)
+  
+  while s.done == False:
+    r = s.run()
+    if r is not None:
+      print r
+
+  s.close()
 
 
 def main():
@@ -259,12 +275,12 @@ def main():
   noncompiled_path = CMG_PREFIX + '/share/ifcmgdb-non'
   domain_to_scan = None
   pages_to_scan = 10
-
+    
   if len(sys.argv) == 1:
     print "ifcmgtool_spider usage:"
     print "  ifcmgtool_spider.py domain pagecount precompiled_path noncompiled_path"
     sys.exit(1)
-    
+      
   if len(sys.argv) > 1:
     domain_to_scan = sys.argv[1]
   if len(sys.argv) > 2:
@@ -275,16 +291,14 @@ def main():
     noncompiled_path = sys.argv[3]
 
   ifcmgkernel.startup( precompiled_path, noncompiled_path)
-  s = Spider(domain_to_scan, pages_to_scan)
 
-  print("link\taccess\tcategory\tad tags\tbytes\ttts\tdate")
-  
-  while s.done == False:
-    r = s.run()
-    if r is not None:
-      print r
+  print("link\taccess\tcategory\tad tags\tbytes\ttts\tdate\turlcategory")
 
-  s.close()
+  if domain_to_scan == '-':
+    for line in sys.stdin:
+      spider_on_url( line[:-1], pages_to_scan )
+  else:
+    spider_on_url( domain_to_scan, pages_to_scan )
 
 if __name__ == "__main__":
     main()
