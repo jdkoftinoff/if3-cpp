@@ -6,12 +6,13 @@
 #include "ifcmg_dynbuf.hpp"
 
 static PyObject *ifcmgkernel_startup(PyObject *self, PyObject *args);
-static PyObject *
-ifcmgkernel_run_scan(PyObject *self, PyObject *args);
+static PyObject *ifcmgkernel_run_scan(PyObject *self, PyObject *args);
+static PyObject *ifcmgkernel_scan_url(PyObject *self, PyObject *args);
 
 static PyMethodDef IfcmgkernelMethods[] = {
   {"run_scan", ifcmgkernel_run_scan, METH_VARARGS, "run scan on data"},
   {"startup", ifcmgkernel_startup, METH_VARARGS, "start up the filter tables"},
+  {"scan_url", ifcmgkernel_scan_url, METH_VARARGS, "run scan on URL"},
   {NULL, NULL, 0, NULL} /* Sentinel */
 };
 
@@ -168,6 +169,89 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
   }
 
   return Py_BuildValue("iii", accessed, category+1, ad_tags_found);
+}
+
+
+static PyObject *
+ifcmgkernel_scan_url(PyObject *self, PyObject *args)
+{
+  using namespace ifcmg;
+
+  const char *link;
+  size_t link_length;
+
+  const char *bad_categories_enable = 0;
+
+  int category = 0;
+
+  if (!PyArg_ParseTuple(args, "s#|s",
+                        &link, &link_length,
+                        bad_categories_enable
+                        ))
+    return NULL;
+
+  multiscanner_categories_enable_t good_url_enable_bits;
+  multiscanner_categories_enable_t bad_url_enable_bits;
+  multiscanner_categories_enable_t postbad_url_enable_bits;
+  multiscanner_categories_enable_t bad_phrase_enable_bits;
+
+  if (bad_categories_enable)
+  {
+    bad_url_enable_bits.set_from_string(std::string(bad_categories_enable));
+    postbad_url_enable_bits.set_from_string(std::string(bad_categories_enable));
+    bad_phrase_enable_bits.set_from_string(std::string(bad_categories_enable));
+  }
+
+  std::cerr << "link to scan: " << link << "\n";
+
+  multiscanner_result_t link_find_result =
+          multiscanner->find_in_data(
+                                     link,
+                                     link_length,
+                                     good_url_enable_bits,
+                                     bad_url_enable_bits,
+                                     postbad_url_enable_bits,
+                                     bad_phrase_enable_bits
+                                     );
+
+  std::cerr << "link_find_result: " << link_find_result << "\n";
+
+  category = -1;
+
+  int total_bad = 0;
+  total_bad += link_find_result.get_total_bad_url_match_count();
+  total_bad += link_find_result.get_total_postbad_url_match_count();
+  total_bad += link_find_result.get_total_bad_phrase_match_count();
+
+  // find largest category
+
+  int category_sums[64];
+
+  for (int i = 0; i < 64; ++i)
+  {
+    category_sums[i] = 0;
+    category_sums[i] += link_find_result.get_bad_phrase_match_count(i);
+    category_sums[i] += link_find_result.get_bad_url_match_count(i);
+  }
+
+  int largest_category = -1;
+  int largest_category_value = 0;
+
+  for (int i = 0; i < 64; ++i)
+  {
+    if (category_sums[i] >= largest_category_value && category_sums[i]>0)
+    {
+      largest_category = i;
+      largest_category_value = category_sums[i];
+    }
+  }
+
+  if (largest_category != -1)
+  {
+    category = largest_category;
+  }
+
+  return Py_BuildValue("i", category+1 );
 }
 
 static PyObject *
