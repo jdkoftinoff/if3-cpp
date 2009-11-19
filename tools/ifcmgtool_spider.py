@@ -17,6 +17,9 @@ import urlparse
 def ifcmgkernel_run_scan(link, text, links, content_links):
   return ifcmgkernel.run_scan(link, text, links, content_links)
 
+def ifcmgkernel_scan_url(link):
+  return ifcmgkernel.scan_url(link)
+
 class MyParser(HTMLParser):
   def __init__(self, spider):
     HTMLParser.__init__(self)
@@ -103,11 +106,12 @@ class ScanResults:
     r = '%s\t%d\t%d\t%d\t%d\t%d\t%s\t%s' \
       % (self.link, self.accessed, self.category, self.ad_tags_found, self.bytes, self.tts, self.date, self.urlcategory)
     return r
-        
+    
+    
 class Spider:
   viewed_queue = []
   todo_queue = []
-
+  
   def __init__(self, start, pagelimit):
     if start[:7] != 'http://':
       start = 'http://' + start
@@ -115,11 +119,11 @@ class Spider:
     start_url = url.geturl()
     self.site = url[1]
     self.parser = MyParser(self)
-    self.todo_queue.append( start_url )
     self.pagelimit = pagelimit
-    self.done = False
     self.bytes = 0
     self.current_link = start_url
+    self.todo_queue.append( start_url )
+    self.done = False
 
   def close(self):
     self.parser.reset()
@@ -167,7 +171,7 @@ class Spider:
                              html
                              )
 
-    urlcategory = ifcmgkernel_run_scan( link, link, '', '' )
+    urlcategory = ifcmgkernel_scan_url( link )
     
     accessed = r[0]
     category = r[1]
@@ -181,7 +185,7 @@ class Spider:
                        ad_tags_found,
                        accessed,
                        datetime.datetime.now(),
-                       urlcategory[1]
+                       urlcategory
                        )
 
   def scan(self, link, starttime):
@@ -192,7 +196,7 @@ class Spider:
                              self.parser.content_links
                              )
 
-    urlcategory = ifcmgkernel_run_scan( link, link, '', '' )
+    urlcategory = ifcmgkernel_scan_url( link )
     accessed = r[0]
     category = r[1]
     ad_tags_found = r[2]
@@ -205,7 +209,7 @@ class Spider:
                        ad_tags_found,
                        accessed,
                        datetime.datetime.now(),
-                       urlcategory[1]
+                       urlcategory
                        )
 
   def parse(self, link, html):
@@ -264,14 +268,15 @@ class Spider:
     return None
 
 def spider_on_url( domain_to_scan, pages_to_scan ):
-  s = Spider(domain_to_scan, pages_to_scan)
-  
-  while s.done == False:
-    r = s.run()
-    if r is not None:
-      print r
-
-  s.close()
+  if pages_to_scan == 0:
+    print domain_to_scan, ifcmgkernel_scan_url( domain_to_scan )
+  else:
+    s = Spider(domain_to_scan, pages_to_scan)  
+    while s.done == False:
+      r = s.run()
+      if r is not None:
+        print r        
+    s.close()
 
 
 def main():
@@ -299,8 +304,10 @@ def main():
 
   ifcmgkernel.startup( precompiled_path, noncompiled_path)
 
-  print("link\taccess\tcategory\tad tags\tbytes\ttts\tdate\turlcategory")
-
+  if pages_to_scan == 0:
+    print("link\turlcategory")
+  else:
+    print("link\taccess\tcategory\tad tags\tbytes\ttts\tdate\turlcategory")
   if domain_to_scan == '-':
     for line in sys.stdin:
       spider_on_url( line[:-1], pages_to_scan )

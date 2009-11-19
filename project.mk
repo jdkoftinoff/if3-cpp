@@ -83,7 +83,7 @@ ALL_TARGETS += python-build
 python-build : lib
 	@( echo Python Modules: && \
 	cd $(PYTHON_MODULES_DIR) && \
-	LIB_DIR=$(OUTPUT_LIB_DIR) $(PYTHON) setup.py build -f -b $(OUTPUT_PYTHON_BUILD_DIR) $(PYTHON_MODULES_BUILD_OPTIONS) )
+	PROJECT_TOP_DIR=$(PROJECT_TOP_DIR) LIB_DIR=$(OUTPUT_LIB_DIR) $(PYTHON) setup.py build -f -b $(OUTPUT_PYTHON_BUILD_DIR) $(PYTHON_MODULES_BUILD_OPTIONS) )
 
 PREINSTALL_MAIN_DEPS += python-preinstall
 
