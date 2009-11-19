@@ -44,6 +44,10 @@ class MyParser(HTMLParser):
     elif tag == 'script':
       self.handle_script(tag, attrs)
             
+  def fixup_link( self, link ):
+    res=urlparse.urljoin( self.spider.current_link, link )
+    return res
+  
   def handle_a(self, tag, attrs):
     for i in attrs:
       if i[0] == 'href':
@@ -70,11 +74,13 @@ class MyParser(HTMLParser):
         return None
 
   def handle_link(self, link):
-    self.spider.validate_add_todo(link)
-    self.links += link + '\n'
+    l = self.fixup_link( link )
+    self.spider.validate_add_todo(l)
+    self.links += l + '\n'
 
   def handle_content_link(self, link):
-    self.content_links += link + '\n'
+    l = self.fixup_link( link )
+    self.content_links += l + '\n'
 
 
   def handle_data(self, data):
@@ -104,17 +110,19 @@ class Spider:
   viewed_queue = []
   todo_queue = []
 
-  def __init__(self, site, pagelimit):
-    # todo: allow URI's as well as site domain names
-    # in case of URI, set site to extracted domain name
-    # and add URI to todo_queue and set current_link
-    self.site = site
+  def __init__(self, start, pagelimit):
+    if start[:7] != 'http://':
+      start = 'http://' + start
+    url = urlparse.urlsplit( start, 'http', False )
+    start_url = url.geturl()
+    self.site = url[1]
     self.parser = MyParser(self)
-    self.todo_queue.append('http://' + site + '/')
+    self.todo_queue.append( start_url )
     self.pagelimit = pagelimit
     self.done = False
     self.bytes = 0
-    self.current_link = 'http://' + site + '/'
+    self.current_link = start_url
+    print start, start_url
 
   def close(self):
     self.parser.reset()
@@ -201,7 +209,8 @@ class Spider:
       self.parser.feed(html)
       return True
     except:
-      return False
+      raise
+    return False
 
   def fixup(self, link):
     pos = link.find('#')
