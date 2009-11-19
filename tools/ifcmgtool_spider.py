@@ -246,7 +246,10 @@ class Spider:
 
       response = urllib2.urlopen(req)
 
-      content_type = response.info()['Content-Type']
+      if response.info().has_key('Content-Type'):
+        content_type = response.info()['Content-Type']
+      else
+        content_type = ''
       if content_type[:4] == 'text':
         the_page = response.read()
         return the_page
