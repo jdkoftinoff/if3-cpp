@@ -46,24 +46,35 @@ namespace ifcmg
     
     db_needles_row_t & operator = ( db_needles_row_t const &o )
     {
+      m_id = o.m_id;
+      m_needle = o.m_needle;
+      m_section = o.m_section;
+      m_category1 = o.m_category1;
+      m_category2 = o.m_category2;
+      m_category3 = o.m_category3;
+      m_category4 = o.m_category4;
+      m_score = o.m_score;
+      m_autogen = o.m_autogen;
       return *this;
     }
     
     int64_t m_id;
-    char m_needle[128];
+    std::string m_needle;
     int64_t m_section;
     int64_t m_category1;
     int64_t m_category2;
     int64_t m_category3;
     int64_t m_category4;
     int32_t m_score;
-    int32_t m_autogen;   
+    int32_t m_autogen;
   };
-    
-  typedef std::vector< db_needles_row_t > db_needles_table_t;
+
+  class db_needles_table_t
+  {
+  public:
+  };
   
   void load( db_needles_table_t &t, filename_t file );  
-
 }
 
 
