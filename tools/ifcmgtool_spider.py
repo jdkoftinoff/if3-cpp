@@ -248,7 +248,7 @@ class Spider:
 
       if response.info().has_key('Content-Type'):
         content_type = response.info()['Content-Type']
-      else
+      else:
         content_type = ''
       if content_type[:4] == 'text':
         the_page = response.read()
