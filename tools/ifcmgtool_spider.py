@@ -79,11 +79,11 @@ class MyParser(HTMLParser):
     l = self.fixup_link( link )
     self.content_links += l + '\n'
 
-
   def handle_data(self, data):
-    t = data.strip()
-    if len(t) > 0:
-      self.text += data + '\n'
+    if data is not None:
+      t = data.strip()
+      if len(t) > 0:
+        self.text += data + '\n'
 
   def handle_endtag(self, tag):
     pass
@@ -135,7 +135,11 @@ class Spider:
     else:
       starttime = time.clock()
       link = self.todo_queue.pop(0)
-      html = self.get_html(link)
+      html = None
+      try:
+        html = self.get_html(link)
+      except:
+        pass
       if html == None:
         return ScanResults(
                            link,
