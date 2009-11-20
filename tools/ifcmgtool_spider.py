@@ -269,7 +269,7 @@ class Spider:
 
 def spider_on_url( domain_to_scan, pages_to_scan, verbose ):
   if pages_to_scan == 0:
-    print( '%s\t%s' % (domain_to_scan, ifcmgkernel_scan_url( domain_to_scan ) ) )
+    print( '%s\t%s' % (ifcmgkernel_scan_url( domain_to_scan ), domain_to_scan ) )
   else:
     s = Spider(domain_to_scan, pages_to_scan )  
     while s.done == False:
