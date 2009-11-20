@@ -267,15 +267,18 @@ class Spider:
       pass
     return None
 
-def spider_on_url( domain_to_scan, pages_to_scan ):
+def spider_on_url( domain_to_scan, pages_to_scan, verbose ):
   if pages_to_scan == 0:
     print( '%s\t%s' % (domain_to_scan, ifcmgkernel_scan_url( domain_to_scan ) ) )
   else:
-    s = Spider(domain_to_scan, pages_to_scan)  
+    s = Spider(domain_to_scan, pages_to_scan )  
     while s.done == False:
       r = s.run()
       if r is not None:
-        print r        
+        if verbose:
+          print r
+        else:
+          print '%d\t%s' % ( r.category, r.link )
     s.close()
 
 
@@ -309,15 +312,15 @@ def main():
 
   ifcmgkernel.startup( precompiled_path, noncompiled_path)
 
-  if pages_to_scan == 0:
-    print("link\turlcategory")
-  else:
-    print("link\taccess\tcategory\tad tags\tbytes\ttts\tdate\turlcategory")
+#  if pages_to_scan == 0:
+#    print("link\turlcategory")
+#  else:
+#    print("link\taccess\tcategory\tad tags\tbytes\ttts\tdate\turlcategory")
   if domain_to_scan == '-':
     for line in sys.stdin:
-      spider_on_url( line[:-1], pages_to_scan )
+      spider_on_url( line[:-1], pages_to_scan, False )
   else:
-    spider_on_url( domain_to_scan, pages_to_scan )
+    spider_on_url( domain_to_scan, pages_to_scan, False )
 
 if __name__ == "__main__":
     main()

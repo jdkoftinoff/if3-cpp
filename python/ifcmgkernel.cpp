@@ -110,6 +110,7 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
   if (text_length < 100)
   {
     accessed = 0;
+    category=35;
   }
   else
   {
@@ -155,7 +156,11 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
       }
     }
 
-    if (largest_category != -1)
+    if (largest_category == -1)
+    {
+      category = -1;
+    }
+    else
     {
       category = largest_category;
 
