@@ -124,11 +124,30 @@ class Spider:
     self.current_link = start_url
     self.todo_queue.append( start_url )
     self.done = False
+    self.store_to_cache = True
+    self.cache_count = 0
 
   def close(self):
     self.parser.reset()
     self.parser.close()
-        
+    
+  def write_file( self, fname, data ):
+    f=open(fname,'w')  
+    f.write( data )
+    f.close()
+
+  def store( self, link, html ):
+    self.cache_count = self.cache_count + 1
+    s = '%06d' % (self.cache_count)
+    dir = s[0] + '/' + s[1] + '/' + s[2] + '/' + s[3] + '/'
+    if not os.path.exists( dir ):
+      os.makedirs( dir )
+    try:
+      self.write_file( dir + 'cache-%06d.url' % (self.cache_count), link )
+      self.write_file( dir + 'cache-%06d.html' % (self.cache_count), html )      
+    except:
+      pass
+
   def run(self):
     if self.pagelimit <= 0:
       self.done = True
@@ -142,6 +161,8 @@ class Spider:
       html = None
       try:
         html = self.get_html(link)
+        if self.store_to_cache:
+          self.store( link, html )
       except:
         pass
       if html == None:
