@@ -224,32 +224,60 @@ ifcmgkernel_scan_url(PyObject *self, PyObject *args)
   total_bad += link_find_result.get_total_postbad_url_match_count();
   total_bad += link_find_result.get_total_bad_phrase_match_count();
 
+  int total_good = link_find_result.get_total_good_url_match_count();
+
   // find largest category
 
-  int category_sums[64];
+  int bad_category_sums[64];
+  int good_category_sums[64];
 
   for (int i = 0; i < 64; ++i)
   {
-    category_sums[i] = 0;
-    category_sums[i] += link_find_result.get_bad_phrase_match_count(i);
-    category_sums[i] += link_find_result.get_bad_url_match_count(i);
+    bad_category_sums[i] = 0;
+    bad_category_sums[i] += link_find_result.get_bad_phrase_match_count(i);
+    bad_category_sums[i] += link_find_result.get_bad_url_match_count(i);
+    bad_category_sums[i] += link_find_result.get_postbad_url_match_count(i);
+    bad_category_sums[i] += link_find_result.get_bad_phrase_match_count(i);
+    good_category_sums[i] = 0;
+    good_category_sums[i] += link_find_result.get_good_url_match_count(i);
   }
 
-  int largest_category = -1;
-  int largest_category_value = 0;
+  int largest_bad_category = -1;
+  int largest_bad_category_value = 0;
 
   for (int i = 0; i < 64; ++i)
   {
-    if (category_sums[i] >= largest_category_value && category_sums[i]>0)
+    if (bad_category_sums[i] >= largest_bad_category_value && bad_category_sums[i]>0)
     {
-      largest_category = i;
-      largest_category_value = category_sums[i];
+      largest_bad_category = i;
+      largest_bad_category_value = bad_category_sums[i];
     }
   }
 
-  if (largest_category != -1)
+  int largest_good_category = -1;
+  int largest_good_category_value = 0;
+
+  for (int i = 0; i < 64; ++i)
   {
-    category = largest_category;
+    if (good_category_sums[i] >= largest_good_category_value && good_category_sums[i]>0)
+    {
+      largest_good_category = i;
+      largest_good_category_value = good_category_sums[i];
+    }
+  }
+
+  if( total_good>0 && total_bad==0 )
+  {
+    category = largest_good_category;
+  }
+  else if( total_good==0 && total_bad>0 )
+  {
+    category = largest_bad_category;
+  }
+
+  if( total_good==0 && total_bad == 0 )
+  {
+    category = 35;
   }
 
   return Py_BuildValue("i", category+1 );
