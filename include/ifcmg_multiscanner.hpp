@@ -19,19 +19,20 @@ ALL RIGHTS RESERVED.
 #include "ifcmg_buf.hpp"
 #include "ifcmg_util.hpp"
 #include "ifcmg_scanner.hpp"
+#include "ifcmg_compile.hpp"
 
 namespace ifcmg
 {
   enum { MULTISCANNER_MAX_CATEGORIES=64 };
 
   inline
-  std::vector<std::string> &split(
-      const std::string &s,
+  std::vector<string_t> &split(
+      const string_t &s,
           char delim,
-          std::vector<std::string> &elems)
+          std::vector<string_t> &elems)
   {
     std::stringstream ss(s);
-    std::string item;
+    string_t item;
     while(std::getline(ss, item, delim)) {
         elems.push_back(item);
     }
@@ -40,8 +41,8 @@ namespace ifcmg
 
 
   inline
-  std::vector<std::string> split(const std::string &s, char delim) {
-      std::vector<std::string> elems;
+  std::vector<string_t> split(const string_t &s, char delim) {
+      std::vector<string_t> elems;
       return split(s, delim, elems);
   }
 
@@ -58,6 +59,15 @@ namespace ifcmg
       }
     }
 
+    multiscanner_categories_enable_t( string_t cats )
+    {
+      for( int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      {
+        enabled[i]=false;
+      }
+      set_from_string( cats );
+    }
+
     void clear()
     {
       for( int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
@@ -66,10 +76,10 @@ namespace ifcmg
       }
     }
 
-    void set_from_string( std::string cats )
+    void set_from_string( string_t cats )
     {
-      std::vector<std::string> items = split( cats, ',' );
-      for( std::vector<std::string>::iterator i=items.begin(); i!=items.end(); i++ )
+      std::vector<string_t> items = split( cats, ',' );
+      for( std::vector<string_t>::iterator i=items.begin(); i!=items.end(); i++ )
       {
         int value = strtol( i->c_str(), 0, 10 );
         if( value>0 && value<=MULTISCANNER_MAX_CATEGORIES )
@@ -205,7 +215,7 @@ namespace ifcmg
       bad_phrase_match_count[ category ]++;
     }
 
-    std::string to_string() const
+    string_t to_string() const
     {
       std::stringstream os;
 
@@ -438,7 +448,7 @@ namespace ifcmg
     }
 
     multiscanner_result_t find_in_string(
-      std::string str,
+      string_t str,
       multiscanner_categories_enable_t const &good_url_enable_bits,
       multiscanner_categories_enable_t const &bad_url_enable_bits,
       multiscanner_categories_enable_t const &postbad_url_enable_bits,
@@ -532,8 +542,8 @@ namespace ifcmg
     }
 
 
-    std::string censor_in_string(
-      std::string str,
+    string_t censor_in_string(
+      string_t str,
       char censor_char,
       multiscanner_categories_enable_t const &bad_url_enable_bits,
       multiscanner_categories_enable_t const &postbad_url_enable_bits,
@@ -706,6 +716,348 @@ namespace ifcmg
     alphanumeric_scanner_precompiled_t *bad_phrases_precompiled[MULTISCANNER_MAX_CATEGORIES];
     alphanumeric_scanner_t *bad_phrases[MULTISCANNER_MAX_CATEGORIES];
 
+  };
+
+  struct category_with_strength_t
+  {
+    category_with_strength_t( int c = -1, int s =0 ) :
+      category( c ),
+      strength( s )
+    {
+    }
+
+    int category;
+    int strength;
+  };
+
+
+  class results_histogram_t
+  {
+  public:
+    results_histogram_t()
+    {
+      for( int i=0; i< MULTISCANNER_MAX_CATEGORIES; ++i )
+      {
+        m_category_sums[i] = 0;
+      }
+    }
+
+    void apply_good_results( const multiscanner_result_t &results )
+    {
+      for( int i=0; i< MULTISCANNER_MAX_CATEGORIES; ++i )
+      {
+        m_category_sums[i] += results.get_good_url_match_count(i);
+      }
+    }
+
+    void apply_bad_results( const multiscanner_result_t &results )
+    {
+      for( int i=0; i< MULTISCANNER_MAX_CATEGORIES; ++i )
+      {
+        m_category_sums[i] += results.get_bad_phrase_match_count(i);
+        m_category_sums[i] += results.get_bad_url_match_count(i);
+      }
+    }
+
+    void apply_postbad_results( const multiscanner_result_t &results )
+    {
+      for( int i=0; i< MULTISCANNER_MAX_CATEGORIES; ++i )
+      {
+        m_category_sums[i] += results.get_postbad_url_match_count(i);
+      }
+    }
+
+    category_with_strength_t
+    calc_largest_category() const
+    {
+      int category = -1;
+      int value = 0;
+
+      for( int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      {
+        if (m_category_sums[i] >= value && m_category_sums[i]>0)
+        {
+          category = i;
+          value = m_category_sums[i];
+        }
+      }
+      return category_with_strength_t(category,value);
+    }
+
+    category_with_strength_t
+    calc_smallest_category() const
+    {
+      int category = -1;
+      int value = 0;
+
+      for( int i=MULTISCANNER_MAX_CATEGORIES-1; i>=0; --i )
+      {
+        if (m_category_sums[i] >= value && m_category_sums[i]>0)
+        {
+          category = i;
+          value = m_category_sums[i];
+        }
+      }
+      return category_with_strength_t(category,value);
+    }
+
+  private:
+    int m_category_sums[ MULTISCANNER_MAX_CATEGORIES ];
+  };
+
+  class ifcmgkernel_t
+  {
+  public:
+
+    ifcmgkernel_t(
+                  const filename_t compiled_db_path,
+                  const filename_t uncompiled_db_path,
+                  bool do_compiling,
+                  int safe_category,
+                  int unknown_category
+                  )
+      :
+      m_compiled_db_path( compiled_db_path ),
+      m_uncompiled_db_path( uncompiled_db_path ),
+      m_multiscanner(0),
+      m_safe_category( safe_category ),
+      m_unknown_category( unknown_category )
+    {
+      if( do_compiling )
+      {
+        compile_all();
+      }
+      m_multiscanner = new multiscanner_t(
+                                          m_compiled_db_path,
+                                          m_uncompiled_db_path
+                                          );
+    }
+
+    virtual ~ifcmgkernel_t()
+    {
+      delete m_multiscanner;
+    }
+
+    category_with_strength_t
+    validate_hostname(
+                      string_t hostname,
+                      string_t good_categories_enable,
+                      string_t bad_categories_enable
+                      )
+    {
+      string_t fixup = string_t("http://") + hostname;
+
+      return validate_data( fixup.c_str(), fixup.length(), good_categories_enable, bad_categories_enable );
+    }
+
+    category_with_strength_t
+    validate_link(
+                      string_t url,
+                      string_t good_categories_enable,
+                      string_t bad_categories_enable
+                      )
+    {
+      return validate_data( url.c_str(), url.length(), good_categories_enable, bad_categories_enable );
+    }
+
+    category_with_strength_t
+    validate_text(
+                      const char *data, int data_len,
+                      string_t good_categories_enable,
+                      string_t bad_categories_enable
+                      )
+    {
+      return validate_data( data, data_len, good_categories_enable, bad_categories_enable );
+    }
+
+    category_with_strength_t
+    validate_links(
+                   const char *data, int data_len,
+                   string_t good_categories_enable,
+                   string_t bad_categories_enable
+                   )
+    {
+      return validate_data( data, data_len, good_categories_enable, bad_categories_enable );
+    }
+
+    category_with_strength_t
+    validate_content_links(
+                           const char *data, int data_len,
+                           string_t good_categories_enable,
+                           string_t bad_categories_enable
+                           )
+    {
+      return validate_data( data, data_len, good_categories_enable, bad_categories_enable );
+    }
+
+
+    category_with_strength_t
+    validate_data(
+                  const char *data,
+                  int data_len,
+                  string_t good_categories_enable,
+                  string_t bad_categories_enable
+                  )
+    {
+      multiscanner_categories_enable_t good_categories_enable_bits( good_categories_enable );
+      multiscanner_categories_enable_t bad_categories_enable_bits( bad_categories_enable );
+      multiscanner_result_t result;
+
+      result = m_multiscanner->find_in_data(
+                                            data, data_len,
+                                            good_categories_enable,
+                                            bad_categories_enable,
+                                            bad_categories_enable,
+                                            bad_categories_enable
+                                            );
+
+      results_histogram_t good_histogram;
+      good_histogram.apply_good_results( result );
+      category_with_strength_t good_category = good_histogram.calc_largest_category();
+
+      results_histogram_t bad_histogram;
+      bad_histogram.apply_bad_results( result );
+      category_with_strength_t bad_category = bad_histogram.calc_largest_category();
+
+      results_histogram_t postbad_histogram;
+      postbad_histogram.apply_postbad_results( result );
+      category_with_strength_t postbad_category = postbad_histogram.calc_largest_category();
+
+      // default to unknown
+      category_with_strength_t final(m_unknown_category,1);
+
+      // if it matches postbad, then it is bad
+      if( postbad_category.category != -1 )
+      {
+        final = postbad_category;
+      }
+      // otherwise if it matches good, then it is good
+      else if( good_category.category != -1 )
+      {
+        final = good_category;
+      }
+      // otherwise if it matches bad, then it is bad
+      else if( bad_category.category!=-1 )
+      {
+        final = bad_category;
+      }
+
+      return final;
+    }
+
+    struct allscans_t
+    {
+      category_with_strength_t hostname;
+      category_with_strength_t link;
+      category_with_strength_t text;
+      category_with_strength_t links;
+      category_with_strength_t content_links;
+      category_with_strength_t final;
+    };
+
+    allscans_t validate(
+                        string_t hostname,
+                        string_t link,
+                        const char *text, int text_len,
+                        const char *links, int links_len,
+                        const char *content_links, int content_links_len,
+                        string_t good_categories_enable_for_hostname,
+                        string_t good_categories_enable_for_link,
+                        string_t good_categories_enable_for_content,
+                        string_t bad_categories_enable
+                        )
+    {
+      allscans_t result;
+      result.hostname = validate_hostname(
+                                          hostname,
+                                          good_categories_enable_for_hostname,
+                                          bad_categories_enable
+                                           );
+
+      result.link = validate_link(
+                                  link,
+                                  good_categories_enable_for_link,
+                                  bad_categories_enable
+                                   );
+
+      result.text = validate_text(
+                                  text, text_len,
+                                  good_categories_enable_for_content,
+                                  bad_categories_enable
+                                   );
+
+      result.links = validate_links(
+                                    links, links_len,
+                                    good_categories_enable_for_content,
+                                    bad_categories_enable
+                                     );
+
+      result.content_links = validate_links(
+                                            content_links,
+                                            content_links_len,
+                                            good_categories_enable_for_content,
+                                            bad_categories_enable
+                                             );
+
+      // default the final result to be based on the hostname
+      result.final = result.hostname;
+
+      // if it was unknown, then look at the link response
+      if( result.final.category == m_unknown_category )
+        result.final = result.link;
+
+      // if that is still unknown, then look at the largest score of the rest of the content
+      if( result.final.category == m_unknown_category )
+      {
+        result.final = result.text;
+        if( result.links.strength >  result.final.strength )
+          result.final = result.links;
+        if( result.content_links.strength > result.final.strength )
+          result.final = result.content_links;
+      }
+
+      return result;
+    }
+
+  private:
+    void compile_all()
+    {
+      int count=0;
+
+      count+=compile_files<tree_traits_url_t,pattern_expander_standard_t>(
+                                                                          m_uncompiled_db_path,
+                                                                          m_compiled_db_path,
+                                                                          "goodurl",
+                                                                          MULTISCANNER_MAX_CATEGORIES
+                                                                          );
+
+      count+=compile_files<tree_traits_url_t,pattern_expander_standard_t>(
+                                                                          m_uncompiled_db_path,
+                                                                          m_compiled_db_path,
+                                                                          "badurl",
+                                                                          MULTISCANNER_MAX_CATEGORIES
+                                                                          );
+
+      count+=compile_files<tree_traits_url_t,pattern_expander_standard_t>(
+                                                                          m_uncompiled_db_path,
+                                                                          m_compiled_db_path,
+                                                                          "postbadurl",
+                                                                          MULTISCANNER_MAX_CATEGORIES
+                                                                          );
+
+      count+=compile_files<tree_traits_alphanumeric_t,pattern_expander_standard_t>(
+                                                                                   m_uncompiled_db_path,
+                                                                                   m_compiled_db_path,
+                                                                                   "badphr",
+                                                                                   MULTISCANNER_MAX_CATEGORIES
+                                                                                   );
+    }
+
+    filename_t m_compiled_db_path;
+    filename_t m_uncompiled_db_path;
+    multiscanner_t * m_multiscanner;
+    int m_safe_category;
+    int m_unknown_category;
   };
 }
 

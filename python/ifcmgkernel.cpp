@@ -182,6 +182,8 @@ ifcmgkernel_scan_url(PyObject *self, PyObject *args)
 {
   using namespace ifcmg;
 
+  const char *hostname;
+  size_t hostname_length;
   const char *link;
   size_t link_length;
 
@@ -189,7 +191,8 @@ ifcmgkernel_scan_url(PyObject *self, PyObject *args)
 
   int category = 0;
 
-  if (!PyArg_ParseTuple(args, "s#|s",
+  if (!PyArg_ParseTuple(args, "s#s#|s",
+                        &hostname, &hostname_length,
                         &link, &link_length,
                         bad_categories_enable
                         ))
