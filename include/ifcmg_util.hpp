@@ -10,7 +10,7 @@ http://www.contextualmediagroup.com/
 
 ALL RIGHTS RESERVED.
 
-*/
+ */
 
 #ifndef IFCMG_UTIL_HPP
 #define IFCMG_UTIL_HPP
@@ -20,102 +20,106 @@ ALL RIGHTS RESERVED.
 
 
 namespace ifcmg
-{  
+{
   namespace util
   {
-    
-    bool formpath( 
-      string_t &dest, 
-      string_t const &path, 
-      string_t const &file, 
-      string_t const &extension, 
-      int maxlen 
-      );
-    
-        
-    inline void sleep( int seconds )
+
+    bool formpath(
+                  string_t &dest,
+                  string_t const &path,
+                  string_t const &file,
+                  string_t const &extension,
+                  int maxlen
+                  );
+
+    inline void
+    sleep(int seconds)
     {
 #if defined(IFCMG_CONFIG_WIN32)
-      Sleep( seconds*1000 );
+      Sleep(seconds * 1000);
 #else
-      sleep( seconds );
+      sleep(seconds);
 #endif
     }
-    
-    inline void sleepms( int milliseconds )
+
+    inline void
+    sleepms(int milliseconds)
     {
 #if defined(IFCMG_CONFIG_WIN32)
-      Sleep( milliseconds );
+      Sleep(milliseconds);
 #else
-      usleep( milliseconds*1000 );
+      usleep(milliseconds * 1000);
 #endif
-      
+
     }
-    
-    inline const char *find_extension( const char *path )
+
+    inline const char *
+    find_extension(const char *path)
     {
-      int pos=std::strlen(path);
-      while( --pos>=0 )
+      int pos = std::strlen(path);
+      while (--pos >= 0)
       {
-        if( path[pos]=='.' )
+        if (path[pos] == '.')
           return &path[pos];
-        if( path[pos]=='/' || path[pos]=='\\' )
+        if (path[pos] == '/' || path[pos] == '\\')
           return 0;
       }
       return 0;
     }
-    
+
 #if defined(IFCMG_CONFIG_POSIX)
 #define IFCMG_PATHSEP '/'
 #else
 #define IFCMG_PATHSEP '\\'
 #endif
-    
-    inline filename_t &fix_directory_name(
-      filename_t &d 
-      )
+
+    inline filename_t &
+    fix_directory_name(
+     filename_t &d
+     )
     {
       // if path does not end in '/' or '\\' then append appropriate path sep char      
       int len = d.length();
-      if( len >0 && d[len-1]!='\\' && d[len-1]!='/'  )
+      if (len > 0 && d[len - 1] != '\\' && d[len - 1] != '/')
       {
         d += IFCMG_PATHSEP;
-      }      
+      }
       return d;
     }
-    
-    
-    inline char * strip_crlf( char *buf )
+
+    inline char *
+    strip_crlf(char *buf)
     {
-      char *p=buf;
-      
-      while( *p )
+      char *p = buf;
+
+      while (*p)
       {
-        if( *p=='\r' || *p=='\n' )
+        if (*p == '\r' || *p == '\n')
         {
-          *p='\0';
+          *p = '\0';
           break;
         }
         ++p;
       }
-      
+
       return buf;
     }
-    
-    inline bool read_line(
-                          string_t &result,
-                          FILE *f
-                          )
+
+    inline bool
+    read_line(
+              string_t &result,
+              FILE *f
+              )
     {
-      bool r=false;      
-      char tmpbuf[4096+1];
-      tmpbuf[4096]='\0';
-      
-      if( fgets( tmpbuf, 4096, f ) )
+      bool r = false;
+      char tmpbuf[4096 + 1];
+      tmpbuf[4096] = '\0';
+
+      if (fgets(tmpbuf, 4096, f))
       {
         strip_crlf(tmpbuf);
         result = tmpbuf;
-        r=true;
+        r = true;
       }
       else
       {
@@ -123,33 +127,61 @@ namespace ifcmg
       }
       return r;
     }
-    
-    inline filename_t append_path( 
-      const filename_t &base_path, 
-      const filename_t &file,
-      const char path_sep = IFCMG_PATHSEP
-      )
+
+    inline filename_t
+    append_path(
+                const filename_t &base_path,
+                const filename_t &file,
+                const char path_sep = IFCMG_PATHSEP
+                )
     {
-      filename_t result( base_path );
+      filename_t result(base_path);
       fix_directory_name(
-        result
-        );
+                         result
+                         );
       result += file;
-      
+
       return result;
     }
-    
-    inline bool file_exists(
-      const filename_t &fname 
-      )
+
+    inline bool
+    file_exists(
+                const filename_t &fname
+                )
     {
-      FILE *f =fopen( fname.c_str(), "rb" );
-      if( f )
+      FILE *f = fopen(fname.c_str(), "rb");
+      if (f)
       {
         fclose(f);
       }
-      return f!=0;
+      return f != 0;
     }
+
+    inline
+    std::vector<string_t> &
+    split(
+     const string_t &s,
+     char delim,
+     std::vector<string_t> &elems)
+    {
+      std::stringstream ss(s);
+      string_t item;
+      while (std::getline(ss, item, delim))
+      {
+        elems.push_back(item);
+      }
+      return elems;
+    }
+
+    inline
+    std::vector<string_t>
+    split(const string_t &s, char delim)
+    {
+      std::vector<string_t> elems;
+      return split(s, delim, elems);
+    }
+
+
   }
 }
 

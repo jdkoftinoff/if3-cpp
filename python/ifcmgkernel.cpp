@@ -16,7 +16,9 @@ static PyMethodDef IfcmgkernelMethods[] = {
   {NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-static ifcmg::multiscanner_t *multiscanner = 0;
+static ifcmg::multiscanner::ifcmgkernel_t *ifcmgkernel = 0;
+static ifcmg::multiscanner::multiscanner_t *multiscanner = 0;
+
 
 PyMODINIT_FUNC
 initifcmgkernel(void)
@@ -27,8 +29,6 @@ initifcmgkernel(void)
 static PyObject *
 ifcmgkernel_run_scan(PyObject *self, PyObject *args)
 {
-  using namespace ifcmg;
-
   const char *link;
   size_t link_length;
 
@@ -55,10 +55,10 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
                         ))
     return NULL;
 
-  multiscanner_categories_enable_t good_url_enable_bits;
-  multiscanner_categories_enable_t bad_url_enable_bits;
-  multiscanner_categories_enable_t postbad_url_enable_bits;
-  multiscanner_categories_enable_t bad_phrase_enable_bits;
+  ifcmg::multiscanner::categories_enable_t good_url_enable_bits;
+  ifcmg::multiscanner::categories_enable_t bad_url_enable_bits;
+  ifcmg::multiscanner::categories_enable_t postbad_url_enable_bits;
+  ifcmg::multiscanner::categories_enable_t bad_phrase_enable_bits;
 
   if (bad_categories_enable)
   {
@@ -67,7 +67,7 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
     bad_phrase_enable_bits.set_from_string(std::string(bad_categories_enable));
   }
 
-  multiscanner_result_t link_find_result =
+  ifcmg::multiscanner::result_t link_find_result =
           multiscanner->find_in_data(
                                      link,
                                      link_length,
@@ -77,7 +77,7 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
                                      bad_phrase_enable_bits
                                      );
 
-  multiscanner_result_t text_find_result =
+  ifcmg::multiscanner::result_t text_find_result =
           multiscanner->find_in_data(
                                      text,
                                      text_length,
@@ -87,7 +87,7 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
                                      bad_phrase_enable_bits
                                      );
 
-  multiscanner_result_t links_find_result =
+  ifcmg::multiscanner::result_t links_find_result =
           multiscanner->find_in_data(
                                      links,
                                      links_length,
@@ -97,7 +97,7 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
                                      bad_phrase_enable_bits
                                      );
 
-  multiscanner_result_t content_links_find_result =
+  ifcmg::multiscanner::result_t content_links_find_result =
           multiscanner->find_in_data(
                                      content_links,
                                      content_links_length,
@@ -180,8 +180,6 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
 static PyObject *
 ifcmgkernel_scan_url(PyObject *self, PyObject *args)
 {
-  using namespace ifcmg;
-
   const char *hostname;
   size_t hostname_length;
   const char *link;
@@ -198,10 +196,10 @@ ifcmgkernel_scan_url(PyObject *self, PyObject *args)
                         ))
     return NULL;
 
-  multiscanner_categories_enable_t good_url_enable_bits;
-  multiscanner_categories_enable_t bad_url_enable_bits;
-  multiscanner_categories_enable_t postbad_url_enable_bits;
-  multiscanner_categories_enable_t bad_phrase_enable_bits;
+  ifcmg::multiscanner::categories_enable_t good_url_enable_bits;
+  ifcmg::multiscanner::categories_enable_t bad_url_enable_bits;
+  ifcmg::multiscanner::categories_enable_t postbad_url_enable_bits;
+  ifcmg::multiscanner::categories_enable_t bad_phrase_enable_bits;
 
   if (bad_categories_enable)
   {
@@ -210,7 +208,7 @@ ifcmgkernel_scan_url(PyObject *self, PyObject *args)
     bad_phrase_enable_bits.set_from_string(std::string(bad_categories_enable));
   }
 
-  multiscanner_result_t link_find_result =
+  ifcmg::multiscanner::result_t link_find_result =
           multiscanner->find_in_data(
                                      link,
                                      link_length,
@@ -289,8 +287,6 @@ ifcmgkernel_scan_url(PyObject *self, PyObject *args)
 static PyObject *
 ifcmgkernel_startup(PyObject *self, PyObject *args)
 {
-  using namespace ifcmg;
-
   const char *compiled_db_path;
   const char *uncompiled_db_path;
   if (!PyArg_ParseTuple(args, "ss", &compiled_db_path, &uncompiled_db_path))
@@ -299,9 +295,9 @@ ifcmgkernel_startup(PyObject *self, PyObject *args)
   if (multiscanner != 0)
     delete multiscanner;
 
-  multiscanner = new multiscanner_t(
-                                    filename_t(compiled_db_path),
-                                    filename_t(uncompiled_db_path)
+  multiscanner = new ifcmg::multiscanner::multiscanner_t(
+                                    ifcmg::filename_t(compiled_db_path),
+                                    ifcmg::filename_t(uncompiled_db_path)
                                     );
 
   return Py_BuildValue("");

@@ -26,7 +26,7 @@ static void usage()
     "\tifcmgtool_findmatch [compiled db dir] [non compiled db dir] [input test data] [output censored data]\n" );
 }
 
-void dump( multiscanner_result_t &find_result, const string_t &title )
+void dump( multiscanner::result_t &find_result, const string_t &title )
 {
   unsigned int i;
   
@@ -36,7 +36,7 @@ void dump( multiscanner_result_t &find_result, const string_t &title )
            find_result.get_total_good_url_match_count()
     );
   
-  for( i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+  for( i=0; i<multiscanner::MAX_CATEGORIES; ++i )
   {
     unsigned int count=find_result.get_good_url_match_count( i );
     if( count )
@@ -49,7 +49,7 @@ void dump( multiscanner_result_t &find_result, const string_t &title )
            find_result.get_total_bad_url_match_count()
     );
   
-  for( i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+  for( i=0; i<multiscanner::MAX_CATEGORIES; ++i )
   {
     unsigned int count=find_result.get_bad_url_match_count( i );
     if( count )
@@ -62,7 +62,7 @@ void dump( multiscanner_result_t &find_result, const string_t &title )
            find_result.get_total_bad_phrase_match_count()
     );
   
-  for( i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+  for( i=0; i<multiscanner::MAX_CATEGORIES; ++i )
   {
     unsigned int count=find_result.get_bad_phrase_match_count( i );
     if( count )
@@ -77,6 +77,7 @@ void dump( multiscanner_result_t &find_result, const string_t &title )
 
 int main( int argc, char **argv )
 {
+  using namespace ifcmg::multiscanner;
   if( argc<4 )
   {
     usage();
@@ -90,15 +91,15 @@ int main( int argc, char **argv )
   const filename_t output_censored_data_filename(argv[4]);
   
   dynbuf_t input_test_data( input_test_data_filename );
-  
+ 
   multiscanner_t ms( compiled_db_dir, non_compiled_db_dir);
-  
-  multiscanner_result_t find_result;
 
-  multiscanner_categories_enable_t good_url_enable_bits;
-  multiscanner_categories_enable_t bad_url_enable_bits;
-  multiscanner_categories_enable_t postbad_url_enable_bits;
-  multiscanner_categories_enable_t bad_phrase_enable_bits;
+  result_t find_result;
+
+  categories_enable_t good_url_enable_bits;
+  categories_enable_t bad_url_enable_bits;
+  categories_enable_t postbad_url_enable_bits;
+  categories_enable_t bad_phrase_enable_bits;
 
   find_result = ms.find_in_data(
     input_test_data.get_data(),

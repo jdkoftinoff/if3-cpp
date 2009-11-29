@@ -23,45 +23,28 @@ ALL RIGHTS RESERVED.
 
 namespace ifcmg
 {
-  enum { MULTISCANNER_MAX_CATEGORIES=64 };
-
-  inline
-  std::vector<string_t> &split(
-      const string_t &s,
-          char delim,
-          std::vector<string_t> &elems)
+  namespace multiscanner
   {
-    std::stringstream ss(s);
-    string_t item;
-    while(std::getline(ss, item, delim)) {
-        elems.push_back(item);
-    }
-    return elems;
-  }
+    enum
+    {
+      MAX_CATEGORIES=64,
+      MAX_MATCH_LEN=2048
+    };
 
-
-  inline
-  std::vector<string_t> split(const string_t &s, char delim) {
-      std::vector<string_t> elems;
-      return split(s, delim, elems);
-  }
-
-
-
-  class multiscanner_categories_enable_t
+  class categories_enable_t
   {
   public:
-    multiscanner_categories_enable_t()
+    categories_enable_t()
     {
-      for( int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( int i=0; i<MAX_CATEGORIES; ++i )
       {
         enabled[i]=true;
       }
     }
 
-    multiscanner_categories_enable_t( string_t cats )
+    categories_enable_t( string_t cats )
     {
-      for( int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( int i=0; i<MAX_CATEGORIES; ++i )
       {
         enabled[i]=false;
       }
@@ -70,7 +53,7 @@ namespace ifcmg
 
     void clear()
     {
-      for( int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( int i=0; i<MAX_CATEGORIES; ++i )
       {
         enabled[i]=false;
       }
@@ -78,11 +61,11 @@ namespace ifcmg
 
     void set_from_string( string_t cats )
     {
-      std::vector<string_t> items = split( cats, ',' );
+      std::vector<string_t> items = util::split( cats, ',' );
       for( std::vector<string_t>::iterator i=items.begin(); i!=items.end(); i++ )
       {
         int value = strtol( i->c_str(), 0, 10 );
-        if( value>0 && value<=MULTISCANNER_MAX_CATEGORIES )
+        if( value>0 && value<=MAX_CATEGORIES )
         {
           enabled[value-1] = true;
         }
@@ -92,21 +75,26 @@ namespace ifcmg
     bool is_enabled( int c ) const { return enabled[c]; }
 
   private:
-    bool enabled[MULTISCANNER_MAX_CATEGORIES];
+    bool enabled[MAX_CATEGORIES];
   };
 
-  class multiscanner_result_t
+  class result_t
   {
   public:
+    typedef std::list< std::pair< unsigned int, string_t > > match_container_t;
 
-    multiscanner_result_t()
+    result_t()
       :
+      good_url_matches(),
+      bad_url_matches(),
+      postbad_url_matches(),
+      bad_phrase_matches(),
       total_good_url_match_count(0),
       total_bad_url_match_count(0),
       total_postbad_url_match_count(0),
       total_bad_phrase_match_count(0)
     {
-      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
       {
         good_url_match_count[i] = 0;
         bad_url_match_count[i] = 0;
@@ -115,14 +103,18 @@ namespace ifcmg
       }
     }
 
-    multiscanner_result_t( const multiscanner_result_t &other )
+    result_t( const result_t &other )
       :
+      good_url_matches( other.good_url_matches),
+      bad_url_matches( other.bad_url_matches ),
+      postbad_url_matches( other.postbad_url_matches ),
+      bad_phrase_matches( other.bad_phrase_matches ),
       total_good_url_match_count( other.total_good_url_match_count ),
       total_bad_url_match_count( other.total_bad_url_match_count ),
       total_postbad_url_match_count( other.total_postbad_url_match_count ),
       total_bad_phrase_match_count( other.total_bad_phrase_match_count )
     {
-      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
       {
         good_url_match_count[i] = other.good_url_match_count[i];
         bad_url_match_count[i] = other.bad_url_match_count[i];
@@ -131,18 +123,43 @@ namespace ifcmg
       }
     }
 
+    const result_t & operator = ( const result_t &other )
+    {
+      good_url_matches = other.good_url_matches;
+      bad_url_matches = other.bad_url_matches;
+      postbad_url_matches = other.postbad_url_matches;
+      bad_phrase_matches = other.bad_phrase_matches;
+      total_good_url_match_count = other.total_good_url_match_count;
+      total_bad_url_match_count = other.total_bad_url_match_count;
+      total_postbad_url_match_count = other.total_postbad_url_match_count;
+      total_bad_phrase_match_count = other.total_bad_phrase_match_count;
 
-    ~multiscanner_result_t()
+      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
+      {
+        good_url_match_count[i] = other.good_url_match_count[i];
+        bad_url_match_count[i] = other.bad_url_match_count[i];
+        postbad_url_match_count[i] = other.postbad_url_match_count[i];
+        bad_phrase_match_count[i] = other.bad_phrase_match_count[i];
+      }
+      return *this;
+    }
+
+    ~result_t()
     {
     }
 
     void clear()
     {
+      good_url_matches.clear();
+      bad_url_matches.clear();
+      postbad_url_matches.clear();
+      bad_phrase_matches.clear();
+      
       total_good_url_match_count =0;
       total_bad_url_match_count =0;
       total_postbad_url_match_count =0;
       total_bad_phrase_match_count =0;
-      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
       {
         good_url_match_count[i] = 0;
         bad_url_match_count[i] = 0;
@@ -191,29 +208,64 @@ namespace ifcmg
       return bad_phrase_match_count[category];
     }
 
-    void add_good_url( unsigned int category )
+    void add_good_url( unsigned int category, const char *match_text=0 )
     {
       total_good_url_match_count++;
       good_url_match_count[ category ]++;
+      if( match_text )
+      {
+        good_url_matches.push_back(
+          std::make_pair( category, string_t(match_text) )
+          );
+      }
     }
 
-    void add_bad_url( unsigned int category )
+    void add_bad_url( unsigned int category, const char *match_text=0 )
     {
       total_bad_url_match_count++;
       bad_url_match_count[ category ]++;
+      if( match_text )
+      {
+        bad_url_matches.push_back(
+          std::make_pair( category, string_t(match_text) )
+          );
+      }
     }
 
-    void add_postbad_url( unsigned int category )
+    void add_postbad_url( unsigned int category, const char *match_text=0 )
     {
       total_postbad_url_match_count++;
       postbad_url_match_count[ category ]++;
+      if( match_text )
+      {
+        postbad_url_matches.push_back(
+          std::make_pair( category, string_t(match_text) )
+          );
+      }
     }
 
-    void add_bad_phrase( unsigned int category )
+    void add_bad_phrase( unsigned int category, const char *match_text=0 )
     {
       total_bad_phrase_match_count++;
       bad_phrase_match_count[ category ]++;
+      if( match_text )
+      {
+        bad_phrase_matches.push_back(
+          std::make_pair( category, string_t(match_text) )
+          );
+      }
+
     }
+
+    void print_matches( std::ostream &os, const char *title, const match_container_t &matches ) const
+    {
+      os << title << ":\n";
+      for(match_container_t::const_iterator i = matches.begin(); i!=matches.end(); ++i )
+      {
+        os << "\t" << i->first << "\t" << i->second << "\n";
+      }
+    }
+
 
     string_t to_string() const
     {
@@ -223,7 +275,7 @@ namespace ifcmg
       os << "total_bad_url_match_count = " << total_bad_url_match_count << "\n";
       os << "total_postbad_url_match_count = " << total_postbad_url_match_count << "\n";
       os << "total_bad_phrase_match_count = " << total_bad_phrase_match_count << "\n";
-      for( size_t i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( size_t i=0; i<MAX_CATEGORIES; ++i )
       {
         if( good_url_match_count[i] !=0 )
         {
@@ -243,11 +295,36 @@ namespace ifcmg
         }
       }
 
+      print_matches( os, "good url matches", get_good_url_matches() );
+      print_matches( os, "bad url matches", get_bad_url_matches() );
+      print_matches( os, "postbad url matches", get_postbad_url_matches() );
+      print_matches( os, "bad url matches", get_postbad_url_matches() );
+      
       return os.str();
     }
 
+    const match_container_t &get_good_url_matches() const
+    {
+      return good_url_matches;
+    }
+
+    const match_container_t &get_bad_url_matches() const
+    {
+      return bad_url_matches;
+    }
+
+    const match_container_t &get_postbad_url_matches() const
+    {
+      return postbad_url_matches;
+    }
+
+    const match_container_t &get_bad_phrase_matches() const
+    {
+      return bad_phrase_matches;
+    }
+
     friend
-    std::ostream & operator << ( std::ostream &os, const multiscanner_result_t &v )
+    std::ostream & operator << ( std::ostream &os, const result_t &v )
     {
       os << v.to_string();
       return os;
@@ -255,46 +332,58 @@ namespace ifcmg
 
   private:
 
+    match_container_t good_url_matches;
+    match_container_t bad_url_matches;
+    match_container_t postbad_url_matches;
+    match_container_t bad_phrase_matches;
+
     unsigned int total_good_url_match_count;
     unsigned int total_bad_url_match_count;
     unsigned int total_postbad_url_match_count;
     unsigned int total_bad_phrase_match_count;
-    unsigned int good_url_match_count[MULTISCANNER_MAX_CATEGORIES];
-    unsigned int bad_url_match_count[MULTISCANNER_MAX_CATEGORIES];
-    unsigned int postbad_url_match_count[MULTISCANNER_MAX_CATEGORIES];
-    unsigned int bad_phrase_match_count[MULTISCANNER_MAX_CATEGORIES];
+    unsigned int good_url_match_count[MAX_CATEGORIES];
+    unsigned int bad_url_match_count[MAX_CATEGORIES];
+    unsigned int postbad_url_match_count[MAX_CATEGORIES];
+    unsigned int bad_phrase_match_count[MAX_CATEGORIES];
   };
 
   template <class T>
-  class multiscanner_good_url_event_t  : public tree_event_t<T>
+  class good_url_event_t  : public tree_event_t<T>
   {
   public:
     typedef T tree_traits_t;
 
-    multiscanner_good_url_event_t( multiscanner_result_t &result_, unsigned int current_category_ )
+    good_url_event_t( result_t &result_, unsigned int current_category_ )
       :
       result( result_ ),
       current_category( current_category_ )
     {
     }
 
-    virtual void operator () ( const treebase_t<tree_traits_t> &tree, typename tree_traits_t::index_t match_item )
+    virtual void operator () (
+      const treebase_t<tree_traits_t> &tree,
+      typename tree_traits_t::index_t match_item
+    )
     {
-      result.add_good_url( current_category );
+      char match_text[MAX_MATCH_LEN]="";
+      tree.extract(match_text,MAX_MATCH_LEN,match_item);
+      match_text[MAX_MATCH_LEN-1] = '\0';
+
+      result.add_good_url( current_category, match_text );
     }
 
   private:
-    multiscanner_result_t &result;
+    result_t &result;
     int current_category;
   };
 
   template <class T>
-  class multiscanner_bad_url_event_t  : public tree_event_t<T>
+  class bad_url_event_t  : public tree_event_t<T>
   {
   public:
     typedef T tree_traits_t;
 
-    multiscanner_bad_url_event_t( multiscanner_result_t &result_, unsigned int current_category_ )
+    bad_url_event_t( result_t &result_, unsigned int current_category_ )
       :
       result( result_ ),
       current_category(current_category_)
@@ -307,17 +396,17 @@ namespace ifcmg
     }
 
   private:
-    multiscanner_result_t &result;
+    result_t &result;
     int current_category;
   };
 
   template <class T>
-  class multiscanner_postbad_url_event_t  : public tree_event_t<T>
+  class postbad_url_event_t  : public tree_event_t<T>
   {
   public:
     typedef T tree_traits_t;
 
-    multiscanner_postbad_url_event_t( multiscanner_result_t &result_, unsigned int current_category_ )
+    postbad_url_event_t( result_t &result_, unsigned int current_category_ )
       :
       result( result_ ),
       current_category(current_category_)
@@ -330,17 +419,17 @@ namespace ifcmg
     }
 
   private:
-    multiscanner_result_t &result;
+    result_t &result;
     int current_category;
   };
 
   template <class T>
-  class multiscanner_bad_phrase_event_t  : public tree_event_t<T>
+  class bad_phrase_event_t  : public tree_event_t<T>
   {
   public:
     typedef T tree_traits_t;
 
-    multiscanner_bad_phrase_event_t( multiscanner_result_t &result_, int current_category_ )
+    bad_phrase_event_t( result_t &result_, int current_category_ )
       :
       result( result_ ),
       current_category( current_category_)
@@ -353,7 +442,7 @@ namespace ifcmg
     }
 
   private:
-    multiscanner_result_t &result;
+    result_t &result;
     int current_category;
   };
 
@@ -372,7 +461,7 @@ namespace ifcmg
       util::fix_directory_name( compiled_dir_name );
       util::fix_directory_name( non_compiled_dir_name );
 
-      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
       {
         good_urls_precompiled[i] =
           load_url_scanner_precompiled(
@@ -434,7 +523,7 @@ namespace ifcmg
 
     virtual ~multiscanner_t()
     {
-      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
       {
         delete good_urls_precompiled[i];
         delete good_urls[i];
@@ -447,12 +536,12 @@ namespace ifcmg
       }
     }
 
-    multiscanner_result_t find_in_string(
+    result_t find_in_string(
       string_t str,
-      multiscanner_categories_enable_t const &good_url_enable_bits,
-      multiscanner_categories_enable_t const &bad_url_enable_bits,
-      multiscanner_categories_enable_t const &postbad_url_enable_bits,
-      multiscanner_categories_enable_t const &bad_phrase_enable_bits
+      categories_enable_t const &good_url_enable_bits,
+      categories_enable_t const &bad_url_enable_bits,
+      categories_enable_t const &postbad_url_enable_bits,
+      categories_enable_t const &bad_phrase_enable_bits
       )
     {
       return find_in_data(
@@ -465,30 +554,30 @@ namespace ifcmg
         );
     }
 
-    multiscanner_result_t find_in_data(
+    result_t find_in_data(
       const void *buf,
       int buf_len,
-      multiscanner_categories_enable_t const &good_url_enable_bits,
-      multiscanner_categories_enable_t const &bad_url_enable_bits,
-      multiscanner_categories_enable_t const &postbad_url_enable_bits,
-      multiscanner_categories_enable_t const &bad_phrase_enable_bits
+      categories_enable_t const &good_url_enable_bits,
+      categories_enable_t const &bad_url_enable_bits,
+      categories_enable_t const &postbad_url_enable_bits,
+      categories_enable_t const &bad_phrase_enable_bits
       )
     {
-      multiscanner_result_t result;
+      result_t result;
 
-      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
       {
         if( bad_url_enable_bits.is_enabled(i))
         {
           if( bad_urls_precompiled[i] )
           {
-            multiscanner_bad_url_event_t<tree_traits_url_mmap_t> event(result,i);
+            bad_url_event_t<tree_traits_url_mmap_t> event(result,i);
             bad_urls_precompiled[i]->find( buf, buf_len, event );
           }
 
           if( bad_urls[i] )
           {
-            multiscanner_bad_url_event_t<tree_traits_url_t> event(result,i);
+            bad_url_event_t<tree_traits_url_t> event(result,i);
             bad_urls[i]->find( buf, buf_len, event );
           }
         }
@@ -497,13 +586,13 @@ namespace ifcmg
         {
           if( good_urls_precompiled[i] )
           {
-            multiscanner_good_url_event_t<tree_traits_url_mmap_t> event(result,i);
+            good_url_event_t<tree_traits_url_mmap_t> event(result,i);
             good_urls_precompiled[i]->find( buf, buf_len, event );
           }
 
           if( good_urls[i] )
           {
-            multiscanner_good_url_event_t<tree_traits_url_t> event(result,i);
+            good_url_event_t<tree_traits_url_t> event(result,i);
             good_urls[i]->find( buf, buf_len, event );
           }
         }
@@ -512,13 +601,13 @@ namespace ifcmg
         {
           if( postbad_urls_precompiled[i] )
           {
-            multiscanner_postbad_url_event_t<tree_traits_url_mmap_t> event(result,i);
+            postbad_url_event_t<tree_traits_url_mmap_t> event(result,i);
             postbad_urls_precompiled[i]->find( buf, buf_len, event );
           }
 
           if( postbad_urls[i] )
           {
-            multiscanner_postbad_url_event_t<tree_traits_url_t> event(result,i);
+            postbad_url_event_t<tree_traits_url_t> event(result,i);
             postbad_urls[i]->find( buf, buf_len, event );
           }
         }
@@ -527,13 +616,13 @@ namespace ifcmg
         {
           if( bad_phrases_precompiled[i] )
           {
-            multiscanner_bad_phrase_event_t<tree_traits_alphanumeric_mmap_t> event(result,i);
+            bad_phrase_event_t<tree_traits_alphanumeric_mmap_t> event(result,i);
             bad_phrases_precompiled[i]->find( buf, buf_len, event );
           }
 
           if( bad_phrases[i] )
           {
-            multiscanner_bad_phrase_event_t<tree_traits_alphanumeric_t> event(result,i);
+            bad_phrase_event_t<tree_traits_alphanumeric_t> event(result,i);
             bad_phrases[i]->find( buf, buf_len, event );
           }
         }
@@ -545,9 +634,9 @@ namespace ifcmg
     string_t censor_in_string(
       string_t str,
       char censor_char,
-      multiscanner_categories_enable_t const &bad_url_enable_bits,
-      multiscanner_categories_enable_t const &postbad_url_enable_bits,
-      multiscanner_categories_enable_t const &bad_phrase_enable_bits
+      categories_enable_t const &bad_url_enable_bits,
+      categories_enable_t const &postbad_url_enable_bits,
+      categories_enable_t const &bad_phrase_enable_bits
       )
     {
       censor_in_data(
@@ -561,31 +650,31 @@ namespace ifcmg
       return str;
     }
 
-    multiscanner_result_t censor_in_data(
+    result_t censor_in_data(
       void *buf,
       int buf_len,
       char censor_char,
-      multiscanner_categories_enable_t const &bad_url_enable_bits,
-      multiscanner_categories_enable_t const &postbad_url_enable_bits,
-      multiscanner_categories_enable_t const &bad_phrase_enable_bits
+      categories_enable_t const &bad_url_enable_bits,
+      categories_enable_t const &postbad_url_enable_bits,
+      categories_enable_t const &bad_phrase_enable_bits
       )
     {
-      multiscanner_result_t result;
+      result_t result;
 
-      for( unsigned int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( unsigned int i=0; i<MAX_CATEGORIES; ++i )
       {
 
         if( bad_url_enable_bits.is_enabled(i))
         {
           if( bad_urls_precompiled[i] )
           {
-            multiscanner_bad_url_event_t<tree_traits_url_mmap_t> event(result,i);
+            bad_url_event_t<tree_traits_url_mmap_t> event(result,i);
             bad_urls_precompiled[i]->censor( buf, buf_len, event, censor_char );
           }
 
           if( bad_urls[i] )
           {
-            multiscanner_bad_url_event_t<tree_traits_url_t> event(result,i);
+            bad_url_event_t<tree_traits_url_t> event(result,i);
             bad_urls[i]->censor( buf, buf_len, event, censor_char );
           }
         }
@@ -594,13 +683,13 @@ namespace ifcmg
         {
           if( postbad_urls_precompiled[i] )
           {
-            multiscanner_postbad_url_event_t<tree_traits_url_mmap_t> event(result,i);
+            postbad_url_event_t<tree_traits_url_mmap_t> event(result,i);
             postbad_urls_precompiled[i]->censor( buf, buf_len, event, censor_char );
           }
 
           if( postbad_urls[i] )
           {
-            multiscanner_postbad_url_event_t<tree_traits_url_t> event(result,i);
+            postbad_url_event_t<tree_traits_url_t> event(result,i);
             postbad_urls[i]->censor( buf, buf_len, event, censor_char );
           }
         }
@@ -609,13 +698,13 @@ namespace ifcmg
         {
           if( bad_phrases_precompiled[i] )
           {
-            multiscanner_bad_phrase_event_t<tree_traits_alphanumeric_mmap_t> event(result,i);
+            bad_phrase_event_t<tree_traits_alphanumeric_mmap_t> event(result,i);
             bad_phrases_precompiled[i]->censor( buf, buf_len, event, censor_char );
           }
 
           if( bad_phrases[i] )
           {
-            multiscanner_bad_phrase_event_t<tree_traits_alphanumeric_t> event(result,i);
+            bad_phrase_event_t<tree_traits_alphanumeric_t> event(result,i);
             bad_phrases[i]->censor( buf, buf_len, event, censor_char );
           }
         }
@@ -704,17 +793,17 @@ namespace ifcmg
       return scanner;
     }
 
-    url_scanner_precompiled_t *good_urls_precompiled[MULTISCANNER_MAX_CATEGORIES];
-    url_scanner_t *good_urls[MULTISCANNER_MAX_CATEGORIES];
+    url_scanner_precompiled_t *good_urls_precompiled[MAX_CATEGORIES];
+    url_scanner_t *good_urls[MAX_CATEGORIES];
 
-    url_scanner_precompiled_t *bad_urls_precompiled[MULTISCANNER_MAX_CATEGORIES];
-    url_scanner_t *bad_urls[MULTISCANNER_MAX_CATEGORIES];
+    url_scanner_precompiled_t *bad_urls_precompiled[MAX_CATEGORIES];
+    url_scanner_t *bad_urls[MAX_CATEGORIES];
 
-    url_scanner_precompiled_t *postbad_urls_precompiled[MULTISCANNER_MAX_CATEGORIES];
-    url_scanner_t *postbad_urls[MULTISCANNER_MAX_CATEGORIES];
+    url_scanner_precompiled_t *postbad_urls_precompiled[MAX_CATEGORIES];
+    url_scanner_t *postbad_urls[MAX_CATEGORIES];
 
-    alphanumeric_scanner_precompiled_t *bad_phrases_precompiled[MULTISCANNER_MAX_CATEGORIES];
-    alphanumeric_scanner_t *bad_phrases[MULTISCANNER_MAX_CATEGORIES];
+    alphanumeric_scanner_precompiled_t *bad_phrases_precompiled[MAX_CATEGORIES];
+    alphanumeric_scanner_t *bad_phrases[MAX_CATEGORIES];
 
   };
 
@@ -736,32 +825,32 @@ namespace ifcmg
   public:
     results_histogram_t()
     {
-      for( int i=0; i< MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( int i=0; i< MAX_CATEGORIES; ++i )
       {
         m_category_sums[i] = 0;
       }
     }
 
-    void apply_good_results( const multiscanner_result_t &results )
+    void apply_good_results( const result_t &results )
     {
-      for( int i=0; i< MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( int i=0; i< MAX_CATEGORIES; ++i )
       {
         m_category_sums[i] += results.get_good_url_match_count(i);
       }
     }
 
-    void apply_bad_results( const multiscanner_result_t &results )
+    void apply_bad_results( const result_t &results )
     {
-      for( int i=0; i< MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( int i=0; i< MAX_CATEGORIES; ++i )
       {
         m_category_sums[i] += results.get_bad_phrase_match_count(i);
         m_category_sums[i] += results.get_bad_url_match_count(i);
       }
     }
 
-    void apply_postbad_results( const multiscanner_result_t &results )
+    void apply_postbad_results( const result_t &results )
     {
-      for( int i=0; i< MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( int i=0; i< MAX_CATEGORIES; ++i )
       {
         m_category_sums[i] += results.get_postbad_url_match_count(i);
       }
@@ -773,7 +862,7 @@ namespace ifcmg
       int category = -1;
       int value = 0;
 
-      for( int i=0; i<MULTISCANNER_MAX_CATEGORIES; ++i )
+      for( int i=0; i<MAX_CATEGORIES; ++i )
       {
         if (m_category_sums[i] >= value && m_category_sums[i]>0)
         {
@@ -790,7 +879,7 @@ namespace ifcmg
       int category = -1;
       int value = 0;
 
-      for( int i=MULTISCANNER_MAX_CATEGORIES-1; i>=0; --i )
+      for( int i=MAX_CATEGORIES-1; i>=0; --i )
       {
         if (m_category_sums[i] >= value && m_category_sums[i]>0)
         {
@@ -802,7 +891,7 @@ namespace ifcmg
     }
 
   private:
-    int m_category_sums[ MULTISCANNER_MAX_CATEGORIES ];
+    int m_category_sums[ MAX_CATEGORIES ];
   };
 
   class ifcmgkernel_t
@@ -899,9 +988,9 @@ namespace ifcmg
                   string_t bad_categories_enable
                   )
     {
-      multiscanner_categories_enable_t good_categories_enable_bits( good_categories_enable );
-      multiscanner_categories_enable_t bad_categories_enable_bits( bad_categories_enable );
-      multiscanner_result_t result;
+      categories_enable_t good_categories_enable_bits( good_categories_enable );
+      categories_enable_t bad_categories_enable_bits( bad_categories_enable );
+      result_t result;
 
       result = m_multiscanner->find_in_data(
                                             data, data_len,
@@ -1028,28 +1117,28 @@ namespace ifcmg
                                                                           m_uncompiled_db_path,
                                                                           m_compiled_db_path,
                                                                           "goodurl",
-                                                                          MULTISCANNER_MAX_CATEGORIES
+                                                                          MAX_CATEGORIES
                                                                           );
 
       count+=compile_files<tree_traits_url_t,pattern_expander_standard_t>(
                                                                           m_uncompiled_db_path,
                                                                           m_compiled_db_path,
                                                                           "badurl",
-                                                                          MULTISCANNER_MAX_CATEGORIES
+                                                                          MAX_CATEGORIES
                                                                           );
 
       count+=compile_files<tree_traits_url_t,pattern_expander_standard_t>(
                                                                           m_uncompiled_db_path,
                                                                           m_compiled_db_path,
                                                                           "postbadurl",
-                                                                          MULTISCANNER_MAX_CATEGORIES
+                                                                          MAX_CATEGORIES
                                                                           );
 
       count+=compile_files<tree_traits_alphanumeric_t,pattern_expander_standard_t>(
                                                                                    m_uncompiled_db_path,
                                                                                    m_compiled_db_path,
                                                                                    "badphr",
-                                                                                   MULTISCANNER_MAX_CATEGORIES
+                                                                                   MAX_CATEGORIES
                                                                                    );
     }
 
@@ -1059,6 +1148,7 @@ namespace ifcmg
     int m_safe_category;
     int m_unknown_category;
   };
+  }
 }
 
 #endif
