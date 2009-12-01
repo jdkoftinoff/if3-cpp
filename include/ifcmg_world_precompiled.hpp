@@ -107,6 +107,7 @@
 # include <iostream>
 # include <sstream>
 # include <list>
+# include <valarray>
 # include <vector>
 # include <algorithm>
 # include <exception>

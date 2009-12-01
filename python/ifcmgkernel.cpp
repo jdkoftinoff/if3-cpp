@@ -3,21 +3,19 @@
 #include "ifcmg_world.hpp"
 #include "ifcmg_tree.hpp"
 #include "ifcmg_multiscanner.hpp"
+#include "ifcmg_kernel.hpp"
 #include "ifcmg_dynbuf.hpp"
 
 static PyObject *ifcmgkernel_startup(PyObject *self, PyObject *args);
 static PyObject *ifcmgkernel_run_scan(PyObject *self, PyObject *args);
-static PyObject *ifcmgkernel_scan_url(PyObject *self, PyObject *args);
 
 static PyMethodDef IfcmgkernelMethods[] = {
   {"run_scan", ifcmgkernel_run_scan, METH_VARARGS, "run scan on data"},
   {"startup", ifcmgkernel_startup, METH_VARARGS, "start up the filter tables"},
-  {"scan_url", ifcmgkernel_scan_url, METH_VARARGS, "run scan on URL"},
   {NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-static ifcmg::multiscanner::ifcmgkernel_t *ifcmgkernel = 0;
-static ifcmg::multiscanner::multiscanner_t *multiscanner = 0;
+static ifcmg::kernel::kernel_t *kernel=0;
 
 
 PyMODINIT_FUNC
@@ -29,6 +27,9 @@ initifcmgkernel(void)
 static PyObject *
 ifcmgkernel_run_scan(PyObject *self, PyObject *args)
 {
+  const char *hostname;
+  size_t hostname_length;
+  
   const char *link;
   size_t link_length;
 
@@ -41,263 +42,67 @@ ifcmgkernel_run_scan(PyObject *self, PyObject *args)
   const char *content_links;
   size_t content_links_length;
 
-  const char *bad_categories_enable = 0;
+  const char *categories_enable = 0;
 
   int accessed = 0;
   int category = 0;
   int ad_tags_found = 0;
 
-  if (!PyArg_ParseTuple(args, "s#s#s#s#|s",
+  if (!PyArg_ParseTuple(args, "s#s#s#s#s#|s",
+                        &hostname, &hostname_length,
                         &link, &link_length, &text, &text_length,
                         &links, &links_length,
                         &content_links, &content_links_length,
-                        bad_categories_enable
+                        categories_enable
                         ))
     return NULL;
 
-  ifcmg::multiscanner::categories_enable_t good_url_enable_bits;
-  ifcmg::multiscanner::categories_enable_t bad_url_enable_bits;
-  ifcmg::multiscanner::categories_enable_t postbad_url_enable_bits;
-  ifcmg::multiscanner::categories_enable_t bad_phrase_enable_bits;
+  ifcmg::kernel::categories_enable_t categories_enable_bits;
 
-  if (bad_categories_enable)
+  if (categories_enable)
   {
-    bad_url_enable_bits.set_from_string(std::string(bad_categories_enable));
-    postbad_url_enable_bits.set_from_string(std::string(bad_categories_enable));
-    bad_phrase_enable_bits.set_from_string(std::string(bad_categories_enable));
+    categories_enable_bits.set_from_string(std::string(categories_enable));
   }
 
-  ifcmg::multiscanner::result_t link_find_result =
-          multiscanner->find_in_data(
-                                     link,
-                                     link_length,
-                                     good_url_enable_bits,
-                                     bad_url_enable_bits,
-                                     postbad_url_enable_bits,
-                                     bad_phrase_enable_bits
-                                     );
+  ifcmg::kernel::full_scan_request_t request;
+  ifcmg::kernel::full_scan_results_t results;
 
-  ifcmg::multiscanner::result_t text_find_result =
-          multiscanner->find_in_data(
-                                     text,
-                                     text_length,
-                                     good_url_enable_bits,
-                                     bad_url_enable_bits,
-                                     postbad_url_enable_bits,
-                                     bad_phrase_enable_bits
-                                     );
+  category = kernel->perform_scan(results,request,categories_enable_bits,true);
 
-  ifcmg::multiscanner::result_t links_find_result =
-          multiscanner->find_in_data(
-                                     links,
-                                     links_length,
-                                     good_url_enable_bits,
-                                     bad_url_enable_bits,
-                                     postbad_url_enable_bits,
-                                     bad_phrase_enable_bits
-                                     );
-
-  ifcmg::multiscanner::result_t content_links_find_result =
-          multiscanner->find_in_data(
-                                     content_links,
-                                     content_links_length,
-                                     good_url_enable_bits,
-                                     bad_url_enable_bits,
-                                     postbad_url_enable_bits,
-                                     bad_phrase_enable_bits
-                                     );
-
-  if (text_length < 100)
+  if( text_length + links_length + content_links_length > 1000 )
   {
-    accessed = 0;
-    category=35;
+    accessed=1;
   }
-  else
-  {
-    accessed = 1;
-    category = -1;
-    ad_tags_found = 0;
-
-    int total_bad = 0;
-    total_bad += link_find_result.get_total_bad_url_match_count();
-    total_bad += link_find_result.get_total_postbad_url_match_count();
-    total_bad += link_find_result.get_total_bad_phrase_match_count();
-
-    total_bad += text_find_result.get_total_bad_phrase_match_count();
-
-    total_bad += content_links_find_result.get_total_bad_url_match_count();
-    total_bad += content_links_find_result.get_total_postbad_url_match_count();
-    total_bad += content_links_find_result.get_total_bad_phrase_match_count();
-
-    // find largest category
-
-    int category_sums[64];
-
-    for (int i = 0; i < 64; ++i)
-    {
-      category_sums[i] = 0;
-      category_sums[i] += link_find_result.get_bad_phrase_match_count(i);
-      category_sums[i] += link_find_result.get_bad_url_match_count(i);
-      category_sums[i] += text_find_result.get_bad_phrase_match_count(i);
-      category_sums[i] += text_find_result.get_bad_url_match_count(i);
-      category_sums[i] += content_links_find_result.get_bad_phrase_match_count(i);
-      category_sums[i] += content_links_find_result.get_bad_url_match_count(i);
-    }
-
-    int largest_category = -1;
-    int largest_category_value = 0;
-
-    for (int i = 0; i < 64; ++i)
-    {
-      if (category_sums[i] >= largest_category_value && category_sums[i]>0)
-      {
-        largest_category = i;
-        largest_category_value = category_sums[i];
-      }
-    }
-
-    if (largest_category == -1)
-    {
-      category = -1;
-    }
-    else
-    {
-      category = largest_category;
-
-      if (total_bad > 0)
-      {
-        accessed = 2;
-      }
-
-    }
-
-  }
-
+  
+  std::cerr << results << "\n";
+  
   return Py_BuildValue("iii", accessed, category+1, ad_tags_found);
 }
 
 
-static PyObject *
-ifcmgkernel_scan_url(PyObject *self, PyObject *args)
-{
-  const char *hostname;
-  size_t hostname_length;
-  const char *link;
-  size_t link_length;
-
-  const char *bad_categories_enable = 0;
-
-  int category = 0;
-
-  if (!PyArg_ParseTuple(args, "s#s#|s",
-                        &hostname, &hostname_length,
-                        &link, &link_length,
-                        bad_categories_enable
-                        ))
-    return NULL;
-
-  ifcmg::multiscanner::categories_enable_t good_url_enable_bits;
-  ifcmg::multiscanner::categories_enable_t bad_url_enable_bits;
-  ifcmg::multiscanner::categories_enable_t postbad_url_enable_bits;
-  ifcmg::multiscanner::categories_enable_t bad_phrase_enable_bits;
-
-  if (bad_categories_enable)
-  {
-    bad_url_enable_bits.set_from_string(std::string(bad_categories_enable));
-    postbad_url_enable_bits.set_from_string(std::string(bad_categories_enable));
-    bad_phrase_enable_bits.set_from_string(std::string(bad_categories_enable));
-  }
-
-  ifcmg::multiscanner::result_t link_find_result =
-          multiscanner->find_in_data(
-                                     link,
-                                     link_length,
-                                     good_url_enable_bits,
-                                     bad_url_enable_bits,
-                                     postbad_url_enable_bits,
-                                     bad_phrase_enable_bits
-                                     );
-
-  category = -1;
-
-  int total_bad = 0;
-  total_bad += link_find_result.get_total_bad_url_match_count();
-  total_bad += link_find_result.get_total_postbad_url_match_count();
-  total_bad += link_find_result.get_total_bad_phrase_match_count();
-
-  int total_good = link_find_result.get_total_good_url_match_count();
-
-  // find largest category
-
-  int bad_category_sums[64];
-  int good_category_sums[64];
-
-  for (int i = 0; i < 64; ++i)
-  {
-    bad_category_sums[i] = 0;
-    bad_category_sums[i] += link_find_result.get_bad_phrase_match_count(i);
-    bad_category_sums[i] += link_find_result.get_bad_url_match_count(i);
-    bad_category_sums[i] += link_find_result.get_postbad_url_match_count(i);
-    bad_category_sums[i] += link_find_result.get_bad_phrase_match_count(i);
-    good_category_sums[i] = 0;
-    good_category_sums[i] += link_find_result.get_good_url_match_count(i);
-  }
-
-  int largest_bad_category = -1;
-  int largest_bad_category_value = 0;
-
-  for (int i = 0; i < 64; ++i)
-  {
-    if (bad_category_sums[i] >= largest_bad_category_value && bad_category_sums[i]>0)
-    {
-      largest_bad_category = i;
-      largest_bad_category_value = bad_category_sums[i];
-    }
-  }
-
-  int largest_good_category = -1;
-  int largest_good_category_value = 0;
-
-  for (int i = 0; i < 64; ++i)
-  {
-    if (good_category_sums[i] >= largest_good_category_value && good_category_sums[i]>0)
-    {
-      largest_good_category = i;
-      largest_good_category_value = good_category_sums[i];
-    }
-  }
-
-  if( total_good>0 && total_bad==0 )
-  {
-    category = largest_good_category;
-  }
-  else if( total_good==0 && total_bad>0 )
-  {
-    category = largest_bad_category;
-  }
-
-  if( total_good==0 && total_bad == 0 )
-  {
-    category = 35;
-  }
-
-  return Py_BuildValue("i", category+1 );
-}
 
 static PyObject *
 ifcmgkernel_startup(PyObject *self, PyObject *args)
 {
-  const char *compiled_db_path;
-  const char *uncompiled_db_path;
-  if (!PyArg_ParseTuple(args, "ss", &compiled_db_path, &uncompiled_db_path))
+  const char *compiled_hostname_filename;
+  const char *compiled_url_filename;
+  const char *compiled_alphanumeric_filename;
+
+  if (!PyArg_ParseTuple(args, "sss", 
+                        &compiled_hostname_filename,
+                        &compiled_url_filename,
+                        &compiled_alphanumeric_filename ) )
+  {
     return NULL;
+  }
+  
+  if (kernel != 0)
+    delete kernel;
 
-  if (multiscanner != 0)
-    delete multiscanner;
-
-  multiscanner = new ifcmg::multiscanner::multiscanner_t(
-                                    ifcmg::filename_t(compiled_db_path),
-                                    ifcmg::filename_t(uncompiled_db_path)
+  kernel = new ifcmg::kernel::kernel_t(
+                                    ifcmg::filename_t(compiled_hostname_filename),
+                                    ifcmg::filename_t(compiled_url_filename),
+                                    ifcmg::filename_t(compiled_alphanumeric_filename)
                                     );
 
   return Py_BuildValue("");

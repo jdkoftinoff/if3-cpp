@@ -24,6 +24,16 @@ namespace ifcmg
   namespace util
   {
 
+    template <typename T1, typename T2>
+    inline T1 lexical_cast( const T2 v )
+    {
+      std::stringstream ss;
+      ss << v;
+      T1 r;
+      ss >> r;
+      return r;
+    }
+
     bool formpath(
                   string_t &dest,
                   string_t const &path,
@@ -75,8 +85,8 @@ namespace ifcmg
 
     inline filename_t &
     fix_directory_name(
-     filename_t &d
-     )
+                       filename_t &d
+                       )
     {
       // if path does not end in '/' or '\\' then append appropriate path sep char      
       int len = d.length();
@@ -160,9 +170,9 @@ namespace ifcmg
     inline
     std::vector<string_t> &
     split(
-     const string_t &s,
-     char delim,
-     std::vector<string_t> &elems)
+          const string_t &s,
+          char delim,
+          std::vector<string_t> &elems)
     {
       std::stringstream ss(s);
       string_t item;

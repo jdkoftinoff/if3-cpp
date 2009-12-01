@@ -121,7 +121,7 @@ namespace ifcmg
   
   typedef scanner_precompiled_t<tree_traits_url_mmap_t> url_scanner_precompiled_t;
   typedef scanner_precompiled_t<tree_traits_alphanumeric_mmap_t> alphanumeric_scanner_precompiled_t;
-  
-#endif
-  
+
 }
+
+#endif
