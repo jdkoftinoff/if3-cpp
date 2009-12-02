@@ -51,7 +51,7 @@ class SimpleRedirector(tornado.web.RequestHandler):
     
     fil = "bw"
     gotit = False
-    logline = referer_url.geturl() + " " + str(result) + "\n"
+    logline = referer + "\t" + str(result) + "\n"
     if result == 0:
       fil = "gw"
       self.log_known_good.write(logline)
