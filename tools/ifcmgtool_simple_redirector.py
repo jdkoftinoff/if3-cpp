@@ -21,6 +21,16 @@ class HealthCheck(tornado.web.RequestHandler):
     self.set_header("Content-Type","text/plain")
     self.write("Good")
 
+class AutoRedirector(tornado.web.RequestHandler):
+  def get(self):
+      self.redirect("http://ad2.adsovo.com" + self.request.uri)
+  def post(self):
+      self.redirect("http://ad2.adsovo.com" + self.request.uri)      
+      
+#  self.set_header("Content-Type","text/plain")
+#  self.write("uri = %s\n" % (self.request.uri) )
+    
+    
 class SimpleRedirector(tornado.web.RequestHandler):
   def get(self):
     ad_type = self.get_argument("ad_type")
@@ -63,7 +73,7 @@ class SimpleRedirector(tornado.web.RequestHandler):
       self.write("redirection to : " + redirect_to + "\n")
       self.write("proof is : \n" + proof + "\n")
     else:
-      self.redirect("http://ad2.adsovo.com" + self.request.uri)
+      self.redirect( redirect_to )
 
 def main():
   cmg_home = '/opt/cmg'
@@ -81,6 +91,7 @@ def main():
     (r"/health", HealthCheck ),
 	  (r"/st", SimpleRedirector ),
     (r"/favicon.ico", FavIcon ),
+    (r"/.*", AutoRedirector ),
   ])
   http_server = tornado.httpserver.HTTPServer(application)
   http_server.listen(options.port)
