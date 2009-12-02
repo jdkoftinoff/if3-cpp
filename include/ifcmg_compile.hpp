@@ -1,5 +1,5 @@
 /*
-  
+
 The IF Contextual Media Group Kernel Version 3
 Source Code
 
@@ -110,8 +110,8 @@ namespace ifcmg
                          const filename_t &source_dir_,
                          const filename_t &dest_file_,
                          const char *middle_part,
-                         int first_category = 0,
-                         int last_category = 64
+                         int first_category,
+                         int last_category
                          )
   {
     int success_count = 0;
@@ -153,6 +153,32 @@ namespace ifcmg
     return success_count;
   }
 
+
+  inline int
+  compile_url_files_into_one(
+                             const filename_t &source_dir,
+                             const filename_t &dest_file,
+                             const char *middle_part,
+                             int first_category,
+                             int last_category
+                             )
+  {
+    return compile_files_into_one<tree_traits_url_t,pattern_expander_standard_t>( source_dir, dest_file, middle_part, first_category, last_category );
+
+  }
+
+  inline int
+  compile_phrase_files_into_one(
+                                const filename_t &source_dir,
+                                const filename_t &dest_file,
+                                const char *middle_part,
+                                int first_category,
+                                int last_category
+                                )
+  {
+    return compile_files_into_one<tree_traits_alphanumeric_t,pattern_expander_standard_t>( source_dir, dest_file, middle_part, first_category, last_category );
+
+  }
 
 }
 
