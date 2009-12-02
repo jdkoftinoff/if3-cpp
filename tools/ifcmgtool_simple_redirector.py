@@ -37,11 +37,10 @@ class SimpleRedirector(tornado.web.RequestHandler):
     ad_type = self.get_argument("ad_type")
     ad_size = self.get_argument("ad_size")
     section = self.get_argument("section")
-    referer=""
+    referer= self.get_argument("q","")
     trace = int(self.get_argument("t","0"))
     if self.request.headers.has_key("referer"):
       referer = self.request.headers["referer"]
-    referer = self.get_argument("q",referer)
     referer_url = urlparse.urlsplit(referer)
     
     r=ifcmgkernel.scan_url(trace,referer_url.netloc, referer_url.geturl())
