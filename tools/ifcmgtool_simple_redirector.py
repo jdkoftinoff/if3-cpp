@@ -58,12 +58,15 @@ class SimpleRedirector(tornado.web.RequestHandler):
       self.redirect("http://ad2.adsovo.com" + self.request.uri)
 
 def main():
-  CMG_PREFIX = '/usr'
-  if os.environ.has_key('CMG_PREFIX'):
-    CMG_PREFIX = os.environ['CMG_PREFIX']
-  precompiled_path = CMG_PREFIX + '/share/ifcmgdb-pre'
-  noncompiled_path = CMG_PREFIX + '/share/ifcmgdb-non'
-  ifcmgkernel.startup( precompiled_path, noncompiled_path)
+  cmg_home = '/usr/cmg'
+  if os.environ.has_key('CMG_HOME'):
+    cmg_home = os.environ['CMG_HOME']
+  precompiled_path = os.path.join( cmg_home, 'share/ifcmgdb-pre' )
+  ifcmgkernel.startup( 
+    os.path.join(precompiled_path,'hostnames.pre'),
+    os.path.join(precompiled_path,'urls.pre'),
+    os.path.join(precompiled_path,'phrases.pre')
+    )
   
   tornado.options.parse_command_line()
   application = tornado.web.Application([
@@ -77,3 +80,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    ifcmgkernel.shutdown()
+    

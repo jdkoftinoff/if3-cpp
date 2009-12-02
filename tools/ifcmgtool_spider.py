@@ -304,11 +304,11 @@ def spider_on_url( domain_to_scan, pages_to_scan, verbose ):
 
 
 def main():
-  CMG_PREFIX = '/usr'
-  if os.environ.has_key('CMG_PREFIX'):
-    CMG_PREFIX = os.environ['CMG_PREFIX']
-  precompiled_path = CMG_PREFIX + '/share/ifcmgdb-pre'
-  noncompiled_path = CMG_PREFIX + '/share/ifcmgdb-non'
+  cmg_home = '/usr/cmg'
+  if os.environ.has_key('CMG_HOME'):
+    cmg_home = os.environ['CMG_HOME']
+  precompiled_path = os.path.join( cmg_home, 'share/ifcmgdb-pre' )
+
   domain_to_scan = None
   pages_to_scan = 10
     
@@ -331,7 +331,11 @@ def main():
   if len(sys.argv) > 4:
     noncompiled_path = sys.argv[3]
 
-  ifcmgkernel.startup( precompiled_path, noncompiled_path)
+  ifcmgkernel.startup( 
+    os.path.join(precompiled_path,'hostnames.pre'),
+    os.path.join(precompiled_path,'urls.pre'),
+    os.path.join(precompiled_path,'phrases.pre')
+    )
 
 #  if pages_to_scan == 0:
 #    print("link\turlcategory")
@@ -345,3 +349,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    ifcmgkernel.shutdown()
+  
