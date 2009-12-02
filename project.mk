@@ -48,13 +48,13 @@ LDLIBS_POSIX+=-lssl -lcrypto
 CONFIG_TOOLS+=$(BOOST_CONFIG) $(JDKS2K9_CONFIG) $(SOCI_CONFIG)
 
 ifeq ($(PROJECT_VARIANT),debian)
-TARGET_DIR_STYLE=debian
+#TARGET_DIR_STYLE=debian
 #PACKAGE_CHOWN?=root:root
 PACKAGE_CHMOD?=go-rw,u+rwX
 endif
 
 ifeq ($(PROJECT_VARIANT),ubuntu)
-TARGET_DIR_STYLE=ubuntu
+#TARGET_DIR_STYLE=ubuntu
 #PACKAGE_CHOWN?=root:root
 PACKAGE_CHMOD?=go-rw,u+rwX
 endif
