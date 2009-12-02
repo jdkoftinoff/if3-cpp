@@ -1,6 +1,6 @@
 #! /bin/bash
 
-CMG_PREFIX=${CMG_PREFIX:-/usr}
+CMG_HOME=${CMG_HOME:-/opt/cmg}
 
-$CMG_PREFIX/bin/ifcmgtool_compile_all $CMG_PREFIX/share/ifcmgdb $CMG_PREFIX/share/ifcmgdb-pre
+"$CMG_HOME/bin/ifcmgtool_compile_all" "$CMG_HOME/share/ifcmgdb" "$CMG_HOME/share/ifcmgdb-pre"
  

@@ -47,7 +47,7 @@ int main( int argc, char **argv )
     filename_t src_dir( argv[1] );
     filename_t dest_dir( argv[2] );    
     util::fix_directory_name( dest_dir );
-    mkdir( dest_dir.c_str() );
+    mkdir( dest_dir.c_str(), 0750 );
     int count=0;
 
     filename_t output_filename;
