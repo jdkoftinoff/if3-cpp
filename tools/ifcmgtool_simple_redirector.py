@@ -68,7 +68,7 @@ class SimpleRedirector(tornado.web.RequestHandler):
       gotit = True
 
     if gotit != True:
-      self.log.unknown.write(logline)
+      self.log_unknown.write(logline)
 
     params = {
       'ad_type' : ad_type,
