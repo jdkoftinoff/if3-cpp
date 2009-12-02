@@ -8,6 +8,7 @@ import tornado.web
 from tornado.options import define, options
 import urllib
 import ifcmgkernel
+import urlparse
 
 define("port", default=8080, help="run port", type=int)
 
@@ -26,11 +27,17 @@ class SimpleRedirector(tornado.web.RequestHandler):
     ad_size = self.get_argument("ad_size")
     section = self.get_argument("section")
     referer=""
-    trace = self.get_argument("t","0")
+    trace = int(self.get_argument("t","0"))
     if self.request.headers.has_key("referer"):
       referer = self.request.headers["referer"]
     referer = self.get_argument("q",referer)
-    result=ifcmgkernel.scan_url(referer)
+    referer_url = urlparse.urlsplit(referer)
+    
+    r=ifcmgkernel.scan_url(trace,referer_url.netloc, referer_url.geturl())
+
+    result = r[0]
+    proof = r[1]
+    
     fil = "bw"
     if result == 0:
       fil = "gw"
@@ -46,7 +53,7 @@ class SimpleRedirector(tornado.web.RequestHandler):
     }
      
     redirect_to ="http://ad2.adsovo.com/st?" + urllib.urlencode(params)
-    if trace == "1": 
+    if trace == 1: 
       self.set_header("Content-Type","text/plain")
       self.write("uri = %s\n" % (self.request.uri) )
       self.write("ad_type = " + ad_type + "\n" )
@@ -54,11 +61,12 @@ class SimpleRedirector(tornado.web.RequestHandler):
       self.write("section = " + section + "\n" )
       self.write("referer was: " + referer + "\n")
       self.write("redirection to : " + redirect_to + "\n")
+      self.write("proof is : \n" + proof + "\n")
     else:
       self.redirect("http://ad2.adsovo.com" + self.request.uri)
 
 def main():
-  cmg_home = '/usr/cmg'
+  cmg_home = '/opt/cmg'
   if os.environ.has_key('CMG_HOME'):
     cmg_home = os.environ['CMG_HOME']
   precompiled_path = os.path.join( cmg_home, 'share/ifcmgdb-pre' )

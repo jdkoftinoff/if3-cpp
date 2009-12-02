@@ -3,9 +3,11 @@
 import os
 import sys
 import ifcmgkernel
+import urlparse
+
 
 def main():
-  cmg_home = '/usr/cmg'
+  cmg_home = '/opt/cmg'
   if os.environ.has_key('CMG_HOME'):
     cmg_home = os.environ['CMG_HOME']
   precompiled_path = os.path.join( cmg_home, 'share/ifcmgdb-pre' )
@@ -15,7 +17,9 @@ def main():
     os.path.join(precompiled_path,'phrases.pre')
     )
   
-  print ifcmgkernel.scan_url( sys.argv[1] )
+  url = urlparse.urlsplit( sys.argv[1] )
+  
+  print ifcmgkernel.scan_url( 1, url.netloc, url.geturl() )
 
 if __name__ == "__main__":
     main()

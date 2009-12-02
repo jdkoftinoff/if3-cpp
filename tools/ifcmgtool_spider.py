@@ -304,7 +304,7 @@ def spider_on_url( domain_to_scan, pages_to_scan, verbose ):
 
 
 def main():
-  cmg_home = '/usr/cmg'
+  cmg_home = '/opt/cmg'
   if os.environ.has_key('CMG_HOME'):
     cmg_home = os.environ['CMG_HOME']
   precompiled_path = os.path.join( cmg_home, 'share/ifcmgdb-pre' )

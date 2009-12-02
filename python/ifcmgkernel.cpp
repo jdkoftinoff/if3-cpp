@@ -52,11 +52,18 @@ ifcmgkernel_startup(PyObject *self, PyObject *args)
   if (kernel != 0)
     delete kernel;
 
-  kernel = new ifcmg::kernel::kernel_t(
-                                    ifcmg::filename_t(compiled_hostname_filename),
-                                    ifcmg::filename_t(compiled_url_filename),
-                                    ifcmg::filename_t(compiled_alphanumeric_filename)
-                                    );
+  try
+  {
+    kernel = new ifcmg::kernel::kernel_t(
+                                         ifcmg::filename_t(compiled_hostname_filename),
+                                         ifcmg::filename_t(compiled_url_filename),
+                                         ifcmg::filename_t(compiled_alphanumeric_filename)
+                                         );
+  }
+  catch( std::exception &e )
+  {
+    PyErr_SetString( PyExc_RuntimeError, e.what() );
+  }
 
   return Py_BuildValue("");
 }
@@ -89,15 +96,25 @@ ifcmgkernel_compile_url_files(PyObject *self, PyObject *args)
     return NULL;
   }
 
-  int count = ifcmg::compile_url_files_into_one(
-                                                ifcmg::filename_t(source_dir),
-                                                ifcmg::filename_t(dest_file),
-                                                middle_part,
-                                                first_category,
-                                                last_category
-                                                );
+  int count = 0;
 
-  return Py_BuildValue("i",count);
+  try
+  {
+    count = ifcmg::compile_url_files_into_one(
+                                              ifcmg::filename_t(source_dir),
+                                              ifcmg::filename_t(dest_file),
+                                              middle_part,
+                                              first_category,
+                                              last_category
+                                              );
+    return Py_BuildValue("i", count );
+  }
+  catch( std::exception &e )
+  {
+    PyErr_SetString( PyExc_RuntimeError, e.what() );
+  }
+
+  return 0;
 }
 
 static PyObject *
@@ -119,15 +136,23 @@ ifcmgkernel_compile_phrase_files(PyObject *self, PyObject *args)
     return NULL;
   }
 
-  int count = ifcmg::compile_phrase_files_into_one(
-                                                   ifcmg::filename_t(source_dir),
-                                                   ifcmg::filename_t(dest_file),
-                                                   middle_part,
-                                                   first_category,
-                                                   last_category
-                                                   );
-
-  return Py_BuildValue("i",count);
+  int count = 0;
+  try
+  {
+    count = ifcmg::compile_phrase_files_into_one(
+                                                 ifcmg::filename_t(source_dir),
+                                                 ifcmg::filename_t(dest_file),
+                                                 middle_part,
+                                                 first_category,
+                                                 last_category
+                                                 );
+    return Py_BuildValue("i",count);
+  }
+  catch( std::exception &e )
+  {
+    PyErr_SetString( PyExc_RuntimeError, e.what() );
+  }
+  return 0;
 }
 
 
@@ -169,33 +194,41 @@ ifcmgkernel_scan_data(PyObject *self, PyObject *args)
 
   enable_proof = (enable_proof_int!=0);
 
-  ifcmg::kernel::categories_enable_t categories_enable_bits;
-
-  if (categories_enable)
+  try
   {
-    categories_enable_bits.set_from_string(std::string(categories_enable));
+    ifcmg::kernel::categories_enable_t categories_enable_bits;
+
+    if (categories_enable)
+    {
+      categories_enable_bits.set_from_string(std::string(categories_enable));
+    }
+
+    ifcmg::kernel::full_scan_request_t request;
+    ifcmg::kernel::full_scan_results_t results;
+
+    request.hostname( hostname, hostname_length );
+    request.link( link, link_length );
+    request.text( text, text_length );
+    request.links( links, links_length );
+    request.content_links( content_links, content_links_length );
+
+    category = kernel->perform_scan(results,request,categories_enable_bits,enable_proof);
+
+    if( text_length + links_length + content_links_length > 1000 )
+    {
+      accessed=1;
+    }
+
+    std::stringstream ss;
+    ss << results << "\n";
+
+    return Py_BuildValue("iis#", accessed, category+1, ss.str().c_str(), ss.str().length() );
   }
-
-  ifcmg::kernel::full_scan_request_t request;
-  ifcmg::kernel::full_scan_results_t results;
-
-  request.hostname( hostname, hostname_length );
-  request.link( link, link_length );
-  request.text( text, text_length );
-  request.links( links, links_length );
-  request.content_links( content_links, content_links_length );
-
-  category = kernel->perform_scan(results,request,categories_enable_bits,enable_proof);
-
-  if( text_length + links_length + content_links_length > 1000 )
+  catch( std::exception &e )
   {
-    accessed=1;
+    PyErr_SetString( PyExc_RuntimeError, e.what() );
   }
-
-  std::stringstream ss;
-  ss << results << "\n";
-
-  return Py_BuildValue("iis#", accessed, category+1, ss.str().c_str(), ss.str().length() );
+  return 0;
 }
 
 
@@ -225,24 +258,33 @@ ifcmgkernel_scan_url(PyObject *self, PyObject *args)
 
   enable_proof = (enable_proof_int !=0);
 
-  ifcmg::kernel::categories_enable_t categories_enable_bits;
-
-  if (categories_enable)
+  try
   {
-    categories_enable_bits.set_from_string(std::string(categories_enable));
+    ifcmg::kernel::categories_enable_t categories_enable_bits;
+
+    if (categories_enable)
+    {
+      categories_enable_bits.set_from_string(std::string(categories_enable));
+    }
+
+    ifcmg::kernel::full_scan_request_t request;
+    ifcmg::kernel::full_scan_results_t results;
+
+    request.hostname( hostname, hostname_length );
+    request.link( link, link_length );
+
+    category = kernel->perform_scan(results,request,categories_enable_bits,enable_proof);
+
+    std::stringstream ss;
+    ss << results << "\n";
+
+    return Py_BuildValue("is#", category+1, ss.str().c_str(), ss.str().length() );
   }
+  catch( std::exception &e )
+  {
+    PyErr_SetString( PyExc_RuntimeError, e.what() );
+  }
+  return 0;
 
-  ifcmg::kernel::full_scan_request_t request;
-  ifcmg::kernel::full_scan_results_t results;
-
-  request.hostname( hostname, hostname_length );
-  request.link( link, link_length );
-
-  category = kernel->perform_scan(results,request,categories_enable_bits,enable_proof);
-
-  std::stringstream ss;
-  ss << results << "\n";
-
-  return Py_BuildValue("is#", category+1, ss.str().c_str(), ss.str().length() );
 }
 

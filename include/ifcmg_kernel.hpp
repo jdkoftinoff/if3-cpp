@@ -190,11 +190,15 @@ namespace ifcmg
 
       typedef std::valarray< float > container_type;
 
-      match_histogram_t() : m_counts(MAX_CATEGORIES, 0)
+      match_histogram_t() : m_counts(MAX_CATEGORIES)
       {
+        for( int i=0; i<MAX_CATEGORIES; ++i )
+        {
+          m_counts[i] = 0.0f;
+        }
       }
 
-      match_histogram_t(const match_histogram_t &other) : m_counts(MAX_CATEGORIES, 0)
+      match_histogram_t(const match_histogram_t &other) : m_counts( other.m_counts )
       {
       }
 
@@ -211,7 +215,7 @@ namespace ifcmg
       add_category(category_t cat)
       {
         if (cat >= 0 && cat < MAX_CATEGORIES)
-          m_counts[cat]++;
+          m_counts[cat] = m_counts[cat] + 1.0f;
         else
           throw std::range_error("invalid category for histogram");
       }
@@ -238,7 +242,10 @@ namespace ifcmg
       std::ostream & operator <<(std::ostream &o, const match_histogram_t &v)
       {
         for (category_t i = 0; i < MAX_CATEGORIES; ++i)
-          o << "\t" << i + 1 << "\t" << v.count_for_category(i) << "\n";
+        {
+          float c = v.count_for_category(i);
+          o << "\t" << i + 1 << "\t" << c << "\n";
+        }
         return o;
       }
     private:
@@ -784,6 +791,7 @@ namespace ifcmg
 
           match_event_t<tree_traits_alphanumeric_mmap_t> alphanumeric_event(results.link(), enabled_categories, enable_proof);
           m_alphanumeric_scanner.find(request.link(), request.link_len(), alphanumeric_event);
+
         }
 
         {
@@ -792,6 +800,7 @@ namespace ifcmg
 
           match_event_t<tree_traits_alphanumeric_mmap_t> alphanumeric_event(results.link(), enabled_categories, enable_proof);
           m_alphanumeric_scanner.find(request.link(), request.link_len(), alphanumeric_event);
+
         }
 
         {
@@ -800,6 +809,7 @@ namespace ifcmg
 
           match_event_t<tree_traits_alphanumeric_mmap_t> alphanumeric_event(results.text(), enabled_categories, enable_proof);
           m_alphanumeric_scanner.find(request.text(), request.text_len(), alphanumeric_event);
+
         }
 
         {
@@ -808,6 +818,7 @@ namespace ifcmg
 
           match_event_t<tree_traits_alphanumeric_mmap_t> alphanumeric_event(results.links(), enabled_categories, enable_proof);
           m_alphanumeric_scanner.find(request.links(), request.links_len(), alphanumeric_event);
+
         }
 
         {
@@ -816,6 +827,7 @@ namespace ifcmg
 
           match_event_t<tree_traits_alphanumeric_mmap_t> alphanumeric_event(results.content_links(), enabled_categories, enable_proof);
           m_alphanumeric_scanner.find(request.content_links(), request.content_links_len(), alphanumeric_event);
+
         }
 
         return results.calculate_final_category();
@@ -825,6 +837,7 @@ namespace ifcmg
       url_scanner_precompiled_t m_hostname_scanner;
       url_scanner_precompiled_t m_url_scanner;
       alphanumeric_scanner_precompiled_t m_alphanumeric_scanner;
+
     };
   }
 }
