@@ -47,6 +47,8 @@ LDLIBS_POSIX+=-lssl -lcrypto
 
 CONFIG_TOOLS+=$(BOOST_CONFIG) $(JDKS2K9_CONFIG) $(SOCI_CONFIG)
 
+PREFIX?=/opt/cmg
+
 ifeq ($(PROJECT_VARIANT),debian)
 #TARGET_DIR_STYLE=debian
 #PACKAGE_CHOWN?=root:root
@@ -63,7 +65,7 @@ ifeq ($(PROJECT_VARIANT),macosx)
 TARGET_DIR_STYLE=macosx-library
 PACKAGE_CHOWN=
 PACKAGE_CHMOD=
-PREFIX=/Library/contextualmediagroup/$(PROJECT)-$(VERSION)
+#PREFIX=/Library/contextualmediagroup/$(PROJECT)-$(VERSION)
 endif
 
 
