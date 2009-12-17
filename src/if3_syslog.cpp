@@ -1,12 +1,12 @@
 /*
  
- The IF Contextual Media Group Kernel Version 3
+ The Internet Filter Version 3 Kernel Version 3
  Source Code
  
- Written By Jeff Koftinoff <jeffk@contextualmediagroup.com>
+ Written By Jeff Koftinoff <jeffk@internetfilter.com>
  Copyright (c) 1995-2005
- By Contextual Media Group, Inc.
- http://www.contextualmediagroup.com/
+ By Turner and Sons Productions, Inc.
+ http://www.internetfilter.com/
  
  ALL RIGHTS RESERVED.
  
@@ -16,7 +16,7 @@
 
 namespace if3
 {
-#if defined(if3_CONFIG_POSIX)
+#if defined(IF3_CONFIG_POSIX)
   
   system_logger_t *logger = 0;
   

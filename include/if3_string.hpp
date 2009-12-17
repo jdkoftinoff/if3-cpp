@@ -1,18 +1,18 @@
 /*
   
-The IF Contextual Media Group Kernel Version 3
+The Internet Filter Version 3 Kernel Version 3
 Source Code
 
-Written By Jeff Koftinoff <jeffk@contextualmediagroup.com>
+Written By Jeff Koftinoff <jeffk@internetfilter.com>
 Copyright (c) 1995-2005
-By Contextual Media Group, Inc.
-http://www.contextualmediagroup.com/
+By Turner and Sons Productions, Inc.
+http://www.internetfilter.com/
 
 ALL RIGHTS RESERVED.
 
 */
-#ifndef if3_STRING_HPP
-#define if3_STRING_HPP
+#ifndef IF3_STRING_HPP
+#define IF3_STRING_HPP
 
 #include <string>
 
@@ -33,7 +33,7 @@ namespace if3
     va_list l;
     va_start( l, fmt );
     
-#if defined(if3_CONFIG_WIN32)	
+#if defined(IF3_CONFIG_WIN32)	
     _vsnprintf( data, sizeof(data)-1, fmt, l );    
 #else
     vsprintf( data, fmt, l );

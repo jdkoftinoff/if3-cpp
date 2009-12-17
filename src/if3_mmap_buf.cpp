@@ -1,12 +1,12 @@
 /*
 
-The IF Contextual Media Group Kernel Version 3
+The Internet Filter Version 3 Kernel Version 3
 Source Code
 
-Written By Jeff Koftinoff <jeffk@contextualmediagroup.com>
+Written By Jeff Koftinoff <jeffk@internetfilter.com>
 Copyright (c) 1995-2005
-By Contextual Media Group, Inc.
-http://www.contextualmediagroup.com/
+By Turner and Sons Productions, Inc.
+http://www.internetfilter.com/
 
 ALL RIGHTS RESERVED.
 
@@ -15,7 +15,7 @@ ALL RIGHTS RESERVED.
 #include "if3_mmap_buf.hpp"
 #include "if3_util.hpp"
 
-#if defined(if3_CONFIG_WIN32)
+#if defined(IF3_CONFIG_WIN32)
 
 namespace if3
 {
@@ -111,7 +111,7 @@ namespace if3
     }
   }
 }
-#elif defined(if3_CONFIG_POSIX)
+#elif defined(IF3_CONFIG_POSIX)
 namespace if3
 {
   mmap_buf_t::mmap_buf_t( const filename_t &filename, bool writable, bool shared )

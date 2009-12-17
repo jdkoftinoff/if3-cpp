@@ -1,18 +1,18 @@
 /*
   
-The IF Contextual Media Group Kernel Version 3
+The Internet Filter Version 3 Kernel Version 3
 Source Code
 
-Written By Jeff Koftinoff <jeffk@contextualmediagroup.com>
+Written By Jeff Koftinoff <jeffk@internetfilter.com>
 Copyright (c) 1995-2005
-By Contextual Media Group, Inc.
-http://www.contextualmediagroup.com/
+By Turner and Sons Productions, Inc.
+http://www.internetfilter.com/
 
 ALL RIGHTS RESERVED.
 
 */
-#ifndef if3_PATTERN_EXPANDER_HPP
-#define if3_PATTERN_EXPANDER_HPP
+#ifndef IF3_PATTERN_EXPANDER_HPP
+#define IF3_PATTERN_EXPANDER_HPP
 
 #include "if3_buf.hpp"
 #include "if3_string.hpp"

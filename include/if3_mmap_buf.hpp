@@ -1,18 +1,18 @@
 /*
   
-The IF Contextual Media Group Kernel Version 3
+The Internet Filter Version 3 Kernel Version 3
 Source Code
 
-Written By Jeff Koftinoff <jeffk@contextualmediagroup.com>
+Written By Jeff Koftinoff <jeffk@internetfilter.com>
 Copyright (c) 1995-2005
-By Contextual Media Group, Inc.
-http://www.contextualmediagroup.com/
+By Turner and Sons Productions, Inc.
+http://www.internetfilter.com/
 
 ALL RIGHTS RESERVED.
 
 */
-#ifndef if3_MMAP_BUF_HPP
-#define if3_MMAP_BUF_HPP
+#ifndef IF3_MMAP_BUF_HPP
+#define IF3_MMAP_BUF_HPP
 
 #include "if3_world.hpp"
 #include "if3_string.hpp"
@@ -35,11 +35,11 @@ namespace if3
     
   private:
     
-#if defined(if3_CONFIG_POSIX)
+#if defined(IF3_CONFIG_POSIX)
     int file_handle;
     void *mmap_pos;
     int mmap_len;
-#elif defined(if3_CONFIG_WIN32)
+#elif defined(IF3_CONFIG_WIN32)
     HANDLE fileHandle;
     HANDLE mapFileHandle;
     void *mmap_pos;

@@ -1,17 +1,17 @@
 /*  
- The IF Contextual Media Group Kernel Version 3
+ The Internet Filter Version 3 Kernel Version 3
  Source Code
  
- Written By Jeff Koftinoff <jeffk@contextualmediagroup.com>
+ Written By Jeff Koftinoff <jeffk@internetfilter.com>
  Copyright (c) 1995-2005
- By Contextual Media Group, Inc.
- http://www.contextualmediagroup.com/
+ By Turner and Sons Productions, Inc.
+ http://www.internetfilter.com/
  
  ALL RIGHTS RESERVED.
  
  */
-#ifndef if3_HTTPD_HPP
-#define if3_HTTPD_HPP
+#ifndef IF3_HTTPD_HPP
+#define IF3_HTTPD_HPP
 
 #include "if3_world.hpp"
 #include "if3_net.hpp"
@@ -45,7 +45,7 @@ namespace if3
     db_t &m_db;
   };
   
-#if defined(if3_CONFIG_POSIX)
+#if defined(IF3_CONFIG_POSIX)
   class httpd_fork_server_t
   {
   public:

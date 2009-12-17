@@ -1,19 +1,19 @@
 /*
   
-The IF Contextual Media Group Kernel Version 3
+The Internet Filter Version 3 Kernel Version 3
 Source Code
 
-Written By Jeff Koftinoff <jeffk@contextualmediagroup.com>
+Written By Jeff Koftinoff <jeffk@internetfilter.com>
 Copyright (c) 1995-2005
-By Contextual Media Group, Inc.
-http://www.contextualmediagroup.com/
+By Turner and Sons Productions, Inc.
+http://www.internetfilter.com/
 
 ALL RIGHTS RESERVED.
 
  */
 
-#ifndef if3_UTIL_HPP
-#define if3_UTIL_HPP
+#ifndef IF3_UTIL_HPP
+#define IF3_UTIL_HPP
 
 #include "if3_world.hpp"
 #include "if3_string.hpp"
@@ -45,7 +45,7 @@ namespace if3
     inline void
     sleep(int seconds)
     {
-#if defined(if3_CONFIG_WIN32)
+#if defined(IF3_CONFIG_WIN32)
       Sleep(seconds * 1000);
 #else
       sleep(seconds);
@@ -55,7 +55,7 @@ namespace if3
     inline void
     sleepms(int milliseconds)
     {
-#if defined(if3_CONFIG_WIN32)
+#if defined(IF3_CONFIG_WIN32)
       Sleep(milliseconds);
 #else
       usleep(milliseconds * 1000);
@@ -77,10 +77,10 @@ namespace if3
       return 0;
     }
 
-#if defined(if3_CONFIG_POSIX)
-#define if3_PATHSEP '/'
+#if defined(IF3_CONFIG_POSIX)
+#define IF3_PATHSEP '/'
 #else
-#define if3_PATHSEP '\\'
+#define IF3_PATHSEP '\\'
 #endif
 
     inline filename_t &
