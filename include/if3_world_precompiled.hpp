@@ -1,15 +1,15 @@
 /*
- 
+
  The Internet Filter Version 3 Kernel Version 3
  Source Code
- 
+
  Written By Jeff Koftinoff <jeffk@internetfilter.com>
  Copyright (c) 1995-2005
  By Turner and Sons Productions, Inc.
  http://www.internetfilter.com/
- 
+
  ALL RIGHTS RESERVED.
- 
+
  */
 #ifndef IF3_WORLD_PRECOMPILED_HPP
 #define IF3_WORLD_PRECOMPILED_HPP
@@ -32,16 +32,16 @@
 # define IF3_CONFIG_NEW
 # undef IF3_CONFIG_NEWNOTHROW
 # undef IF3_CONFIG_THROW
-# define IF3_CONFIG_POSIX 
-# define IF3_CONFIG_PTHREADS 
-# define IF3_CONFIG_FORK 
+# define IF3_CONFIG_POSIX
+# define IF3_CONFIG_PTHREADS
+# define IF3_CONFIG_FORK
 #elif defined(IF3_CONFIG_LINUX)
 # define IF3_CONFIG_NEW
 # undef IF3_CONFIG_NEWNOTHROW
 # undef IF3_CONFIG_THROW
-# define IF3_CONFIG_POSIX 
-# define IF3_CONFIG_PTHREADS 
-# define IF3_CONFIG_FORK 
+# define IF3_CONFIG_POSIX
+# define IF3_CONFIG_PTHREADS
+# define IF3_CONFIG_FORK
 #else
 # error please define one of IF3_CONFIG_WIN32 IF3_CONFIG_MACOSX IF3_CONFIG_LINUX
 #endif
@@ -122,30 +122,30 @@
 # endif
 
 # if defined(IF3_CONFIG_THROW)
-#  define IF3_throw( a, b ) throw( a(b) )
+#  define if3_throw( a, b ) throw( a(b) )
 # elif defined(IF3_CONFIG_POSIX)
-#  define IF3_throw( a, b ) do { fprintf(stderr,"%s(\"%s\")",#a,b); abort(); } while(0)
+#  define if3_throw( a, b ) do { fprintf(stderr,"%s(\"%s\")",#a,b); abort(); } while(0)
 # elif defined(IF3_CONFIG_WIN32)
-#  define IF3_throw( a, b ) do { fprintf(stderr,"%s(\"%s\")",#a,b); abort(); } while(0)
+#  define if3_throw( a, b ) do { fprintf(stderr,"%s(\"%s\")",#a,b); abort(); } while(0)
 # endif
 #endif
 
-namespace if3 
+namespace if3
 {
   template< typename T1, typename T2 > inline T1 lexical_cast ( const T2 &v )
   {
     T1 newval;
     std::stringstream os;
-    
+
     if ( ! ( os << v ) || ! ( os >> newval ) )
     {
       if3_throw( std::invalid_argument, "lexical_cast" );
     }
-    
+
     return newval;
   }
-  
-  
+
+
 }
 
 #endif

@@ -92,7 +92,7 @@ namespace if3
       int len = d.length();
       if (len > 0 && d[len - 1] != '\\' && d[len - 1] != '/')
       {
-        d += if3_PATHSEP;
+        d += IF3_PATHSEP;
       }
       return d;
     }
@@ -142,7 +142,7 @@ namespace if3
     append_path(
                 const filename_t &base_path,
                 const filename_t &file,
-                const char path_sep = if3_PATHSEP
+                const char path_sep = IF3_PATHSEP
                 )
     {
       filename_t result(base_path);
