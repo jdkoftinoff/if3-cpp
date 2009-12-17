@@ -1,6 +1,6 @@
 /*
 
-The Internet Filter IF2K Version 2
+The Internet Filter IF2K Version 3
 Source Code
 
 Written By Jeff Koftinoff <jeffk@jdkoftinoff.com>
