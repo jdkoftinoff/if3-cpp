@@ -304,10 +304,10 @@ def spider_on_url( domain_to_scan, pages_to_scan, verbose ):
 
 
 def main():
-  cmg_home = '/opt/cmg'
-  if os.environ.has_key('CMG_HOME'):
-    cmg_home = os.environ['CMG_HOME']
-  precompiled_path = os.path.join( cmg_home, 'share/if3db-pre' )
+  IF3_home = '/opt/IF3'
+  if os.environ.has_key('IF3_HOME'):
+    IF3_home = os.environ['IF3_HOME']
+  precompiled_path = os.path.join( IF3_home, 'share/if3db-pre' )
 
   domain_to_scan = None
   pages_to_scan = 10

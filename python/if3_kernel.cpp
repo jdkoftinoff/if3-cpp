@@ -7,20 +7,20 @@
 #include "if3_kernel.hpp"
 
 
-static PyObject *if3kernel_startup(PyObject *self, PyObject *args);
-static PyObject *if3kernel_shutdown(PyObject *self, PyObject *args);
-static PyObject *if3kernel_compile_url_files(PyObject *self, PyObject *args);
-static PyObject *if3kernel_compile_phrase_files(PyObject *self, PyObject *args);
-static PyObject *if3kernel_scan_data(PyObject *self, PyObject *args);
-static PyObject *if3kernel_scan_url(PyObject *self, PyObject *args);
+static PyObject *if3_kernel_startup(PyObject *self, PyObject *args);
+static PyObject *if3_kernel_shutdown(PyObject *self, PyObject *args);
+static PyObject *if3_kernel_compile_url_files(PyObject *self, PyObject *args);
+static PyObject *if3_kernel_compile_phrase_files(PyObject *self, PyObject *args);
+static PyObject *if3_kernel_scan_data(PyObject *self, PyObject *args);
+static PyObject *if3_kernel_scan_url(PyObject *self, PyObject *args);
 
 static PyMethodDef if3kernelMethods[] = {
-  {"startup", if3kernel_startup, METH_VARARGS, "start up the filter tables"},
-  {"shutdown", if3kernel_shutdown, METH_VARARGS, "shutdown the filter"},
-  {"scan_data", if3kernel_scan_data, METH_VARARGS, "run scan on data"},
-  {"scan_url", if3kernel_scan_url, METH_VARARGS, "run scan on url"},
-  {"compile_url_files", if3kernel_compile_url_files, METH_VARARGS, "compile set of filter files that contain URLs"},
-  {"compile_phrase_files", if3kernel_compile_phrase_files, METH_VARARGS, "compile set of filter files that contain phrases"},
+  {"startup", if3_kernel_startup, METH_VARARGS, "start up the filter tables"},
+  {"shutdown", if3_kernel_shutdown, METH_VARARGS, "shutdown the filter"},
+  {"scan_data", if3_kernel_scan_data, METH_VARARGS, "run scan on data"},
+  {"scan_url", if3_kernel_scan_url, METH_VARARGS, "run scan on url"},
+  {"compile_url_files", if3_kernel_compile_url_files, METH_VARARGS, "compile set of filter files that contain URLs"},
+  {"compile_phrase_files", if3_kernel_compile_phrase_files, METH_VARARGS, "compile set of filter files that contain phrases"},
   {NULL, NULL, 0, NULL} /* Sentinel */
 };
 
@@ -35,7 +35,7 @@ initif3kernel(void)
 
 
 static PyObject *
-if3kernel_startup(PyObject *self, PyObject *args)
+if3_kernel_startup(PyObject *self, PyObject *args)
 {
   const char *compiled_hostname_filename;
   const char *compiled_url_filename;
@@ -69,7 +69,7 @@ if3kernel_startup(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-if3kernel_shutdown(PyObject *self, PyObject *args)
+if3_kernel_shutdown(PyObject *self, PyObject *args)
 {
   if (kernel != 0)
     delete kernel;
@@ -78,7 +78,7 @@ if3kernel_shutdown(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-if3kernel_compile_url_files(PyObject *self, PyObject *args)
+if3_kernel_compile_url_files(PyObject *self, PyObject *args)
 {
   const char *source_dir;
   const char *dest_file;
@@ -118,7 +118,7 @@ if3kernel_compile_url_files(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-if3kernel_compile_phrase_files(PyObject *self, PyObject *args)
+if3_kernel_compile_phrase_files(PyObject *self, PyObject *args)
 {
   const char *source_dir;
   const char *dest_file;
@@ -157,7 +157,7 @@ if3kernel_compile_phrase_files(PyObject *self, PyObject *args)
 
 
 static PyObject *
-if3kernel_scan_data(PyObject *self, PyObject *args)
+if3_kernel_scan_data(PyObject *self, PyObject *args)
 {
   int enable_proof_int;
   bool enable_proof;
@@ -233,7 +233,7 @@ if3kernel_scan_data(PyObject *self, PyObject *args)
 
 
 static PyObject *
-if3kernel_scan_url(PyObject *self, PyObject *args)
+if3_kernel_scan_url(PyObject *self, PyObject *args)
 {
   int enable_proof_int;
   bool enable_proof;

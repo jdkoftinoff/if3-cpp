@@ -21,18 +21,18 @@ ccflags = os.getenv('CCFLAGS')
 if ccflags is None:
     ccflags = ''
 
-module_sources = [ 'if3kernel.cpp' ]
+module_sources = [ 'if3_kernel.cpp' ]
 
 if3kernel = Extension(
-    'if3kernel',
+    'if3_kernel',
     include_dirs = [ include_dir ],
     library_dirs = [ lib_dir ],
-    libraries = [ 'if3kernel' ],
+    libraries = [ 'if3_kernel' ],
     sources = [ os.path.join(src_python_dir,z) for z in module_sources ],
     )
 
-setup (name = 'if3kernel',
+setup (name = 'if3_kernel',
        version = '3.0',
-       description = 'Internet Filter Kernel For Contextual Media Group',
+       description = 'Internet Filter Kernel by Turner and Sons Productions, Inc.',
        ext_modules = [if3kernel])
 

@@ -8,10 +8,10 @@ using namespace if3;
 
 int main( int argc, char **argv )
 {
-  const char *cmg_home = getenv("CMG_HOME");
-  if( !cmg_home )
-    cmg_home = "/opt/cmg/";
-  filename_t home = cmg_home;
+  const char *IF3_home = getenv("IF3_HOME");
+  if( !IF3_home )
+    IF3_home = "/opt/IF3/";
+  filename_t home = IF3_home;
   filename_t sharedir = home + "share/if3db-pre/";
   filename_t compiled_hostname_file = sharedir + "hostnames.pre";
   filename_t compiled_url_file = sharedir + "urls.pre";

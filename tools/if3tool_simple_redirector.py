@@ -92,10 +92,10 @@ class SimpleRedirector(tornado.web.RequestHandler):
       self.redirect( redirect_to )
 
 def main():  
-  cmg_home = '/opt/cmg'
-  if os.environ.has_key('CMG_HOME'):
-    cmg_home = os.environ['CMG_HOME']
-  precompiled_path = os.path.join( cmg_home, 'share/if3db-pre' )
+  IF3_home = '/opt/IF3'
+  if os.environ.has_key('IF3_HOME'):
+    IF3_home = os.environ['IF3_HOME']
+  precompiled_path = os.path.join( IF3_home, 'share/if3db-pre' )
   if3kernel.startup( 
     os.path.join(precompiled_path,'hostnames.pre'),
     os.path.join(precompiled_path,'urls.pre'),
