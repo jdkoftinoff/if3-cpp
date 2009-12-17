@@ -12,10 +12,10 @@
  
  */
 
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_crawler.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_crawler.hpp"
 
-namespace ifcmg
+namespace if3
 {
   
 }

@@ -10,20 +10,20 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_DB_HPP
-#define IFCMG_DB_HPP
+#ifndef if3_DB_HPP
+#define if3_DB_HPP
 
-#include "ifcmg_world.hpp"
+#include "if3_world.hpp"
 
-#include "ifcmg_db_needles.hpp"
-#include "ifcmg_db_categories.hpp"
-#include "ifcmg_db_filters.hpp"
-#include "ifcmg_db_filtermap.hpp"
-#include "ifcmg_db_sections.hpp"
+#include "if3_db_needles.hpp"
+#include "if3_db_categories.hpp"
+#include "if3_db_filters.hpp"
+#include "if3_db_filtermap.hpp"
+#include "if3_db_sections.hpp"
 
-#include "ifcmg_tree.hpp"
+#include "if3_tree.hpp"
 
-namespace ifcmg
+namespace if3
 {
   
   class db_t

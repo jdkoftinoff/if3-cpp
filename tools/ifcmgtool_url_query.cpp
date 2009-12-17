@@ -1,10 +1,10 @@
-#include "ifcmg_world.hpp"
-#include "ifcmg_dynbuf.hpp"
-#include "ifcmg_tree.hpp"
-#include "ifcmg_compile.hpp"
-#include "ifcmg_kernel.hpp"
+#include "if3_world.hpp"
+#include "if3_dynbuf.hpp"
+#include "if3_tree.hpp"
+#include "if3_compile.hpp"
+#include "if3_kernel.hpp"
 
-using namespace ifcmg;
+using namespace if3;
 
 int main( int argc, char **argv )
 {
@@ -12,7 +12,7 @@ int main( int argc, char **argv )
   if( !cmg_home )
     cmg_home = "/opt/cmg/";
   filename_t home = cmg_home;
-  filename_t sharedir = home + "share/ifcmgdb-pre/";
+  filename_t sharedir = home + "share/if3db-pre/";
   filename_t compiled_hostname_file = sharedir + "hostnames.pre";
   filename_t compiled_url_file = sharedir + "urls.pre";
   filename_t compiled_phrase_file = sharedir + "phrases.pre";

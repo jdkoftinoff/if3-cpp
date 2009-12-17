@@ -1,41 +1,41 @@
 #include <Python.h>
 #include <unistd.h>
-#include "ifcmg_world.hpp"
-#include "ifcmg_dynbuf.hpp"
-#include "ifcmg_tree.hpp"
-#include "ifcmg_compile.hpp"
-#include "ifcmg_kernel.hpp"
+#include "if3_world.hpp"
+#include "if3_dynbuf.hpp"
+#include "if3_tree.hpp"
+#include "if3_compile.hpp"
+#include "if3_kernel.hpp"
 
 
-static PyObject *ifcmgkernel_startup(PyObject *self, PyObject *args);
-static PyObject *ifcmgkernel_shutdown(PyObject *self, PyObject *args);
-static PyObject *ifcmgkernel_compile_url_files(PyObject *self, PyObject *args);
-static PyObject *ifcmgkernel_compile_phrase_files(PyObject *self, PyObject *args);
-static PyObject *ifcmgkernel_scan_data(PyObject *self, PyObject *args);
-static PyObject *ifcmgkernel_scan_url(PyObject *self, PyObject *args);
+static PyObject *if3kernel_startup(PyObject *self, PyObject *args);
+static PyObject *if3kernel_shutdown(PyObject *self, PyObject *args);
+static PyObject *if3kernel_compile_url_files(PyObject *self, PyObject *args);
+static PyObject *if3kernel_compile_phrase_files(PyObject *self, PyObject *args);
+static PyObject *if3kernel_scan_data(PyObject *self, PyObject *args);
+static PyObject *if3kernel_scan_url(PyObject *self, PyObject *args);
 
-static PyMethodDef IfcmgkernelMethods[] = {
-  {"startup", ifcmgkernel_startup, METH_VARARGS, "start up the filter tables"},
-  {"shutdown", ifcmgkernel_shutdown, METH_VARARGS, "shutdown the filter"},
-  {"scan_data", ifcmgkernel_scan_data, METH_VARARGS, "run scan on data"},
-  {"scan_url", ifcmgkernel_scan_url, METH_VARARGS, "run scan on url"},
-  {"compile_url_files", ifcmgkernel_compile_url_files, METH_VARARGS, "compile set of filter files that contain URLs"},
-  {"compile_phrase_files", ifcmgkernel_compile_phrase_files, METH_VARARGS, "compile set of filter files that contain phrases"},
+static PyMethodDef if3kernelMethods[] = {
+  {"startup", if3kernel_startup, METH_VARARGS, "start up the filter tables"},
+  {"shutdown", if3kernel_shutdown, METH_VARARGS, "shutdown the filter"},
+  {"scan_data", if3kernel_scan_data, METH_VARARGS, "run scan on data"},
+  {"scan_url", if3kernel_scan_url, METH_VARARGS, "run scan on url"},
+  {"compile_url_files", if3kernel_compile_url_files, METH_VARARGS, "compile set of filter files that contain URLs"},
+  {"compile_phrase_files", if3kernel_compile_phrase_files, METH_VARARGS, "compile set of filter files that contain phrases"},
   {NULL, NULL, 0, NULL} /* Sentinel */
 };
 
-static ifcmg::kernel::kernel_t *kernel=0;
+static if3::kernel::kernel_t *kernel=0;
 
 
 PyMODINIT_FUNC
-initifcmgkernel(void)
+initif3kernel(void)
 {
-  (void) Py_InitModule("ifcmgkernel", IfcmgkernelMethods);
+  (void) Py_InitModule("if3kernel", if3kernelMethods);
 }
 
 
 static PyObject *
-ifcmgkernel_startup(PyObject *self, PyObject *args)
+if3kernel_startup(PyObject *self, PyObject *args)
 {
   const char *compiled_hostname_filename;
   const char *compiled_url_filename;
@@ -54,10 +54,10 @@ ifcmgkernel_startup(PyObject *self, PyObject *args)
 
   try
   {
-    kernel = new ifcmg::kernel::kernel_t(
-                                         ifcmg::filename_t(compiled_hostname_filename),
-                                         ifcmg::filename_t(compiled_url_filename),
-                                         ifcmg::filename_t(compiled_alphanumeric_filename)
+    kernel = new if3::kernel::kernel_t(
+                                         if3::filename_t(compiled_hostname_filename),
+                                         if3::filename_t(compiled_url_filename),
+                                         if3::filename_t(compiled_alphanumeric_filename)
                                          );
   }
   catch( std::exception &e )
@@ -69,7 +69,7 @@ ifcmgkernel_startup(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-ifcmgkernel_shutdown(PyObject *self, PyObject *args)
+if3kernel_shutdown(PyObject *self, PyObject *args)
 {
   if (kernel != 0)
     delete kernel;
@@ -78,7 +78,7 @@ ifcmgkernel_shutdown(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-ifcmgkernel_compile_url_files(PyObject *self, PyObject *args)
+if3kernel_compile_url_files(PyObject *self, PyObject *args)
 {
   const char *source_dir;
   const char *dest_file;
@@ -100,9 +100,9 @@ ifcmgkernel_compile_url_files(PyObject *self, PyObject *args)
 
   try
   {
-    count = ifcmg::compile_url_files_into_one(
-                                              ifcmg::filename_t(source_dir),
-                                              ifcmg::filename_t(dest_file),
+    count = if3::compile_url_files_into_one(
+                                              if3::filename_t(source_dir),
+                                              if3::filename_t(dest_file),
                                               middle_part,
                                               first_category,
                                               last_category
@@ -118,7 +118,7 @@ ifcmgkernel_compile_url_files(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-ifcmgkernel_compile_phrase_files(PyObject *self, PyObject *args)
+if3kernel_compile_phrase_files(PyObject *self, PyObject *args)
 {
   const char *source_dir;
   const char *dest_file;
@@ -139,9 +139,9 @@ ifcmgkernel_compile_phrase_files(PyObject *self, PyObject *args)
   int count = 0;
   try
   {
-    count = ifcmg::compile_phrase_files_into_one(
-                                                 ifcmg::filename_t(source_dir),
-                                                 ifcmg::filename_t(dest_file),
+    count = if3::compile_phrase_files_into_one(
+                                                 if3::filename_t(source_dir),
+                                                 if3::filename_t(dest_file),
                                                  middle_part,
                                                  first_category,
                                                  last_category
@@ -157,7 +157,7 @@ ifcmgkernel_compile_phrase_files(PyObject *self, PyObject *args)
 
 
 static PyObject *
-ifcmgkernel_scan_data(PyObject *self, PyObject *args)
+if3kernel_scan_data(PyObject *self, PyObject *args)
 {
   int enable_proof_int;
   bool enable_proof;
@@ -196,15 +196,15 @@ ifcmgkernel_scan_data(PyObject *self, PyObject *args)
 
   try
   {
-    ifcmg::kernel::categories_enable_t categories_enable_bits;
+    if3::kernel::categories_enable_t categories_enable_bits;
 
     if (categories_enable)
     {
       categories_enable_bits.set_from_string(std::string(categories_enable));
     }
 
-    ifcmg::kernel::full_scan_request_t request;
-    ifcmg::kernel::full_scan_results_t results;
+    if3::kernel::full_scan_request_t request;
+    if3::kernel::full_scan_results_t results;
 
     request.hostname( hostname, hostname_length );
     request.link( link, link_length );
@@ -233,7 +233,7 @@ ifcmgkernel_scan_data(PyObject *self, PyObject *args)
 
 
 static PyObject *
-ifcmgkernel_scan_url(PyObject *self, PyObject *args)
+if3kernel_scan_url(PyObject *self, PyObject *args)
 {
   int enable_proof_int;
   bool enable_proof;
@@ -260,15 +260,15 @@ ifcmgkernel_scan_url(PyObject *self, PyObject *args)
 
   try
   {
-    ifcmg::kernel::categories_enable_t categories_enable_bits;
+    if3::kernel::categories_enable_t categories_enable_bits;
 
     if (categories_enable)
     {
       categories_enable_bits.set_from_string(std::string(categories_enable));
     }
 
-    ifcmg::kernel::full_scan_request_t request;
-    ifcmg::kernel::full_scan_results_t results;
+    if3::kernel::full_scan_request_t request;
+    if3::kernel::full_scan_results_t results;
 
     request.hostname( hostname, hostname_length );
     request.link( link, link_length );

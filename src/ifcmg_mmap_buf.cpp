@@ -11,18 +11,18 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_mmap_buf.hpp"
-#include "ifcmg_util.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_mmap_buf.hpp"
+#include "if3_util.hpp"
 
-#if defined(IFCMG_CONFIG_WIN32)
+#if defined(if3_CONFIG_WIN32)
 
-namespace ifcmg
+namespace if3
 {
   mmap_buf_t::mmap_buf_t( const filename_t &filename, bool writable, bool shared )
   {
     static unsigned int unique_mapping_id=0;
-    static const char * unique_mapping_prefix = "ifcmgmmap";
+    static const char * unique_mapping_prefix = "if3mmap";
 
     unique_mapping_id++;
     string_t unique_mapping_name;
@@ -111,8 +111,8 @@ namespace ifcmg
     }
   }
 }
-#elif defined(IFCMG_CONFIG_POSIX)
-namespace ifcmg
+#elif defined(if3_CONFIG_POSIX)
+namespace if3
 {
   mmap_buf_t::mmap_buf_t( const filename_t &filename, bool writable, bool shared )
     :

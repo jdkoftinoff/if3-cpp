@@ -11,13 +11,13 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_BUF_HPP
-#define IFCMG_BUF_HPP
+#ifndef if3_BUF_HPP
+#define if3_BUF_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
 
-namespace ifcmg
+namespace if3
 {  
   class buf_t
   {

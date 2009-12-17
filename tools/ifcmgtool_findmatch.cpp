@@ -11,19 +11,19 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_tree.hpp"
-#include "ifcmg_multiscanner.hpp"
-#include "ifcmg_dynbuf.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_tree.hpp"
+#include "if3_multiscanner.hpp"
+#include "if3_dynbuf.hpp"
 
-using namespace ifcmg;
+using namespace if3;
 
 static void usage()
 {
   fprintf( 
     stderr, 
     "usage:\n"
-    "\tifcmgtool_findmatch [compiled db dir] [non compiled db dir] [input test data] [output censored data]\n" );
+    "\tif3tool_findmatch [compiled db dir] [non compiled db dir] [input test data] [output censored data]\n" );
 }
 
 void dump( multiscanner::result_t &find_result, const string_t &title )
@@ -77,7 +77,7 @@ void dump( multiscanner::result_t &find_result, const string_t &title )
 
 int main( int argc, char **argv )
 {
-  using namespace ifcmg::multiscanner;
+  using namespace if3::multiscanner;
   if( argc<4 )
   {
     usage();

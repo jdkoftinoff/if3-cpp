@@ -12,16 +12,16 @@
  
  */
 
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_util.hpp"
-#include "ifcmg_compile.hpp"
-#include "ifcmg_net.hpp"
-#include "ifcmg_httpd.hpp"
-#include "ifcmg_syslog.hpp"
-#include "ifcmg_daemon.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_string.hpp"
+#include "if3_util.hpp"
+#include "if3_compile.hpp"
+#include "if3_net.hpp"
+#include "if3_httpd.hpp"
+#include "if3_syslog.hpp"
+#include "if3_daemon.hpp"
 
-using namespace ifcmg;
+using namespace if3;
 
 int main( int argc, char **argv )
 {

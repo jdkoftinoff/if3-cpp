@@ -12,12 +12,12 @@
  
  */
 
-#ifndef IFCMG_CRAWLER_HPP
-#define IFCMG_CRAWLER_HPP
+#ifndef if3_CRAWLER_HPP
+#define if3_CRAWLER_HPP
 
-#include "ifcmg_world.hpp"
+#include "if3_world.hpp"
 
-namespace ifcmg
+namespace if3
 {
   
 }

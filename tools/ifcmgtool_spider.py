@@ -7,18 +7,18 @@ import os
 from HTMLParser import HTMLParser, HTMLParseError
 import datetime
 import httplib
-import ifcmgkernel
+import if3kernel
 import re
 import threading
 import urllib
 import urllib2
 import urlparse
 
-def ifcmgkernel_run_scan(link, text, links, content_links):
-  return ifcmgkernel.run_scan(link, text, links, content_links)
+def if3kernel_run_scan(link, text, links, content_links):
+  return if3kernel.run_scan(link, text, links, content_links)
 
-def ifcmgkernel_scan_url(link):
-  return ifcmgkernel.scan_url(link)
+def if3kernel_scan_url(link):
+  return if3kernel.scan_url(link)
 
 class MyParser(HTMLParser):
   def __init__(self, spider):
@@ -185,14 +185,14 @@ class Spider:
           return self.scan_after_failed_parse(link, starttime, html)
 
   def scan_after_failed_parse(self, link, starttime, html):
-    r = ifcmgkernel_run_scan(
+    r = if3kernel_run_scan(
                              link,
                              html,
                              html,
                              html
                              )
 
-    urlcategory = ifcmgkernel_scan_url( link )
+    urlcategory = if3kernel_scan_url( link )
     
     accessed = r[0]
     category = r[1]
@@ -210,14 +210,14 @@ class Spider:
                        )
 
   def scan(self, link, starttime):
-    r = ifcmgkernel_run_scan(
+    r = if3kernel_run_scan(
                              link,
                              self.parser.text,
                              self.parser.links,
                              self.parser.content_links
                              )
 
-    urlcategory = ifcmgkernel_scan_url( link )
+    urlcategory = if3kernel_scan_url( link )
     accessed = r[0]
     category = r[1]
     ad_tags_found = r[2]
@@ -290,7 +290,7 @@ class Spider:
 
 def spider_on_url( domain_to_scan, pages_to_scan, verbose ):
   if pages_to_scan == 0:
-    print( '%s\t%s' % (ifcmgkernel_scan_url( domain_to_scan ), domain_to_scan ) )
+    print( '%s\t%s' % (if3kernel_scan_url( domain_to_scan ), domain_to_scan ) )
   else:
     s = Spider(domain_to_scan, pages_to_scan )  
     while s.done == False:
@@ -307,17 +307,17 @@ def main():
   cmg_home = '/opt/cmg'
   if os.environ.has_key('CMG_HOME'):
     cmg_home = os.environ['CMG_HOME']
-  precompiled_path = os.path.join( cmg_home, 'share/ifcmgdb-pre' )
+  precompiled_path = os.path.join( cmg_home, 'share/if3db-pre' )
 
   domain_to_scan = None
   pages_to_scan = 10
     
   if len(sys.argv) == 1:
-    print "ifcmgtool_spider usage:"
-    print "  ifcmgtool_spider.py domain_or_url pagecount precompiled_path noncompiled_path"
+    print "if3tool_spider usage:"
+    print "  if3tool_spider.py domain_or_url pagecount precompiled_path noncompiled_path"
     print "to crawl pages."
     print "or:"
-    print "  ifcmgtool_spider.py url 0"
+    print "  if3tool_spider.py url 0"
     print "to verify url without downloading content."
     print "in either case a url/domain of '-' means to read from stdin"
     sys.exit(1)
@@ -331,7 +331,7 @@ def main():
   if len(sys.argv) > 4:
     noncompiled_path = sys.argv[3]
 
-  ifcmgkernel.startup( 
+  if3kernel.startup( 
     os.path.join(precompiled_path,'hostnames.pre'),
     os.path.join(precompiled_path,'urls.pre'),
     os.path.join(precompiled_path,'phrases.pre')
@@ -349,5 +349,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-    ifcmgkernel.shutdown()
+    if3kernel.shutdown()
   

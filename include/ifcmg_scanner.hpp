@@ -11,14 +11,14 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_SCANNER_HPP
-#define IFCMG_SCANNER_HPP
+#ifndef if3_SCANNER_HPP
+#define if3_SCANNER_HPP
 
-#include "ifcmg_pattern_expander.hpp"
-#include "ifcmg_tree.hpp"
-#include "ifcmg_dynbuf.hpp"
+#include "if3_pattern_expander.hpp"
+#include "if3_tree.hpp"
+#include "if3_dynbuf.hpp"
 
-namespace ifcmg
+namespace if3
 {
   
   template <class tree_traits_t>

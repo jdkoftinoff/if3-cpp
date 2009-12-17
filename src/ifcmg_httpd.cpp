@@ -11,13 +11,13 @@
  ALL RIGHTS RESERVED.
  
  */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_httpd.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_httpd.hpp"
 
-namespace ifcmg
+namespace if3
 {
 
-#if defined(IFCMG_CONFIG_POSIX)
+#if defined(if3_CONFIG_POSIX)
   void httpd_fork_server_t::run()
   {
     for( 

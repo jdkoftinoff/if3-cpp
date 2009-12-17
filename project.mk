@@ -1,5 +1,5 @@
-PROJECT=ifcmgkernel
-PROJECT_NAME=ifcmgkernel
+PROJECT=if3kernel
+PROJECT_NAME=if3kernel
 PROJECT_MAINTAINER=jeffk
 PROJECT_COPYRIGHT=2008
 PROJECT_EMAIL=jeffk@contextualmediagroup.com
@@ -7,10 +7,10 @@ PROJECT_LICENSE=closed
 PROJECT_LICENSE_FILE=$(PROJECT_TOP_DIR)/LICENSE.txt
 PROJECT_README_FILE=$(PROJECT_TOP_DIR)/README.txt
 PROJECT_COMPANY=Contextual Media Group, Inc.
-PROJECT_WEBSITE=https://dev.contextualmediagroup.com/project/projects/test-ifcmgkernel
-PROJECT_DESCRIPTION=ifcmgkernel
+PROJECT_WEBSITE=https://dev.contextualmediagroup.com/project/projects/test-if3kernel
+PROJECT_DESCRIPTION=if3kernel
 PROJECT_VERSION=3.0
-PROJECT_IDENTIFIER=com.contextualmediagroup.ifcmgkernel
+PROJECT_IDENTIFIER=com.contextualmediagroup.if3kernel
 TOP_LIB_DIRS+=.
 SUBLIBS=
 INCLUDES+=
@@ -21,7 +21,7 @@ PKGCONFIG_PACKAGES+=
 CONFIG_TOOLS+=
 
 ENABLE_PRECOMPILED_HEADERS?=1
-PRECOMPILED_HEADER=$(PROJECT_TOP_DIR)/include/ifcmg_world_precompiled.hpp
+PRECOMPILED_HEADER=$(PROJECT_TOP_DIR)/include/if3_world_precompiled.hpp
 
 COMPILE_FLAGS+=-fPIC
 

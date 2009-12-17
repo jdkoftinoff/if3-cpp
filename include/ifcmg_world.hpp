@@ -11,11 +11,11 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_WORLD_HPP
-#define IFCMG_WORLD_HPP
+#ifndef if3_WORLD_HPP
+#define if3_WORLD_HPP
 
-#ifndef IFCMG_WORLD_PRECOMPILED_HPP
-#include "ifcmg_world_precompiled.hpp"
+#ifndef if3_WORLD_PRECOMPILED_HPP
+#include "if3_world_precompiled.hpp"
 #endif
 
 #endif

@@ -11,17 +11,17 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
  */
-#ifndef IFCMG_MULTISCANNER_HPP
-#define IFCMG_MULTISCANNER_HPP
+#ifndef if3_MULTISCANNER_HPP
+#define if3_MULTISCANNER_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_buf.hpp"
-#include "ifcmg_util.hpp"
-#include "ifcmg_scanner.hpp"
-#include "ifcmg_compile.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
+#include "if3_buf.hpp"
+#include "if3_util.hpp"
+#include "if3_scanner.hpp"
+#include "if3_compile.hpp"
 
-namespace ifcmg
+namespace if3
 {
   namespace multiscanner
   {
@@ -818,7 +818,7 @@ namespace ifcmg
           scanner = newnothrow url_scanner_precompiled_t(input_filename);
           if (!scanner)
           {
-            ifcmg_throw(std::runtime_exception, "new url_scanner_precompiled_t");
+            if3_throw(std::runtime_exception, "new url_scanner_precompiled_t");
           }
         }
         return scanner;
@@ -841,7 +841,7 @@ namespace ifcmg
           scanner = newnothrow url_scanner_t(input_filename);
           if (!scanner)
           {
-            ifcmg_throw(std::runtime_exception, "new url_scanner_t");
+            if3_throw(std::runtime_exception, "new url_scanner_t");
           }
         }
         return scanner;
@@ -864,7 +864,7 @@ namespace ifcmg
           scanner = newnothrow alphanumeric_scanner_precompiled_t(input_filename);
           if (!scanner)
           {
-            ifcmg_throw(std::runtime_exception, "new alphanumeric_scanner_precompiled_t");
+            if3_throw(std::runtime_exception, "new alphanumeric_scanner_precompiled_t");
           }
         }
         return scanner;
@@ -887,7 +887,7 @@ namespace ifcmg
           scanner = newnothrow alphanumeric_scanner_t(input_filename);
           if (!scanner)
           {
-            ifcmg_throw(std::runtime_exception, "alphanumeric_scanner_t");
+            if3_throw(std::runtime_exception, "alphanumeric_scanner_t");
           }
         }
         return scanner;
@@ -1076,11 +1076,11 @@ namespace ifcmg
 
 #if 0
 
-    class ifcmgkernel_t
+    class if3kernel_t
     {
     public:
 
-      ifcmgkernel_t(
+      if3kernel_t(
                     const filename_t compiled_db_path,
                     const filename_t uncompiled_db_path,
                     bool do_compiling,
@@ -1106,7 +1106,7 @@ namespace ifcmg
       }
 
       virtual
-      ~ifcmgkernel_t()
+      ~if3kernel_t()
       {
         delete m_multiscanner;
       }

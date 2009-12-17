@@ -12,14 +12,14 @@ ALL RIGHTS RESERVED.
 
  */
 
-#ifndef IFCMG_UTIL_HPP
-#define IFCMG_UTIL_HPP
+#ifndef if3_UTIL_HPP
+#define if3_UTIL_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
 
 
-namespace ifcmg
+namespace if3
 {
   namespace util
   {
@@ -45,7 +45,7 @@ namespace ifcmg
     inline void
     sleep(int seconds)
     {
-#if defined(IFCMG_CONFIG_WIN32)
+#if defined(if3_CONFIG_WIN32)
       Sleep(seconds * 1000);
 #else
       sleep(seconds);
@@ -55,7 +55,7 @@ namespace ifcmg
     inline void
     sleepms(int milliseconds)
     {
-#if defined(IFCMG_CONFIG_WIN32)
+#if defined(if3_CONFIG_WIN32)
       Sleep(milliseconds);
 #else
       usleep(milliseconds * 1000);
@@ -77,10 +77,10 @@ namespace ifcmg
       return 0;
     }
 
-#if defined(IFCMG_CONFIG_POSIX)
-#define IFCMG_PATHSEP '/'
+#if defined(if3_CONFIG_POSIX)
+#define if3_PATHSEP '/'
 #else
-#define IFCMG_PATHSEP '\\'
+#define if3_PATHSEP '\\'
 #endif
 
     inline filename_t &
@@ -92,7 +92,7 @@ namespace ifcmg
       int len = d.length();
       if (len > 0 && d[len - 1] != '\\' && d[len - 1] != '/')
       {
-        d += IFCMG_PATHSEP;
+        d += if3_PATHSEP;
       }
       return d;
     }
@@ -142,7 +142,7 @@ namespace ifcmg
     append_path(
                 const filename_t &base_path,
                 const filename_t &file,
-                const char path_sep = IFCMG_PATHSEP
+                const char path_sep = if3_PATHSEP
                 )
     {
       filename_t result(base_path);

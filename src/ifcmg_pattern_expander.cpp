@@ -11,10 +11,10 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_pattern_expander.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_pattern_expander.hpp"
 
-namespace ifcmg
+namespace if3
 {
 /// Manages the recursive expansion of phrase patterns
   struct expstring_list_t

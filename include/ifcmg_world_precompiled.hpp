@@ -11,44 +11,44 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_WORLD_PRECOMPILED_HPP
-#define IFCMG_WORLD_PRECOMPILED_HPP
+#ifndef if3_WORLD_PRECOMPILED_HPP
+#define if3_WORLD_PRECOMPILED_HPP
 
 #if defined(__APPLE__)
-# define IFCMG_CONFIG_MACOSX
+# define if3_CONFIG_MACOSX
 #elif defined(__linux__)
-# define IFCMG_CONFIG_LINUX
+# define if3_CONFIG_LINUX
 #elif defined(WIN32) || defined( _MSC_VER )
-# define IFCMG_CONFIG_WIN32
+# define if3_CONFIG_WIN32
 #endif
 
 
   // platform options
-#if defined(IFCMG_CONFIG_WIN32)
-# define IFCMG_CONFIG_NEW
-# undef IFCMG_CONFIG_NEWNOTHROW
-# undef IFCMG_CONFIG_THROW
-#elif defined(IFCMG_CONFIG_MACOSX)
-# define IFCMG_CONFIG_NEW
-# undef IFCMG_CONFIG_NEWNOTHROW
-# undef IFCMG_CONFIG_THROW
-# define IFCMG_CONFIG_POSIX 
-# define IFCMG_CONFIG_PTHREADS 
-# define IFCMG_CONFIG_FORK 
-#elif defined(IFCMG_CONFIG_LINUX)
-# define IFCMG_CONFIG_NEW
-# undef IFCMG_CONFIG_NEWNOTHROW
-# undef IFCMG_CONFIG_THROW
-# define IFCMG_CONFIG_POSIX 
-# define IFCMG_CONFIG_PTHREADS 
-# define IFCMG_CONFIG_FORK 
+#if defined(if3_CONFIG_WIN32)
+# define if3_CONFIG_NEW
+# undef if3_CONFIG_NEWNOTHROW
+# undef if3_CONFIG_THROW
+#elif defined(if3_CONFIG_MACOSX)
+# define if3_CONFIG_NEW
+# undef if3_CONFIG_NEWNOTHROW
+# undef if3_CONFIG_THROW
+# define if3_CONFIG_POSIX 
+# define if3_CONFIG_PTHREADS 
+# define if3_CONFIG_FORK 
+#elif defined(if3_CONFIG_LINUX)
+# define if3_CONFIG_NEW
+# undef if3_CONFIG_NEWNOTHROW
+# undef if3_CONFIG_THROW
+# define if3_CONFIG_POSIX 
+# define if3_CONFIG_PTHREADS 
+# define if3_CONFIG_FORK 
 #else
-# error please define one of IFCMG_CONFIG_WIN32 IFCMG_CONFIG_MACOSX IFCMG_CONFIG_LINUX
+# error please define one of if3_CONFIG_WIN32 if3_CONFIG_MACOSX if3_CONFIG_LINUX
 #endif
 
 
   // for win32 we need windows.h and friends
-#if defined(IFCMG_CONFIG_WIN32)
+#if defined(if3_CONFIG_WIN32)
 # include <windows.h>
 # include <winsock2.h>
 # include <ws2tcpip.h>
@@ -56,7 +56,7 @@
 # include <process.h>
 #endif
 
-#if defined(IFCMG_CONFIG_PTHREADS)
+#if defined(if3_CONFIG_PTHREADS)
 # ifndef __STL_PTHREADS
 #  define __STL_PTHREADS
 # endif
@@ -64,7 +64,7 @@
 # include <pthread.h>
 #endif
 
-#if defined(IFCMG_CONFIG_POSIX)
+#if defined(if3_CONFIG_POSIX)
 # include <signal.h>
 # include <sys/time.h>
 # include <sys/types.h>
@@ -99,7 +99,7 @@
 
 
 #ifdef __cplusplus
-# if defined(IFCMG_CONFIG_NEW)
+# if defined(if3_CONFIG_NEW)
 #  include <new>
 # endif
 
@@ -115,22 +115,22 @@
 # include <cstring>
 # include <cstdlib>
 
-# if defined(IFCMG_CONFIG_NEWNOTHROW)
+# if defined(if3_CONFIG_NEWNOTHROW)
 #  define newnothrow new (std::nothrow)
 # else
 #  define newnothrow new
 # endif
 
-# if defined(IFCMG_CONFIG_THROW)
-#  define ifcmg_throw( a, b ) throw( a(b) )
-# elif defined(IFCMG_CONFIG_POSIX)
-#  define ifcmg_throw( a, b ) do { fprintf(stderr,"%s(\"%s\")",#a,b); abort(); } while(0)
-# elif defined(IFCMG_CONFIG_WIN32)
-#  define ifcmg_throw( a, b ) do { fprintf(stderr,"%s(\"%s\")",#a,b); abort(); } while(0)
+# if defined(if3_CONFIG_THROW)
+#  define if3_throw( a, b ) throw( a(b) )
+# elif defined(if3_CONFIG_POSIX)
+#  define if3_throw( a, b ) do { fprintf(stderr,"%s(\"%s\")",#a,b); abort(); } while(0)
+# elif defined(if3_CONFIG_WIN32)
+#  define if3_throw( a, b ) do { fprintf(stderr,"%s(\"%s\")",#a,b); abort(); } while(0)
 # endif
 #endif
 
-namespace ifcmg 
+namespace if3 
 {
   template< typename T1, typename T2 > inline T1 lexical_cast ( const T2 &v )
   {
@@ -139,7 +139,7 @@ namespace ifcmg
     
     if ( ! ( os << v ) || ! ( os >> newval ) )
     {
-      ifcmg_throw( std::invalid_argument, "lexical_cast" );
+      if3_throw( std::invalid_argument, "lexical_cast" );
     }
     
     return newval;

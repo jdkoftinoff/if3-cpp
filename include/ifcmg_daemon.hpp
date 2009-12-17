@@ -10,17 +10,17 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_DAEMON_HPP
-#define IFCMG_DAEMON_HPP
+#ifndef if3_DAEMON_HPP
+#define if3_DAEMON_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_util.hpp"
-#include "ifcmg_syslog.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
+#include "if3_util.hpp"
+#include "if3_syslog.hpp"
 
-namespace ifcmg 
+namespace if3 
 {
-#if defined(IFCMG_CONFIG_POSIX)
+#if defined(if3_CONFIG_POSIX)
   void daemon_drop_root( 
                         string_t uid_name
                         );  

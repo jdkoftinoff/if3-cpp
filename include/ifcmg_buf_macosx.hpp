@@ -11,14 +11,14 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_BUF_MACOSX_HPP
-#define IFCMG_BUF_MACOSX_HPP
+#ifndef if3_BUF_MACOSX_HPP
+#define if3_BUF_MACOSX_HPP
 
 #ifdef __OBJC__
 
 #import <Cocoa/Cocoa.h>
 
-namespace ifcmg
+namespace if3
 {
   
   inline void buf_from_NSString( buf_t &buf, NSString *s )

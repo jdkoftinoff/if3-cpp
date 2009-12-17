@@ -10,16 +10,16 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_HTML_PARSE_HPP
-#define IFCMG_HTML_PARSE_HPP
+#ifndef if3_HTML_PARSE_HPP
+#define if3_HTML_PARSE_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_buf.hpp"
-#include "ifcmg_dynbuf.hpp"
-#include "ifcmg_cgi.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
+#include "if3_buf.hpp"
+#include "if3_dynbuf.hpp"
+#include "if3_cgi.hpp"
 
-namespace ifcmg 
+namespace if3 
 {
   class html_decode_target_t
   {

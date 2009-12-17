@@ -11,10 +11,10 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_buf.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_buf.hpp"
 
-namespace ifcmg
+namespace if3
 {
   bool buf_t::append_from_string( const char *str )
   {
@@ -182,7 +182,7 @@ namespace ifcmg
     va_list l;
     va_start( l, fmt );
     
-#if defined(IFCMG_CONFIG_WIN32)	
+#if defined(if3_CONFIG_WIN32)	
     added=vsprintf( (char *)data+data_len, fmt, l );
 #else
     added=vsnprintf( (char *)data+data_len, buf_len-data_len, fmt, l );    

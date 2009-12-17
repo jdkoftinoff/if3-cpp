@@ -11,10 +11,10 @@
  ALL RIGHTS RESERVED.
  
  */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_html_parse.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_html_parse.hpp"
 
-namespace ifcmg
+namespace if3
 {
 
   

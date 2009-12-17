@@ -10,13 +10,13 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_DB_CATEGORIES_HPP
-#define IFCMG_DB_CATEGORIES_HPP
+#ifndef if3_DB_CATEGORIES_HPP
+#define if3_DB_CATEGORIES_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_db_util.hpp"
+#include "if3_world.hpp"
+#include "if3_db_util.hpp"
 
-namespace ifcmg 
+namespace if3 
 {
   class db_categories_row_t 
   {

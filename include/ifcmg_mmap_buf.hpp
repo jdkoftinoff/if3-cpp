@@ -11,14 +11,14 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_MMAP_BUF_HPP
-#define IFCMG_MMAP_BUF_HPP
+#ifndef if3_MMAP_BUF_HPP
+#define if3_MMAP_BUF_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_buf.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
+#include "if3_buf.hpp"
 
-namespace ifcmg
+namespace if3
 {
   class mmap_buf_t : public buf_t
   {
@@ -35,11 +35,11 @@ namespace ifcmg
     
   private:
     
-#if defined(IFCMG_CONFIG_POSIX)
+#if defined(if3_CONFIG_POSIX)
     int file_handle;
     void *mmap_pos;
     int mmap_len;
-#elif defined(IFCMG_CONFIG_WIN32)
+#elif defined(if3_CONFIG_WIN32)
     HANDLE fileHandle;
     HANDLE mapFileHandle;
     void *mmap_pos;

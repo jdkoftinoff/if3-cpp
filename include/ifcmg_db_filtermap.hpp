@@ -10,14 +10,14 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_DB_FILTERMAP_HPP
-#define IFCMG_DB_FILTERMAP_HPP
+#ifndef if3_DB_FILTERMAP_HPP
+#define if3_DB_FILTERMAP_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_db_util.hpp"
+#include "if3_world.hpp"
+#include "if3_db_util.hpp"
 
 
-namespace ifcmg 
+namespace if3 
 {
   class db_filtermap_row_t 
   {

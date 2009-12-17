@@ -11,13 +11,13 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
  */
-#ifndef IFCMG_TREEBASE_HPP
-#define IFCMG_TREEBASE_HPP
+#ifndef if3_TREEBASE_HPP
+#define if3_TREEBASE_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_util.hpp"
+#include "if3_world.hpp"
+#include "if3_util.hpp"
 
-namespace ifcmg
+namespace if3
 {
 
   template <class VALUE_T>
@@ -358,7 +358,7 @@ namespace ifcmg
       {
         if (!buf.expand(buf.get_data_length()*3 / 2))
         {
-          ifcmg_throw(std::runtime_error, "Unable to expand tree buffer");
+          if3_throw(std::runtime_error, "Unable to expand tree buffer");
         }
         buf.fill();
         clear(first_free, (buf.get_data_length() / sizeof (typename tree_traits_t::leaf_t)));

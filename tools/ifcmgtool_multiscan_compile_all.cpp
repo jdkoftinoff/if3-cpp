@@ -12,19 +12,19 @@ ALL RIGHTS RESERVED.
 
 */
 
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_util.hpp"
-#include "ifcmg_compile.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_string.hpp"
+#include "if3_util.hpp"
+#include "if3_compile.hpp"
 
 
-using namespace ifcmg;
+using namespace if3;
 
 static void usage()
 {
   fprintf(
     stderr,
-    "usage:\nifcmgtool_multiscan_compile_all [source dir] [dest dir]\n"
+    "usage:\nif3tool_multiscan_compile_all [source dir] [dest dir]\n"
     "source dir should contain the files:\n"
     "\t#-badurl.txt   (bad url lists)\n"
     "\t#-postbadurl.txt   (post bad url lists)\n"

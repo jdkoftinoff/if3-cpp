@@ -11,10 +11,10 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_dynbuf.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_dynbuf.hpp"
 
-namespace ifcmg
+namespace if3
 {
   void dynbuf_t::markup()
   {

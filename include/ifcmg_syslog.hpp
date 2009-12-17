@@ -10,15 +10,15 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_SYSLOG_HPP
-#define IFCMG_SYSLOG_HPP
+#ifndef if3_SYSLOG_HPP
+#define if3_SYSLOG_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
 
-namespace ifcmg
+namespace if3
 {
-#if defined(IFCMG_CONFIG_POSIX)
+#if defined(if3_CONFIG_POSIX)
   class system_logger_t
   {
   public:

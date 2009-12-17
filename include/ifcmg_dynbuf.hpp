@@ -11,14 +11,14 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_DYNBUF_HPP
-#define IFCMG_DYNBUF_HPP
+#ifndef if3_DYNBUF_HPP
+#define if3_DYNBUF_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_buf.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
+#include "if3_buf.hpp"
 
-namespace ifcmg
+namespace if3
 {
   class dynbuf_t : public buf_t
   {

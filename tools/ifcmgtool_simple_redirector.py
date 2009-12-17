@@ -7,7 +7,7 @@ import tornado.options
 import tornado.web
 from tornado.options import define, options
 import urllib
-import ifcmgkernel
+import if3kernel
 import urlparse
 
 define("port", default=8080, help="run port", type=int)
@@ -43,7 +43,7 @@ class SimpleRedirector(tornado.web.RequestHandler):
       referer = self.request.headers["Referer"]
     referer_url = urlparse.urlsplit(referer)
     
-    r=ifcmgkernel.scan_url(trace,referer_url.netloc, referer_url.geturl())
+    r=if3kernel.scan_url(trace,referer_url.netloc, referer_url.geturl())
 
     result = r[0]-1
     proof = r[1]
@@ -95,8 +95,8 @@ def main():
   cmg_home = '/opt/cmg'
   if os.environ.has_key('CMG_HOME'):
     cmg_home = os.environ['CMG_HOME']
-  precompiled_path = os.path.join( cmg_home, 'share/ifcmgdb-pre' )
-  ifcmgkernel.startup( 
+  precompiled_path = os.path.join( cmg_home, 'share/if3db-pre' )
+  if3kernel.startup( 
     os.path.join(precompiled_path,'hostnames.pre'),
     os.path.join(precompiled_path,'urls.pre'),
     os.path.join(precompiled_path,'phrases.pre')
@@ -120,7 +120,7 @@ def main():
     http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
   finally:
-    ifcmgkernel.shutdown()
+    if3kernel.shutdown()
     log_known_bad.close()
     log_known_good.close()
     log_unknown.close()

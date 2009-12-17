@@ -11,12 +11,12 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_STRING_HPP
-#define IFCMG_STRING_HPP
+#ifndef if3_STRING_HPP
+#define if3_STRING_HPP
 
 #include <string>
 
-namespace ifcmg
+namespace if3
 {
   typedef std::string string_t;
   typedef std::string filename_t;
@@ -33,7 +33,7 @@ namespace ifcmg
     va_list l;
     va_start( l, fmt );
     
-#if defined(IFCMG_CONFIG_WIN32)	
+#if defined(if3_CONFIG_WIN32)	
     _vsnprintf( data, sizeof(data)-1, fmt, l );    
 #else
     vsprintf( data, fmt, l );

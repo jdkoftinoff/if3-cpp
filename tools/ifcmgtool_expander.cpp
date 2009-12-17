@@ -11,19 +11,19 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_pattern_expander.hpp"
-#include "ifcmg_util.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_pattern_expander.hpp"
+#include "if3_util.hpp"
 
-class dumping_target : public ifcmg::pattern_target_t
+class dumping_target : public if3::pattern_target_t
 {
 public:
-  void add( const ifcmg::string_t &s, short flags )
+  void add( const if3::string_t &s, short flags )
   {
     fprintf( stdout, "+%s\n", s.c_str() );
   }
   
-  void remove( const ifcmg::string_t &s )
+  void remove( const if3::string_t &s )
   {
     fprintf( stdout, "-%s\n", s.c_str() );
   }
@@ -31,7 +31,7 @@ public:
 
 static void usage()
 {
-  fprintf( stderr, "usage:\nifcmgtool_compile [prefix]\nreads stdin, expands patterns, writes to stdout.\n" );
+  fprintf( stderr, "usage:\nif3tool_compile [prefix]\nreads stdin, expands patterns, writes to stdout.\n" );
 }
 
 
@@ -43,13 +43,13 @@ int main( int argc, char **argv )
     return 1;
   }
   
-  ifcmg::string_t prefix( argv[1] );
+  if3::string_t prefix( argv[1] );
   
   dumping_target target;
-  ifcmg::pattern_expander_standard_t expander;
+  if3::pattern_expander_standard_t expander;
   
-  ifcmg::string_t line;
-  while( ifcmg::util::read_line( line, stdin ) )
+  if3::string_t line;
+  while( if3::util::read_line( line, stdin ) )
   {
     expander.expand( line, target, 0, false, prefix );
   }

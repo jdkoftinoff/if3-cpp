@@ -10,17 +10,17 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_HTTPD_HPP
-#define IFCMG_HTTPD_HPP
+#ifndef if3_HTTPD_HPP
+#define if3_HTTPD_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_net.hpp"
-#include "ifcmg_cgi.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_dynbuf.hpp"
-#include "ifcmg_db.hpp"
+#include "if3_world.hpp"
+#include "if3_net.hpp"
+#include "if3_cgi.hpp"
+#include "if3_string.hpp"
+#include "if3_dynbuf.hpp"
+#include "if3_db.hpp"
 
-namespace ifcmg 
+namespace if3 
 {
   class httpd_session_base_t
   {
@@ -45,7 +45,7 @@ namespace ifcmg
     db_t &m_db;
   };
   
-#if defined(IFCMG_CONFIG_POSIX)
+#if defined(if3_CONFIG_POSIX)
   class httpd_fork_server_t
   {
   public:

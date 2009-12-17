@@ -10,13 +10,13 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_DB_UTIL_HPP
-#define IFCMG_DB_UTIL_HPP
+#ifndef if3_DB_UTIL_HPP
+#define if3_DB_UTIL_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
 
-namespace ifcmg 
+namespace if3 
 {
   typedef std::list< string_t > string_list_t;
   

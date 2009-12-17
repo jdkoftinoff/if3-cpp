@@ -10,15 +10,15 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_NET_HPP
-#define IFCMG_NET_HPP
+#ifndef if3_NET_HPP
+#define if3_NET_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_util.hpp"
-#include "ifcmg_daemon.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
+#include "if3_util.hpp"
+#include "if3_daemon.hpp"
 
-namespace ifcmg 
+namespace if3 
 {
   
 #ifdef _WIN32

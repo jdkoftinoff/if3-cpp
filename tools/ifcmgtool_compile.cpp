@@ -11,12 +11,12 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_tree.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_tree.hpp"
 
 static void usage()
 {
-  fprintf( stderr, "usage:\nifcmgtool_compile [url|alpha] [inputfile] [outputfile] [codeoffset] [prefix]\n" );
+  fprintf( stderr, "usage:\nif3tool_compile [url|alpha] [inputfile] [outputfile] [codeoffset] [prefix]\n" );
 }
 
 int main( int argc, char **argv )
@@ -39,7 +39,7 @@ int main( int argc, char **argv )
   
   if( strcmp(argv[1],"url")==0 )
   {
-    bool r = ifcmg::tree_compile<ifcmg::tree_traits_url_t,ifcmg::pattern_expander_standard_t>(
+    bool r = if3::tree_compile<if3::tree_traits_url_t,if3::pattern_expander_standard_t>(
       input_filename,
       output_filename,
       code_offset,
@@ -49,7 +49,7 @@ int main( int argc, char **argv )
   }
   else if( strcmp(argv[1],"alpha")==0 )
   {
-    bool r = ifcmg::tree_compile<ifcmg::tree_traits_alphanumeric_t,ifcmg::pattern_expander_standard_t>(
+    bool r = if3::tree_compile<if3::tree_traits_alphanumeric_t,if3::pattern_expander_standard_t>(
       input_filename,
       output_filename,
       code_offset,

@@ -11,17 +11,17 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
  */
-#ifndef IFCMG_KERNEL_HPP
-#define IFCMG_KERNEL_HPP
+#ifndef if3_KERNEL_HPP
+#define if3_KERNEL_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_buf.hpp"
-#include "ifcmg_util.hpp"
-#include "ifcmg_scanner.hpp"
-#include "ifcmg_compile.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
+#include "if3_buf.hpp"
+#include "if3_util.hpp"
+#include "if3_scanner.hpp"
+#include "if3_compile.hpp"
 
-namespace ifcmg
+namespace if3
 {
   namespace kernel
   {

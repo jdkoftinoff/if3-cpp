@@ -11,14 +11,14 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_PATTERN_EXPANDER_HPP
-#define IFCMG_PATTERN_EXPANDER_HPP
+#ifndef if3_PATTERN_EXPANDER_HPP
+#define if3_PATTERN_EXPANDER_HPP
 
-#include "ifcmg_buf.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_util.hpp"
+#include "if3_buf.hpp"
+#include "if3_string.hpp"
+#include "if3_util.hpp"
 
-namespace ifcmg
+namespace if3
 {
   class pattern_target_t
   {

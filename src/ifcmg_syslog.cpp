@@ -11,12 +11,12 @@
  ALL RIGHTS RESERVED.
  
  */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_syslog.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_syslog.hpp"
 
-namespace ifcmg
+namespace if3
 {
-#if defined(IFCMG_CONFIG_POSIX)
+#if defined(if3_CONFIG_POSIX)
   
   system_logger_t *logger = 0;
   

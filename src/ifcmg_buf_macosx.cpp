@@ -11,5 +11,5 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_buf_macosx.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_buf_macosx.hpp"

@@ -10,13 +10,13 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_CGI_HPP
-#define IFCMG_CGI_HPP
+#ifndef if3_CGI_HPP
+#define if3_CGI_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
 
-namespace ifcmg 
+namespace if3 
 {
   inline bool cgi_is_escapable( char c )
   {

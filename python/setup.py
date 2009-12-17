@@ -21,18 +21,18 @@ ccflags = os.getenv('CCFLAGS')
 if ccflags is None:
     ccflags = ''
 
-module_sources = [ 'ifcmgkernel.cpp' ]
+module_sources = [ 'if3kernel.cpp' ]
 
-ifcmgkernel = Extension(
-    'ifcmgkernel',
+if3kernel = Extension(
+    'if3kernel',
     include_dirs = [ include_dir ],
     library_dirs = [ lib_dir ],
-    libraries = [ 'ifcmgkernel' ],
+    libraries = [ 'if3kernel' ],
     sources = [ os.path.join(src_python_dir,z) for z in module_sources ],
     )
 
-setup (name = 'ifcmgkernel',
+setup (name = 'if3kernel',
        version = '3.0',
        description = 'Internet Filter Kernel For Contextual Media Group',
-       ext_modules = [ifcmgkernel])
+       ext_modules = [if3kernel])
 

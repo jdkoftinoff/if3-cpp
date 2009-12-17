@@ -12,13 +12,13 @@
  
  */
 
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_net.hpp"
-#include "ifcmg_syslog.hpp"
-#include "ifcmg_daemon.hpp"
-#include "ifcmg_crawler.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_net.hpp"
+#include "if3_syslog.hpp"
+#include "if3_daemon.hpp"
+#include "if3_crawler.hpp"
 
-using namespace ifcmg;
+using namespace if3;
 
 int main( int argc, char **argv )
 {

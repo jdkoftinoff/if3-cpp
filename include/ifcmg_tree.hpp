@@ -11,16 +11,16 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
 */
-#ifndef IFCMG_TREE_HPP
-#define IFCMG_TREE_HPP
+#ifndef if3_TREE_HPP
+#define if3_TREE_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_dynbuf.hpp"
-#include "ifcmg_treebase.hpp"
-#include "ifcmg_mmap_buf.hpp"
-#include "ifcmg_pattern_expander.hpp"
+#include "if3_world.hpp"
+#include "if3_dynbuf.hpp"
+#include "if3_treebase.hpp"
+#include "if3_mmap_buf.hpp"
+#include "if3_pattern_expander.hpp"
 
-namespace ifcmg
+namespace if3
 {
   template <class VALUE_T>
   struct tree_nonalphanumericpunct_ignorer_t

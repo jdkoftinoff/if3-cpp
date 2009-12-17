@@ -11,10 +11,10 @@
  ALL RIGHTS RESERVED.
  
  */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_db_util.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_db_util.hpp"
 
-namespace ifcmg 
+namespace if3 
 {
   string_list_t split_tabline( string_t const &line )
   {

@@ -11,11 +11,11 @@
  ALL RIGHTS RESERVED.
  
  */
-#include "ifcmg_world_precompiled.hpp"
-#include "ifcmg_net.hpp"
+#include "if3_world_precompiled.hpp"
+#include "if3_net.hpp"
 
 
-namespace ifcmg
+namespace if3
 {
 #ifdef _WIN32
   void net_init()
@@ -35,7 +35,7 @@ namespace ifcmg
     if ( version != wsaData.wVersion )
     {
       /* incorrect WinSock version */
-      ifcmg_throw(std::runtime_error,"Incorrect Winsock version");
+      if3_throw(std::runtime_error,"Incorrect Winsock version");
     }
     /* WinSock has been initialized */    
   }

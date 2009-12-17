@@ -11,15 +11,15 @@ http://www.contextualmediagroup.com/
 ALL RIGHTS RESERVED.
 
  */
-#ifndef IFCMG_COMPILE_HPP
-#define IFCMG_COMPILE_HPP
+#ifndef if3_COMPILE_HPP
+#define if3_COMPILE_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_string.hpp"
-#include "ifcmg_util.hpp"
-#include "ifcmg_tree.hpp"
+#include "if3_world.hpp"
+#include "if3_string.hpp"
+#include "if3_util.hpp"
+#include "if3_tree.hpp"
 
-namespace ifcmg
+namespace if3
 {
 
   inline bool

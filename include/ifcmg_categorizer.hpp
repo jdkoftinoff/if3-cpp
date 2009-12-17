@@ -10,14 +10,14 @@
  ALL RIGHTS RESERVED.
  
  */
-#ifndef IFCMG_CATEGORIZER_HPP
-#define IFCMG_CATEGORIZER_HPP
+#ifndef if3_CATEGORIZER_HPP
+#define if3_CATEGORIZER_HPP
 
-#include "ifcmg_world.hpp"
-#include "ifcmg_html_parse.hpp"
-#include "ifcmg_db.hpp"
+#include "if3_world.hpp"
+#include "if3_html_parse.hpp"
+#include "if3_db.hpp"
 
-namespace ifcmg 
+namespace if3 
 {
   class categorizer_base_t
   {
