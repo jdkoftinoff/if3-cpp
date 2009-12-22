@@ -1,5 +1,5 @@
-PROJECT=if3_kernel
-PROJECT_NAME=if3_kernel
+PROJECT=if3kernel
+PROJECT_NAME=if3kernel
 PROJECT_MAINTAINER=jeffk
 PROJECT_COPYRIGHT=2008
 PROJECT_EMAIL=jeffk@internetfilter.com

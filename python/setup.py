@@ -27,7 +27,7 @@ if3kernel = Extension(
     'if3_kernel',
     include_dirs = [ include_dir ],
     library_dirs = [ lib_dir ],
-    libraries = [ 'if3_kernel' ],
+    libraries = [ 'if3kernel' ],
     sources = [ os.path.join(src_python_dir,z) for z in module_sources ],
     )
 
