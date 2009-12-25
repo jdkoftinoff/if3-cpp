@@ -25,7 +25,75 @@ namespace if3
   {
 
     template <typename T1, typename T2>
-    inline T1 lexical_cast( const T2 v )
+    inline bool
+    compare_case_insensitive(T1 a, T1 b)
+    {
+      bool r = false;
+
+      if (a.length() == b.length())
+      {
+        r = true;
+        for (int i = 0; i < a.length(); ++i)
+        {
+
+          if (toupper(a[i]) != toupper(b[i]))
+          {
+            r = false;
+            break;
+          }
+        }
+      }
+      return r;
+    }
+
+    template <typename T1>
+    inline bool
+    compare_case_insensitive(T1 a, const char * b)
+    {
+      bool r = false;
+
+      if (a.length() == strlen(b))
+      {
+        r = true;
+        for (int i = 0; i < a.length(); ++i)
+        {
+
+          if (toupper(a[i]) != toupper(b[i]))
+          {
+            r = false;
+            break;
+          }
+        }
+      }
+      return r;
+    }
+
+    template <typename T1>
+    inline bool
+    compare_case_insensitive(const char *a, T1 b)
+    {
+      bool r = false;
+
+      if (strlen(a) == b.length())
+      {
+        r = true;
+        for (int i = 0; i < b.length(); ++i)
+        {
+          if (toupper(a[i]) != toupper(b[i]))
+          {
+            r = false;
+            break;
+          }
+        }
+      }
+
+      return r;
+
+    }
+
+    template <typename T1, typename T2>
+    inline T1
+    lexical_cast(const T2 v)
     {
       std::stringstream ss;
       ss << v;
@@ -85,10 +153,10 @@ namespace if3
 
     inline filename_t &
     fix_directory_name(
-                       filename_t &d
+                       filename_t & d
                        )
     {
-      // if path does not end in '/' or '\\' then append appropriate path sep char      
+      // if path does not end in '/' or '\\' then append appropriate path sep char
       int len = d.length();
       if (len > 0 && d[len - 1] != '\\' && d[len - 1] != '/')
       {
@@ -118,7 +186,7 @@ namespace if3
     inline bool
     read_line(
               string_t &result,
-              FILE *f
+              FILE * f
               )
     {
       bool r = false;
@@ -156,7 +224,7 @@ namespace if3
 
     inline bool
     file_exists(
-                const filename_t &fname
+                const filename_t & fname
                 )
     {
       FILE *f = fopen(fname.c_str(), "rb");

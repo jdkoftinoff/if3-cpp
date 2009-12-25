@@ -34,7 +34,7 @@ namespace if3
     virtual void text( string_t const &text ) = 0;
   };
 
-  class html_decode_target_dumper_t
+  class html_decode_target_dumper_t : public html_decode_target_t
   {
   public:
     html_decode_target_dumper_t( std::ostream &o ) : m_o(o)
@@ -86,7 +86,7 @@ namespace if3
     explicit html_decode_t();
     virtual ~html_decode_t();
 
-    virtual void reset() = 0;
+    virtual void reset();
     virtual void process( const buf_t &data_in, html_decode_target_t &target );
     
   protected:
@@ -110,6 +110,7 @@ namespace if3
     string_t m_tagname;
     string_t m_script;
     string_t m_href;
+    string_t m_text;
     
     bool m_in_script;
     bool m_in_style;
