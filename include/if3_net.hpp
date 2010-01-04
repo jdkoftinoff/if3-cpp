@@ -22,7 +22,7 @@ namespace if3
 {
   
 #ifdef _WIN32
-  typedef SOCKET_HANDLE socket_handle_t;
+  typedef int socket_handle_t;
 #else
   typedef int socket_handle_t;
 #endif

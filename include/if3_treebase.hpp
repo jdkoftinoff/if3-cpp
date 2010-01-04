@@ -75,8 +75,8 @@ namespace if3
     int operator() (const VALUE_T &a_, const VALUE_T & b_) const
     {
       int result;
-      VALUE_T a(std::toupper(a_));
-      VALUE_T b(std::toupper(b_));
+      VALUE_T a(::toupper(a_));
+      VALUE_T b(::toupper(b_));
 
       if (a == b)
         result = 0;

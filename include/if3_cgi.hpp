@@ -22,7 +22,7 @@ namespace if3
   {
     bool r=true;
     
-    if( std::isalnum(c) )
+    if( ::isalnum(c) )
     {
       r=false;
     }
@@ -38,7 +38,7 @@ namespace if3
   {
     bool r=true;
     
-    if( std::isalnum(c) )
+    if( ::isalnum(c) )
     {
       r=false;
     }
@@ -56,7 +56,7 @@ namespace if3
   {
     bool r=true;
     
-    if( std::isalnum(c) )
+    if( ::isalnum(c) )
     {
       r=false;
     }
@@ -73,7 +73,7 @@ namespace if3
   {
     bool r=true;
     
-    if( std::isalnum(c) )
+    if( ::isalnum(c) )
     {
       r=false;
     }
