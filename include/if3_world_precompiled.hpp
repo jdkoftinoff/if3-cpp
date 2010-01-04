@@ -49,11 +49,35 @@
 
   // for win32 we need windows.h and friends
 #if defined(IF3_CONFIG_WIN32)
-# include <windows.h>
+
+#ifndef _CRT_SECURE_NO_DEPRECATE
+# define _CRT_SECURE_NO_DEPRECATE 1
+#endif
+
+#ifndef _WIN32_WINNT
+# define _WIN32_WINNT 0x0500
+# undef WINVER
+# define WINVER _WIN32_WINNT
+#endif
+
 # include <winsock2.h>
+# include <windows.h>
 # include <ws2tcpip.h>
 # include <io.h>
 # include <process.h>
+
+typedef long ssize_t;
+typedef long long int64_t;
+typedef unsigned long long uint64_t;
+typedef int int32_t;
+typedef unsigned int uint32_t;
+typedef short int16_t;
+typedef unsigned short uint16_t;
+typedef char int8_t;
+typedef unsigned char uint8_t;
+
+#define strtoll(p, e, b) _strtoi64(p, e, b) 
+
 #endif
 
 #if defined(IF3_CONFIG_PTHREADS)

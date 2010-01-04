@@ -94,7 +94,7 @@ namespace if3
   void httpd_session_redirector_t::run( socket_handle_t s )
   {
     //read_request(s)
-    write(s, "HTTP 404 NOT FOUND\r\n", 13);
+    ::send(s, "HTTP 404 NOT FOUND\r\n", 13, 0 );
   }
   
 }

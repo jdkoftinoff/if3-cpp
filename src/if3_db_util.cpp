@@ -215,7 +215,7 @@ namespace if3
     bool r = decode_tbd_entry( entry, &result_as_string );
     if( r ) 
     {
-      *result = atof(result_as_string.c_str());
+      *result = (float)atof(result_as_string.c_str());
     }    
     return r;
     

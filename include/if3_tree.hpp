@@ -27,7 +27,7 @@ namespace if3
   {
     inline bool operator() ( const VALUE_T &a ) const
     {
-      return !std::isalnum(a) && !std::ispunct(a);
+      return !::isalnum(a) && !::ispunct(a);
     }
   };
   
@@ -325,10 +325,10 @@ namespace if3
         const typename tree_traits_t::leaf_t &leaf = tree.get( item );
         if( leaf.is_free() || leaf.is_end() )
           break;
-        if( std::isalpha( leaf.value ) )
+        if( ::isalpha( leaf.value ) )
         {
-          initial_shortcuts[ (int)std::toupper(leaf.value) ] = item;			
-          initial_shortcuts[ (int)std::tolower(leaf.value) ] = item;						
+          initial_shortcuts[ (int)::toupper(leaf.value) ] = item;			
+          initial_shortcuts[ (int)::tolower(leaf.value) ] = item;						
         }
         else
         {
