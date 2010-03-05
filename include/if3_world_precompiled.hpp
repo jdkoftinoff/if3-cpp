@@ -1,16 +1,3 @@
-/*
-
- The Internet Filter Version 3 Kernel Version 3
- Source Code
-
- Written By Jeff Koftinoff <jeffk@internetfilter.com>
- Copyright (c) 1995-2005
- By Turner and Sons Productions, Inc.
- http://www.internetfilter.com/
-
- ALL RIGHTS RESERVED.
-
- */
 #ifndef IF3_WORLD_PRECOMPILED_HPP
 #define IF3_WORLD_PRECOMPILED_HPP
 
@@ -46,38 +33,17 @@
 # error please define one of IF3_CONFIG_WIN32 IF3_CONFIG_MACOSX IF3_CONFIG_LINUX
 #endif
 
+#ifndef IF3_CONFIG_DEBUG
+# define IF3_CONFIG_DEBUG (1)
+#endif
 
   // for win32 we need windows.h and friends
 #if defined(IF3_CONFIG_WIN32)
-
-#ifndef _CRT_SECURE_NO_DEPRECATE
-# define _CRT_SECURE_NO_DEPRECATE 1
-#endif
-
-#ifndef _WIN32_WINNT
-# define _WIN32_WINNT 0x0500
-# undef WINVER
-# define WINVER _WIN32_WINNT
-#endif
-
-# include <winsock2.h>
 # include <windows.h>
+# include <winsock2.h>
 # include <ws2tcpip.h>
 # include <io.h>
 # include <process.h>
-
-typedef long ssize_t;
-typedef long long int64_t;
-typedef unsigned long long uint64_t;
-typedef int int32_t;
-typedef unsigned int uint32_t;
-typedef short int16_t;
-typedef unsigned short uint16_t;
-typedef char int8_t;
-typedef unsigned char uint8_t;
-
-#define strtoll(p, e, b) _strtoi64(p, e, b) 
-
 #endif
 
 #if defined(IF3_CONFIG_PTHREADS)
@@ -133,11 +99,19 @@ typedef unsigned char uint8_t;
 # include <list>
 # include <valarray>
 # include <vector>
+# include <tr1/unordered_map>
 # include <algorithm>
 # include <exception>
 # include <stdexcept>
 # include <cstring>
 # include <cstdlib>
+# include <queue>
+# include <deque>
+# include <functional>
+# include <tr1/functional>
+# include <map>
+
+using std::tr1::function;
 
 # if defined(IF3_CONFIG_NEWNOTHROW)
 #  define newnothrow new (std::nothrow)

@@ -1,17 +1,3 @@
-/*
-
-The Internet Filter Version 3 Kernel Version 3
-Source Code
-
-Written By Jeff Koftinoff <jeffk@internetfilter.com>
-Copyright (c) 1995-2005
-By Turner and Sons Productions, Inc.
-http://www.internetfilter.com/
-
-ALL RIGHTS RESERVED.
-
-*/
-
 #include "if3_world_precompiled.hpp"
 #include "if3_string.hpp"
 #include "if3_util.hpp"
@@ -45,7 +31,7 @@ int main( int argc, char **argv )
   else
   {
     filename_t src_dir( argv[1] );
-    filename_t dest_dir( argv[2] );    
+    filename_t dest_dir( argv[2] );
     util::fix_directory_name( dest_dir );
     mkdir( dest_dir.c_str(), 0750 );
     int count=0;
@@ -59,7 +45,7 @@ int main( int argc, char **argv )
     count+=compile_url_files_into_one( src_dir, output_filename, "urls", 0, 64 );
 
     form(output_filename,"%s%s.pre", dest_dir.c_str(), "phrases");
-    count+=compile_url_files_into_one( src_dir, output_filename, "phrases", 0, 64 );
+    count+=compile_phrase_files_into_one( src_dir, output_filename, "phrases", 0, 64 );
 
     fprintf( stdout, "%d files precompiled\n", count );
   }

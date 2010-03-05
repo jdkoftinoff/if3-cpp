@@ -1,15 +1,3 @@
-/*  
- The Internet Filter Version 3 Kernel Version 3
- Source Code
- 
- Written By Jeff Koftinoff <jeffk@internetfilter.com>
- Copyright (c) 1995-2005
- By Turner and Sons Productions, Inc.
- http://www.internetfilter.com/
- 
- ALL RIGHTS RESERVED.
- 
- */
 #ifndef IF3_HTTPD_HPP
 #define IF3_HTTPD_HPP
 
@@ -18,62 +6,83 @@
 #include "if3_cgi.hpp"
 #include "if3_string.hpp"
 #include "if3_dynbuf.hpp"
-#include "if3_db.hpp"
+#include "if3_http.hpp"
 
-namespace if3 
+namespace if3
 {
-  class httpd_session_base_t
+  namespace httpd
   {
-  public:
-    httpd_session_base_t() {}
-    virtual ~httpd_session_base_t() {}
-    
-    virtual void run( socket_handle_t s ) = 0;
-
-  };
-  
-  class httpd_session_redirector_t : public httpd_session_base_t
-  {
-  public:
-    httpd_session_redirector_t( db_t &db ) : m_db( db ) {}
-    virtual ~httpd_session_redirector_t() {}
-    
-    void run( socket_handle_t s );
- 
-  private:
-    
-    db_t &m_db;
-  };
-  
-#if defined(IF3_CONFIG_POSIX)
-  class httpd_fork_server_t
-  {
-  public:
-    httpd_fork_server_t( 
-                        const char *bind_hostname,
-                        const char *bind_port,
-                        httpd_session_base_t *session_handler 
-                        )
-    :
-    m_bind_address( bind_hostname, bind_port ),
-    m_session_handler( session_handler )
+    class server_context_t : public net::tcp_server_context_t
     {
-    }
-    
-    virtual ~httpd_fork_server_t()
-    {
-      delete m_session_handler;
-    }
-    
-    void run();
-    void run_on_address( net_address_t::const_iterator &a );
-    
-  private:
-    net_address_t m_bind_address;
-    httpd_session_base_t *m_session_handler;
-  };
+    public:
+    };
 
-#endif
+    class unimplemented_error : public std::runtime_error
+    {
+    public:
+      unimplemented_error( std::string name ) : runtime_error( name )
+      {
+      }
+    };
+
+    class request_handler_t
+    {
+    public:
+      request_handler_t() {}
+      virtual ~request_handler_t() {}
+
+      virtual int get(
+          http::request_t const &req_header,
+          http::response_t &response_header
+          )
+      {
+        throw unimplemented_error("get");
+        return 404;
+      }
+
+      virtual int put(
+          http::request_t const &req_header,
+          http::response_t &response_header
+          )
+      {
+        throw unimplemented_error("put");
+        return 404;
+      }
+
+      virtual int post(
+          http::request_t const &req_header,
+          http::response_t &response_header
+          )
+      {
+        throw unimplemented_error("post");
+        return 404;
+      }
+
+    };
+
+    class session_t : public net::tcp_server_session_base_t
+    {
+    public:
+      session_t( server_context_t &context, request_handler_t &top_handler )
+        : m_context( context ),
+          m_top_handler( top_handler )
+      {
+      }
+      virtual ~session_t() {}
+
+      void run(
+               net::socket_handle_t s,
+               struct sockaddr *addr,
+               socklen_t addrlen
+               );
+
+    private:
+
+      server_context_t &m_context;
+      request_handler_t &m_top_handler;
+    };
+
+  }
 }
 
 #endif

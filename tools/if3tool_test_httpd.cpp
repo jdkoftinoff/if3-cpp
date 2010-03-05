@@ -1,17 +1,3 @@
-/*
- 
- The Internet Filter Version 3 Kernel Version 3
- Source Code
- 
- Written By Jeff Koftinoff <jeffk@internetfilter.com>
- Copyright (c) 1995-2005
- By Turner and Sons Productions, Inc.
- http://www.internetfilter.com/
- 
- ALL RIGHTS RESERVED.
- 
- */
-
 #include "if3_world_precompiled.hpp"
 #include "if3_string.hpp"
 #include "if3_util.hpp"
@@ -25,28 +11,30 @@ using namespace if3;
 
 int main( int argc, char **argv )
 {
-  net_init();
-  
-  daemonize(
-            false, 
-            string_t(argv[0]), 
-            string_t(""), 
-            string_t(argv[0])+".pid", 
+  net::net_init();
+
+  if3::daemon::daemonize(
+            false,
+            string_t(argv[0]),
+            string_t(""),
+            string_t(argv[0])+".pid",
             string_t("")
             );
-  
+
   logger->log_info("Started");
 
-  try 
+  try
   {
-    db_t db;
-    httpd_session_base_t *session =  new httpd_session_redirector_t(db);
-    session->run( STDIN_FILENO );      
+    httpd::server_context_t context;
+    httpd::request_handler_t handler;
+    httpd::session_t session(context,handler);
+
+    session.run( STDIN_FILENO, 0, 0 );
   }
-  catch (std::exception &e) 
+  catch (std::exception &e)
   {
-    logger->log_error("Exception caught: %s", e.what() );                    
+    logger->log_error("Exception caught: %s", e.what() );
   }
   logger->log_info("Ending");
-  daemon_end();
+  if3::daemon::end();
 }

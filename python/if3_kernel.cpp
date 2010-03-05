@@ -7,20 +7,20 @@
 #include "if3_kernel.hpp"
 
 
-static PyObject *if3_kernel_startup(PyObject *self, PyObject *args);
-static PyObject *if3_kernel_shutdown(PyObject *self, PyObject *args);
-static PyObject *if3_kernel_compile_url_files(PyObject *self, PyObject *args);
-static PyObject *if3_kernel_compile_phrase_files(PyObject *self, PyObject *args);
-static PyObject *if3_kernel_scan_data(PyObject *self, PyObject *args);
-static PyObject *if3_kernel_scan_url(PyObject *self, PyObject *args);
+static PyObject *if3kernel_startup(PyObject *self, PyObject *args);
+static PyObject *if3kernel_shutdown(PyObject *self, PyObject *args);
+static PyObject *if3kernel_compile_url_files(PyObject *self, PyObject *args);
+static PyObject *if3kernel_compile_phrase_files(PyObject *self, PyObject *args);
+static PyObject *if3kernel_scan_data(PyObject *self, PyObject *args);
+static PyObject *if3kernel_scan_url(PyObject *self, PyObject *args);
 
-static PyMethodDef if3kernelMethods[] = {
-  {"startup", if3_kernel_startup, METH_VARARGS, "start up the filter tables"},
-  {"shutdown", if3_kernel_shutdown, METH_VARARGS, "shutdown the filter"},
-  {"scan_data", if3_kernel_scan_data, METH_VARARGS, "run scan on data"},
-  {"scan_url", if3_kernel_scan_url, METH_VARARGS, "run scan on url"},
-  {"compile_url_files", if3_kernel_compile_url_files, METH_VARARGS, "compile set of filter files that contain URLs"},
-  {"compile_phrase_files", if3_kernel_compile_phrase_files, METH_VARARGS, "compile set of filter files that contain phrases"},
+static PyMethodDef If3kernelMethods[] = {
+  {"startup", if3kernel_startup, METH_VARARGS, "start up the filter tables"},
+  {"shutdown", if3kernel_shutdown, METH_VARARGS, "shutdown the filter"},
+  {"scan_data", if3kernel_scan_data, METH_VARARGS, "run scan on data"},
+  {"scan_url", if3kernel_scan_url, METH_VARARGS, "run scan on url"},
+  {"compile_url_files", if3kernel_compile_url_files, METH_VARARGS, "compile set of filter files that contain URLs"},
+  {"compile_phrase_files", if3kernel_compile_phrase_files, METH_VARARGS, "compile set of filter files that contain phrases"},
   {NULL, NULL, 0, NULL} /* Sentinel */
 };
 
@@ -30,12 +30,12 @@ static if3::kernel::kernel_t *kernel=0;
 PyMODINIT_FUNC
 initif3kernel(void)
 {
-  (void) Py_InitModule("if3kernel", if3kernelMethods);
+  (void) Py_InitModule("if3kernel", If3kernelMethods);
 }
 
 
 static PyObject *
-if3_kernel_startup(PyObject *self, PyObject *args)
+if3kernel_startup(PyObject *self, PyObject *args)
 {
   const char *compiled_hostname_filename;
   const char *compiled_url_filename;
@@ -69,7 +69,7 @@ if3_kernel_startup(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-if3_kernel_shutdown(PyObject *self, PyObject *args)
+if3kernel_shutdown(PyObject *self, PyObject *args)
 {
   if (kernel != 0)
     delete kernel;
@@ -78,7 +78,7 @@ if3_kernel_shutdown(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-if3_kernel_compile_url_files(PyObject *self, PyObject *args)
+if3kernel_compile_url_files(PyObject *self, PyObject *args)
 {
   const char *source_dir;
   const char *dest_file;
@@ -118,7 +118,7 @@ if3_kernel_compile_url_files(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-if3_kernel_compile_phrase_files(PyObject *self, PyObject *args)
+if3kernel_compile_phrase_files(PyObject *self, PyObject *args)
 {
   const char *source_dir;
   const char *dest_file;
@@ -157,7 +157,7 @@ if3_kernel_compile_phrase_files(PyObject *self, PyObject *args)
 
 
 static PyObject *
-if3_kernel_scan_data(PyObject *self, PyObject *args)
+if3kernel_scan_data(PyObject *self, PyObject *args)
 {
   int enable_proof_int;
   bool enable_proof;
@@ -178,6 +178,7 @@ if3_kernel_scan_data(PyObject *self, PyObject *args)
   size_t content_links_length;
 
   const char *categories_enable = 0;
+  size_t categories_enable_length;
 
   int accessed = 0;
   int category = 0;
@@ -188,7 +189,7 @@ if3_kernel_scan_data(PyObject *self, PyObject *args)
                         &link, &link_length, &text, &text_length,
                         &links, &links_length,
                         &content_links, &content_links_length,
-                        categories_enable
+                        &categories_enable, &categories_enable_length
                         ))
     return NULL;
 
@@ -222,7 +223,7 @@ if3_kernel_scan_data(PyObject *self, PyObject *args)
     std::stringstream ss;
     ss << results << "\n";
 
-    return Py_BuildValue("iis#", accessed, category+1, ss.str().c_str(), ss.str().length() );
+    return Py_BuildValue("iis#", accessed, category, ss.str().c_str(), ss.str().length() );
   }
   catch( std::exception &e )
   {
@@ -233,7 +234,7 @@ if3_kernel_scan_data(PyObject *self, PyObject *args)
 
 
 static PyObject *
-if3_kernel_scan_url(PyObject *self, PyObject *args)
+if3kernel_scan_url(PyObject *self, PyObject *args)
 {
   int enable_proof_int;
   bool enable_proof;
@@ -244,7 +245,8 @@ if3_kernel_scan_url(PyObject *self, PyObject *args)
   const char *link;
   size_t link_length;
 
-  const char *categories_enable = 0;
+  const char *categories_enable=0;
+  size_t categories_enable_length;
 
   int category = 0;
 
@@ -252,7 +254,7 @@ if3_kernel_scan_url(PyObject *self, PyObject *args)
                         &enable_proof_int,
                         &hostname, &hostname_length,
                         &link, &link_length,
-                        categories_enable
+                        &categories_enable, &categories_enable_length
                         ))
     return NULL;
 
@@ -278,7 +280,7 @@ if3_kernel_scan_url(PyObject *self, PyObject *args)
     std::stringstream ss;
     ss << results << "\n";
 
-    return Py_BuildValue("is#", category+1, ss.str().c_str(), ss.str().length() );
+    return Py_BuildValue("is#", category, ss.str().c_str(), ss.str().length() );
   }
   catch( std::exception &e )
   {

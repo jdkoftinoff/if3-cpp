@@ -47,7 +47,7 @@ LDLIBS_POSIX+=-lssl -lcrypto
 
 CONFIG_TOOLS+=$(BOOST_CONFIG) $(JDKS2K9_CONFIG) $(SOCI_CONFIG)
 
-PREFIX?=/opt/IF3
+PREFIX?=/opt/if3
 
 ifeq ($(PROJECT_VARIANT),debian)
 #TARGET_DIR_STYLE=debian

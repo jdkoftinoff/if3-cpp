@@ -1,16 +1,3 @@
-/*
-  
-The Internet Filter Version 3 Kernel Version 3
-Source Code
-
-Written By Jeff Koftinoff <jeffk@internetfilter.com>
-Copyright (c) 1995-2005
-By Turner and Sons Productions, Inc.
-http://www.internetfilter.com/
-
-ALL RIGHTS RESERVED.
-
-*/
 #include "if3_world_precompiled.hpp"
 #include "if3_tree.hpp"
 
@@ -26,17 +13,17 @@ int main( int argc, char **argv )
     usage();
     return 1;
   }
-  
+
   const char *input_filename = argv[2];
   const char *output_filename = argv[3];
   int code_offset = strtol( argv[4],0,10 );
   std::string prefix;
-  
+
   if( argc==6 )
   {
     prefix += argv[5];
   }
-  
+
   if( strcmp(argv[1],"url")==0 )
   {
     bool r = if3::tree_compile<if3::tree_traits_url_t,if3::pattern_expander_standard_t>(
