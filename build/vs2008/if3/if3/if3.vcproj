@@ -181,34 +181,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\src\if3_db.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\if3_db_categories.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\if3_db_filtermap.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\if3_db_filters.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\if3_db_needles.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\if3_db_sections.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\if3_db_util.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\..\src\if3_dynbuf.cpp"
 				>
 			</File>

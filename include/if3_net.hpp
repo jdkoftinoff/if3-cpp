@@ -12,7 +12,7 @@ namespace if3
   namespace net
   {
 #ifdef _WIN32
-    typedef SOCKET_HANDLE socket_handle_t;
+    typedef SOCKET socket_handle_t;
 #else
     typedef int socket_handle_t;
 #endif

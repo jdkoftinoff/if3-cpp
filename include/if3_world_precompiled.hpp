@@ -9,7 +9,6 @@
 # define IF3_CONFIG_WIN32
 #endif
 
-
   // platform options
 #if defined(IF3_CONFIG_WIN32)
 # define IF3_CONFIG_NEW
@@ -39,9 +38,9 @@
 
   // for win32 we need windows.h and friends
 #if defined(IF3_CONFIG_WIN32)
-# include <windows.h>
+
 # include <winsock2.h>
-# include <ws2tcpip.h>
+# include <windows.h>
 # include <io.h>
 # include <process.h>
 #endif
@@ -99,7 +98,6 @@
 # include <list>
 # include <valarray>
 # include <vector>
-# include <tr1/unordered_map>
 # include <algorithm>
 # include <exception>
 # include <stdexcept>
@@ -108,10 +106,7 @@
 # include <queue>
 # include <deque>
 # include <functional>
-# include <tr1/functional>
 # include <map>
-
-using std::tr1::function;
 
 # if defined(IF3_CONFIG_NEWNOTHROW)
 #  define newnothrow new (std::nothrow)
