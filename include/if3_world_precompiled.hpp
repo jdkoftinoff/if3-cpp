@@ -126,7 +126,7 @@
 
 namespace if3
 {
-  using tr1::function;
+  using std::tr1::function;
 
   template< typename T1, typename T2 > inline T1 lexical_cast ( const T2 &v )
   {
