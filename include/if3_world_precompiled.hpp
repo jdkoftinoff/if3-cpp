@@ -106,6 +106,7 @@
 # include <queue>
 # include <deque>
 # include <functional>
+# include <tr1/functional>
 # include <map>
 
 # if defined(IF3_CONFIG_NEWNOTHROW)
@@ -125,6 +126,8 @@
 
 namespace if3
 {
+  using tr1::function;
+
   template< typename T1, typename T2 > inline T1 lexical_cast ( const T2 &v )
   {
     T1 newval;
