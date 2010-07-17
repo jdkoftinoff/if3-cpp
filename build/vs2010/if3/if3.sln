@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "if3", "if3\if3.vcproj", "{4F36FD53-460D-4799-A777-AE3215509197}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "if3", "if3\if3.vcxproj", "{4F36FD53-460D-4799-A777-AE3215509197}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

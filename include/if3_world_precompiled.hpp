@@ -38,8 +38,8 @@
 
   // for win32 we need windows.h and friends
 #if defined(IF3_CONFIG_WIN32)
-
 # include <winsock2.h>
+# include <ws2tcpip.h>
 # include <windows.h>
 # include <io.h>
 # include <process.h>
@@ -85,7 +85,11 @@
 #include <time.h>
 #include <errno.h>
 #include <stdarg.h>
+#include <stdint.h>
 
+#if defined(IF3_CONFIG_WIN32)
+typedef int64_t ssize_t;
+#endif
 
 #ifdef __cplusplus
 # if defined(IF3_CONFIG_NEW)
@@ -106,7 +110,9 @@
 # include <queue>
 # include <deque>
 # include <functional>
+#if !defined(IF3_CONFIG_WIN32)
 # include <tr1/functional>
+#endif
 # include <map>
 
 # if defined(IF3_CONFIG_NEWNOTHROW)

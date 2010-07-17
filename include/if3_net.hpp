@@ -194,12 +194,22 @@ namespace if3
 
     inline void set_socket_nonblocking(socket_handle_t s)
     {
+#if defined(IF3_CONFIG_WIN32)
+      u_long iMode=1;
+	    ioctlsocket(s,FIONBIO,&iMode);
+#else
       fcntl(s, F_SETFL, fcntl(s, F_GETFL, 0) | O_NONBLOCK);
+#endif
     }
 
     inline void set_socket_blocking(socket_handle_t s)
     {
+#if defined(IF3_CONFIG_WIN32)
+      u_long iMode=0;
+	    ioctlsocket(s,FIONBIO,&iMode);
+#else
       fcntl(s, F_SETFL, fcntl(s, F_GETFL, 0) & (~O_NONBLOCK));
+#endif
     }
 
 #if defined(IF3_CONFIG_POSIX)
