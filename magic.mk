@@ -130,9 +130,9 @@ TAR_EXCLUDE_LIST=--exclude '.svn' --exclude '*~' --exclude '.hg' --exclude 'CVS'
 # When we build a config tool script, this is the file name we use. 
 PROJECT_CONFIG_TOOL?=$(PROJECT)-config
 
+PYTHON?=python
 CHMOD?=chmod
 CHOWN?=chown
-PYTHON?=python
 SWIG:=$(shell which swig)
 SWIG?=$(SWIG_SHELL)
 SWIG_OPTIONS?=-python
@@ -414,6 +414,7 @@ LIB_$(1)_M_FILES=$$(call get_file_list,$$(LIB_$(1)_DIR),m)
 LIB_$(1)_MM_FILES=$$(call get_file_list,$$(LIB_$(1)_DIR),mm)
 LIB_$(1)_RC_FILES=$$(call get_file_list,$$(LIB_$(1)_DIR),rc)
 LIB_$(1)_SH_FILES=$$(call get_file_list_full,$$(LIB_$(1)_DIR),sh)
+LIB_$(1)_PY_FILES=$$(call get_file_list_full,$$(LIB_$(1)_DIR),py)
 
 LIB_$(1)_O_FILES=$$(call get_cpp_o_files,$$(LIB_$(1)_CPP_FILES)) \
 	$$(call get_cc_o_files,$$(LIB_$(1)_CC_FILES)) \
@@ -434,6 +435,8 @@ LIB_$(1)_DISASM_FILES=$$(LIB_$(1)_O_FILES:.o=.disasm)
 LIB_$(1)_ASM_FILES=$$(LIB_$(1)_O_FILES:.o=.asm)
 
 LIB_$(1)_EXE_FILES=$$(addprefix $$(OUTPUT_$(1)_DIR)/,$$(notdir $$(LIB_$(1)_O_FILES:.o=$$(EXE))))
+LIB_$(1)_EXE_FILES+=$$(addprefix $$(OUTPUT_$(1)_DIR)/,$$(notdir $$(LIB_$(1)_PY_FILES)))
+LIB_$(1)_EXE_FILES+=$$(addprefix $$(OUTPUT_$(1)_DIR)/,$$(notdir $$(LIB_$(1)_SH_FILES)))
 
 ifeq ($(CROSS_COMPILING),1)
 NATIVE_LIB_$(1)_CPP_FILES=$$(call get_file_list,$$(NATIVE_LIB_$(1)_DIR),cpp)
@@ -984,7 +987,7 @@ TARGET_MACOSX_SDK?=/Developer/SDKs/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk
 ifeq ($(TARGET_PLATFORM_MACOSX_UNIVERSAL),1)
 ENABLE_PRECOMPILED_HEADERS=0
 TARGET_PLATFORM_NAME=macosx-universal
-MACOSX_UNIVERSAL_ARCHS?=i386 ppc x86_64 ppc64
+MACOSX_UNIVERSAL_ARCHS?=i386 ppc x86_64 
 MACOSX_UNIVERSAL_ARCHS_PARAMS=$(foreach a,$(MACOSX_UNIVERSAL_ARCHS),-arch $(a))
 SUFFIXES_TARGET_PLATFORM=POSIX MACOSX MACOSX_UNIVERSAL
 RAW_PLATFORM_DIRS+=posix macosx macosx-ppc macosx-i386
@@ -1130,7 +1133,7 @@ TARGET_ETC_DIR?=etc/$(PROJECT)-$(PROJECT_VERSION)
 endif
 
 ifeq ($(TARGET_DIR_STYLE),debian)
-PREFIX?=/usr
+PREFIX=/usr
 TARGET_BIN_DIR?=bin
 TARGET_LIB_DIR?=lib
 TARGET_INCLUDE_DIR?=include/$(PROJECT)
@@ -1142,7 +1145,7 @@ TARGET_INSTALL_ETC_DIR=/etc
 endif
 
 ifeq ($(TARGET_DIR_STYLE),ubuntu)
-PREFIX?=/usr
+PREFIX=/usr
 TARGET_BIN_DIR?=bin
 TARGET_LIB_DIR?=lib
 TARGET_INCLUDE_DIR?=include/$(PROJECT)
@@ -1154,7 +1157,7 @@ TARGET_INSTALL_ETC_DIR=/etc
 endif
 
 ifeq ($(TARGET_DIR_STYLE),macosx-library)
-PREFIX?=/Library/$(PROJECT)
+PREFIX=/Library/$(PROJECT)
 TARGET_BIN_DIR?=bin
 TARGET_LIB_DIR?=lib
 TARGET_INCLUDE_DIR?=include
@@ -1165,7 +1168,7 @@ TARGET_ETC_DIR?=etc
 endif
 
 ifeq ($(TARGET_DIR_STYLE),macosx-applications)
-PREFIX?=/Applications/$(PROJECT)-$(PROJECT_VERSION)
+PREFIX=/Applications/$(PROJECT)-$(PROJECT_VERSION)
 TARGET_BIN_DIR?=.
 TARGET_LIB_DIR?=lib
 TARGET_INCLUDE_DIR?=include
@@ -2032,7 +2035,7 @@ endif
 ifeq ($(DO_NOT_BUILD_LIB),1)
 PROJECT_LDLIB=
 else
-PROJECT_LDLIB=-l$(PROJECT)
+PROJECT_LDLIB=$(OUTPUT_LIB)
 endif
 
 ifeq ($(NATIVE_DO_NOT_BUILD_LIB),1)
@@ -2148,7 +2151,7 @@ else
 ifeq ($(CROSS_COMPILING)$(BUILD_NATIVE),11)
 ALL_TARGETS += native-dirs dirs native-lib native-tools native-tools-dev native-examples native-tests dirs lib tools tools-dev tests examples local-config-tool 
 else
-ALL_TARGETS += dirs lib tools tools-dev tests examples local-config-tool 
+ALL_TARGETS += dirs $(PRECOMPILED_HEADER_GCH) lib tools tools-dev tests examples local-config-tool 
 endif
 
 all : dirs $(ALL_TARGETS)
@@ -2292,11 +2295,11 @@ endif
 
 TAGS : $(LIB_CPP_FILES) $(LIB_CC_FILES) $(LIB_C_FILES) $(LIB_H_FILES)
 	@echo "TAGS:"
-	@etags --language c++ $(shell find $(LIB_INCLUDE_DIR) $(LIB_SRC_DIR) $(LIB_TESTS_DIR) $(LIB_EXAMPLES_DIR) $(LIB_TOOLS_DIR) \( -name "*.cpp" -or -name "*.cc" -or -name "*.h" \) )
+	@etags --language c++ $(shell find $(LIB_INCLUDE_DIR) $(LIB_SRC_DIR) $(LIB_TESTS_DIR) $(LIB_EXAMPLES_DIR) $(LIB_TOOLS_DIR) \( -name "*.cpp" -or -name "*.cc" -or -name "*.c" -or -name "*.h" \) )
 
 tags : $(LIB_CPP_FILES) $(LIB_CC_FILES) $(LIB_C_FILES) $(LIB_H_FILES)
 	@echo "tags:"
-	@ctags --language c++ $(shell find $(LIB_INCLUDE_DIR) $(LIB_SRC_DIR) $(LIB_TESTS_DIR) $(LIB_EXAMPLES_DIR) $(LIB_TOOLS_DIR) \( -name "*.cpp" -or -name "*.cc" -or -name "*.h" \) )
+	@ctags --language c++ $(shell find $(LIB_INCLUDE_DIR) $(LIB_SRC_DIR) $(LIB_TESTS_DIR) $(LIB_EXAMPLES_DIR) $(LIB_TOOLS_DIR) \( -name "*.cpp" -or -name "*.cc" -or -name "*.c" -or -name "*.h" \) )
 
 ifeq ($(CROSS_COMPILING),1)
 .PHONY : native-dirs
@@ -2402,11 +2405,11 @@ install-all : $(ALL_INSTALLS)
 
 install : $(INSTALL_MODE)
 
-.PHONY : preinstall-main
+.PHONY : preinstall-main preinstall-main-setup
 
 CLEAN_DIRS += $(LOCAL_INSTALL_DIR) $(LOCAL_INSTALL_DEV_DIR) $(LOCAL_INSTALL_DOCS_DEV_DIR)
 
-preinstall-main : all lib tools tests examples docs internal-magic-util-scripts
+preinstall-main-setup : all lib tools tests examples docs internal-magic-util-scripts
 	@echo preinstall-main:
 	@$(RMDIRS) $(LOCAL_INSTALL_DIR)
 	@$(MKDIRS) $(LOCAL_INSTALL_BIN_DIR)	
@@ -2415,13 +2418,17 @@ preinstall-main : all lib tools tests examples docs internal-magic-util-scripts
 	@$(call copy_dirs,$(LIB_ETC_DIR),$(LOCAL_INSTALL_ETC_DIR))
 	@$(call copy_dirs,$(LIB_MAN_DIR),$(LOCAL_INSTALL_MAN_DIR))
 	@$(call copy_files,$(LIB_TOOLS_SH_FILES),$(LOCAL_INSTALL_BIN_DIR))
+	@$(call copy_files,$(LIB_TOOLS_PY_FILES),$(LOCAL_INSTALL_BIN_DIR))
 	@$(call chown_dirs,$(LOCAL_INSTALL_DIR))
 	@$(call chmod_dirs,$(LOCAL_INSTALL_DIR))
 	@$(call project-preinstall-main-hook,$(LOCAL_INSTALL_DIR))
 
+preinstall-main : preinstall-main-setup $(PREINSTALL_MAIN_DEPS)
+
+
 .PHONY : install-main
 
-install-main : preinstall-main install-main-dirs
+install-main : preinstall-main install-main-dirs 
 	@echo install-main:
 	@$(call copy_dirs,$(LOCAL_INSTALL_BIN_DIR),$(INSTALL_BIN_DIR))
 	@$(call copy_dirs,$(LOCAL_INSTALL_SHARE_DIR),$(INSTALL_SHARE_DIR))
@@ -2734,7 +2741,7 @@ PACKAGE_DEPENDS+=$(PACKAGE_GLIBC_DEPENDS)
 
 PACKAGE_COPYRIGHT_FILE?=$()
 
-PACKAGE_DOCS_DIR=$(LOCAL_INSTALL_DIR)/usr/share/doc/$(PACKAGE_BASENAME)
+PACKAGE_DOCS_DIR?=$(LOCAL_INSTALL_DIR)/usr/share/doc/$(PACKAGE_BASENAME)
 
 define create_copyright_file
 	echo create_copyright_file $(1) $(2)
