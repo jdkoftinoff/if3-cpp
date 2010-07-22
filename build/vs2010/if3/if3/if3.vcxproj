@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4F36FD53-460D-4799-A777-AE3215509197}</ProjectGuid>
+    <RootNamespace>if3</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>if3_world_precompiled.hpp</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>if3_world_precompiled.hpp</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\if3_buf.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_buf_macosx.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_categorizer.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_cgi.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_compile.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_crawler.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_daemon.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_dynbuf.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_html_parse.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_httpd.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_kernel.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_mmap_buf.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_multiscanner.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_net.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_pattern_expander.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_scanner.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_syslog.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_tree.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_treebase.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_util.cpp" />
+    <ClCompile Include="..\..\..\..\src\if3_world.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\include\if3_buf.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_buf_macosx.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_categorizer.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_cgi.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_compile.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_crawler.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_daemon.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_db.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_db_categories.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_db_filtermap.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_db_filters.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_db_needles.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_db_sections.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_db_util.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_dynbuf.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_html_parse.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_httpd.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_kernel.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_mmap_buf.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_multiscanner.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_net.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_pattern_expander.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_scanner.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_string.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_syslog.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_tree.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_treebase.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_util.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_world.hpp" />
+    <ClInclude Include="..\..\..\..\include\if3_world_precompiled.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
