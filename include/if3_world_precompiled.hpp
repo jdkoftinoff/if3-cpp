@@ -110,9 +110,6 @@ typedef int64_t ssize_t;
 # include <queue>
 # include <deque>
 # include <functional>
-#if !defined(IF3_CONFIG_WIN32)
-# include <tr1/functional>
-#endif
 # include <map>
 
 # if defined(IF3_CONFIG_NEWNOTHROW)
@@ -132,7 +129,7 @@ typedef int64_t ssize_t;
 
 namespace if3
 {
-  using std::tr1::function;
+  using std::function;
 
   template< typename T1, typename T2 > inline T1 lexical_cast ( const T2 &v )
   {

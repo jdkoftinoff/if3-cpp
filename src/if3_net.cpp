@@ -77,7 +77,7 @@ namespace if3
       {
         logger->log_info("about to fork for binding to %s", to_string(*i).c_str());
 
-        daemon::run_in_fork(std::tr1::bind(&tcp_fork_server_t::run_on_address, this, i));
+        daemon::run_in_fork(std::bind(&tcp_fork_server_t::run_on_address, this, i));
       }
     }
 
@@ -108,7 +108,7 @@ namespace if3
         throw std::runtime_error(string_t("listen: ") + string_t(strerror(errno)));
       }
 
-      daemon::run_in_fork(std::tr1::bind(&tcp_fork_server_t::run_accept, this, sock), m_num_forks_per_addr);
+      daemon::run_in_fork(std::bind(&tcp_fork_server_t::run_accept, this, sock), m_num_forks_per_addr);
 
       daemon::wait_for_children_to_finish("parent of acceptors", m_observer);
     }
@@ -117,12 +117,12 @@ namespace if3
     {
       IF3_LOG_DEBUG("%s: Entering run_accept", m_title.c_str());
 
-      m_observer.set_on_sigterm( std::tr1::bind( &tcp_fork_server_t::on_sigterm, this ) );
-      m_observer.set_on_sigchld( std::tr1::bind( &tcp_fork_server_t::on_sigchld, this ) );
-      m_observer.set_on_sigint( std::tr1::bind( &tcp_fork_server_t::on_sigint, this ) );
-      m_observer.set_on_sighup( std::tr1::bind( &tcp_fork_server_t::on_sighup, this ) );
-      m_observer.set_on_sigquit( std::tr1::bind( &tcp_fork_server_t::on_sigquit, this ) );
-      m_observer.set_on_sigalrm( std::tr1::bind( &tcp_fork_server_t::on_sigalrm, this ) );
+      m_observer.set_on_sigterm( std::bind( &tcp_fork_server_t::on_sigterm, this ) );
+      m_observer.set_on_sigchld( std::bind( &tcp_fork_server_t::on_sigchld, this ) );
+      m_observer.set_on_sigint( std::bind( &tcp_fork_server_t::on_sigint, this ) );
+      m_observer.set_on_sighup( std::bind( &tcp_fork_server_t::on_sighup, this ) );
+      m_observer.set_on_sigquit( std::bind( &tcp_fork_server_t::on_sigquit, this ) );
+      m_observer.set_on_sigalrm( std::bind( &tcp_fork_server_t::on_sigalrm, this ) );
 
 
       while (!m_done)
